@@ -17,6 +17,7 @@
 	$ git status -s 		
 ##### switch到对应的branch中去，-b表示新建branch
 	$ git checkout [branch_name]
+	$ git checkout -b [branch_name]
 ##### 放弃对这个file的修改，仅限在add之前
 	$ git checkout --[file_name]
 ##### check the file change, 文件内容修改的情况
