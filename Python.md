@@ -63,7 +63,24 @@ a = "Hello" + "" + "Renne"
 ```
 
 #### 数据转化
-python可以使用 "[type](var)"实现数据转化，数据转化仅限于经典数据类型，默认不支持object（能否让object也可以转化？）并且只能在类型有办法转化的时候实现转化。
+python可以使用 "\[type\](var)"实现数据转化，数据转化仅限于经典数据类型，默认不支持object（能否让object也可以转化？）并且只能在类型有办法转化的时候实现转化。
+```python
+    a = "123"
+    int(a) # return 123
+    b = Neko() #Neko is an object
+    str(b) # <utility.Neko object at 0x7f406023a4a8>
+    int(b) # run time error, no method
+```
+
+####数组操作
+python使用\[ \]
+```python
+    a = "123"
+    int(a) # return 123
+    b = Neko() #Neko is an object
+    str(b) # <utility.Neko object at 0x7f406023a4a8>
+    int(b) # run time error, no method
+```
 
 # 通用函数：
 
