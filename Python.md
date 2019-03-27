@@ -73,13 +73,12 @@ python可以使用 "\[type\](var)"实现数据转化，数据转化仅限于经�
 ```
 
 ####数组操作
-python使用\[ \]
+python使用array\[index_a:index_b\]表示数组中的一部分，对于string来说，这个操作为string的sub string,负数表示倒着数，
 ```python
-    a = "123"
-    int(a) # return 123
-    b = Neko() #Neko is an object
-    str(b) # <utility.Neko object at 0x7f406023a4a8>
-    int(b) # run time error, no method
+    a = "Hello world"
+    a[:4] # a的最开始到第四位
+    a[1:-3] # a的第一位开始到倒数第三位
+    a[-4:] # a的倒数第四位到最后
 ```
 
 # 通用函数：
