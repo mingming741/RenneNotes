@@ -1,7 +1,7 @@
 # pip
+pip是python的packet manager
 
-##### pip是python的packet manager
-Check PIP version:
+##### Check PIP version:
     pip --version
 ##### 使用对应python的version管理文件
     python3.6 -m pip install numpy
