@@ -1,6 +1,6 @@
 # GPU info: 
 ##### 查看GPU信息
-	nvidia-smi -q -g 0 -d UTILIZATION -l
+	$ nvidia-smi -q -g 0 -d UTILIZATION -l
 
 # Git:
 ### 基本定义
@@ -51,5 +51,5 @@
 
 # ls
 ##### 看隐藏文件
-	ls -ah
+	$ ls -ah
 
