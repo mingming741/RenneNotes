@@ -35,12 +35,23 @@ a = {}
 thisdict =	dict(brand="Ford", model="Mustang", year=1964)
 # set: #set中value不重复
 a = {"a", "b"}
+# function
+a = lambda para : para * 2
 # object:
 a = Telephone()
 # type (type本身也是一个type):
 a = int
 ```
 python中的iterable可以存储不同的数据类型，并且其constructor可以互相转化
+
+#### lambda
+python中的lambda可以认为是函数简单定义的方式，fun_name = lambda parameter_1, parameter_2 : return_value，这种定义的好处是可以使得function变成inline，在某些只需要定义一次的function中非常的好用。lambda定义的变量名类型是一个函数，（似乎和装饰器有关）
+```python
+a = lambda para : para * 2 #type(a) is function
+def myfunc(n):
+  return lambda a : a * n
+mydoubler = myfunc(2) #mydoubler 是一个接受一个参数的函数，会返回这个参数的翻倍值
+```
 
 
 # 通用操作
