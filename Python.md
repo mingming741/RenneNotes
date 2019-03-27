@@ -32,11 +32,15 @@ python的数据类型会在initial的时候根据被赋值的值去初始化，�
     a = []
     # dict:
     a = {}
+    thisdict =	dict(brand="Ford", model="Mustang", year=1964)
+    # set: #set中value不重复
+    a = {"a", "b"}
     # object:
     a = Telephone()
     # type (type本身也是一个type):
     a = int
 ```
+python中的iterable可以存储不同的数据类型，并且其constructor可以互相转化
 
 
 # 通用操作
@@ -89,8 +93,18 @@ a = "Hello" + " " + "Renne"
     ``` a.replace("A", "B") ```
     
 ### List
-* Insert到指定位置
-    ```
+python的list变量名存储的是list的指针
+```python
     thislist = ["apple", "banana", "cherry"]
-    thislist.insert(1, "orange")
-    ```
+    thislist.insert(1, "orange") #Insert到指定位置
+    thislist.remove("banana")   #Remove对应值的element
+    del thislist[0] #Remove指定位置的element
+    thislist.clear() #清除所有element
+    thislist = list(("apple", "banana", "cherry")) #用tuple构建list
+    otherlist = thislist.copy() #内存复制一个list，直接等号赋值会导致两个list变量其实指向同一个list
+    thislist.extend(otherlist) #通过其他的iterable变量延伸list，otherlist也可以是一个tuple或者其他
+    thislist.count("apple") #数一下list中有几个叫apple的变量
+    thislist.index("apple") #返回第一个叫apple变量的index位置
+    thislist.reverse() #返回反向list的一个新的list
+    
+```
