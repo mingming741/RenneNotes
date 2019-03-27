@@ -1,5 +1,6 @@
 # GPU info: 
-	nvidia-smi -q -g 0 -d UTILIZATION -l
+* 查看GPU信息
+	* nvidia-smi -q -g 0 -d UTILIZATION -l
 
 
 # Git:
@@ -45,7 +46,7 @@
 	* 将本地commit过之后的修改放入云端代码库
 
 # vim
-在vim中按ctl+z是强行退出，会留下修改缓存文件，正确不保存退出应该是:q!
+* 在vim中按ctl+z是强行退出，会留下修改缓存文件，正确不保存退出应该是:q!
 
 
 
