@@ -21,8 +21,18 @@ python的数据类型会在initial的时候根据被赋值的值去初始化，�
     * a = 1.3
 * complex
     * a = 1j 
-* str ("hello")
-* tuple (), list, dict, type, object (type本身也是一个type)
+* str 
+    * a = "hello"
+* tuple 
+    * a = ()
+* list
+    * a = [] 
+* dict
+    * a = {} 
+* object
+    * a = Telephone()
+* type (type本身也是一个type)
+    * a = int
 
 
 # 通用操作
