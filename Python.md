@@ -1,11 +1,11 @@
 # 常识：
-* Indentation: 
+##### Indentation: 
 	> 即tab, python没有tab会报错
-* Comment: 
+##### Comment: 
 	> 即#开始表示comment，适用于一行
-* Docstring(document string): 
+##### Docstring(document string): 
 	> 用 """  docstring """表示，可以理解为多行comment，通常用于给函数添加说明
-* Data type: 
+##### Data type: 
 	> python的数据类型会在initial的时候根据被赋值的值去初始化，并且数据类型在计算中也可以改变
 	> 常见的数据类型有* int (1), * float (1.3), complex (1j) str ("hello"), tuple (), list, dict, type, object (type本身也是一个type)
 
