@@ -108,3 +108,10 @@ python的list变量名存储的是list的指针
     thislist.reverse() #返回反向list的一个新的list
     
 ```
+### Dict
+dictionary可用来表示各种object
+```python
+    fromkeys() #返回指定的keys的sub dictionary
+    items() #返回key&value的tuple
+    values() #返回所有的value
+```
