@@ -2,12 +2,13 @@
 	$ nvidia-smi -q -g 0 -d UTILIZATION -l
 
 # Git:
-	工作区(working directory):指的是你电脑中的路径，
-	版本库(repository):指的是本地.git的隐藏目录，同事同步了云端
-	暂存区(stage/index): 属于版本库，接受工作区的内容（通过add），在通过commit更新到版本库对应的分支
-	远程仓库(对应github)：其实github是一个给git提供远程仓库的平台，先有git才有github
+## 基本定义
+	*工作区(working directory):指的是你电脑中的路径，
+	*版本库(repository):指的是本地.git的隐藏目录，同事同步了云端
+	*暂存区(stage/index): 属于版本库，接受工作区的内容（通过add），在通过commit更新到版本库对应的分支
+	*远程仓库(对应github)：其实github是一个给git提供远程仓库的平台，先有git才有github
 		
-
+## cmd方法
 	git clone [url] 	
 		#get git database from remote to local
 	$git status
