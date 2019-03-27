@@ -11,7 +11,7 @@
 * 远程仓库(对应github): 其实github是一个给git提供远程仓库的平台，先有git才有github	
 #### cmd方法
 * git clone [url] 	
-	> get git database from remote to local
+	# get git database from remote to local
 * git status
 	> check the detail of your modification, 本地文件结构修改的详细状态
 * git status -s 		
