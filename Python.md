@@ -80,7 +80,7 @@ python使用array\[index_a:index_b\]表示数组中的一部分，对于string�
 ### String
 字符串相加可以直接使用加号，同时不同数据类型相加会做相应的转换
 ```python
-a = "Hello" + "" + "Renne"
+a = "Hello" + " " + "Renne"
 ```
 字符串也可以使用函数
 * 去除空格
@@ -88,4 +88,9 @@ a = "Hello" + "" + "Renne"
 * 字符替换
     ``` a.replace("A", "B") ```
     
-
+### List
+* Insert到指定位置
+    ```
+    thislist = ["apple", "banana", "cherry"]
+    thislist.insert(1, "orange")
+    ```
