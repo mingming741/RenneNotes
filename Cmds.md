@@ -1,18 +1,14 @@
-1. GPU info: 
+# GPU info: 
 	$ nvidia-smi -q -g 0 -d UTILIZATION -l
 
-
-
-2. Git:
-	#[
-		工作区(working directory):指的是你电脑中的路径，
-		版本库(repository):指的是本地.git的隐藏目录，同事同步了云端
-		暂存区(stage/index): 属于版本库，接受工作区的内容（通过add），在通过commit更新到版本库对应的分支
-		远程仓库(对应github)：其实github是一个给git提供远程仓库的平台，先有git才有github
+# Git:
+	工作区(working directory):指的是你电脑中的路径，
+	版本库(repository):指的是本地.git的隐藏目录，同事同步了云端
+	暂存区(stage/index): 属于版本库，接受工作区的内容（通过add），在通过commit更新到版本库对应的分支
+	远程仓库(对应github)：其实github是一个给git提供远程仓库的平台，先有git才有github
 		
-	]
 
-	$git clone [url] 	
+	git clone [url] 	
 		#get git database from remote to local
 	$git status
 		#check the detail of your modification
@@ -50,7 +46,7 @@
 	$git push 
 		#将本地commit过之后的修改放入云端代码库
 
-3. vim
+# vim
 	#在vim中按ctl+z是强行退出，会留下修改缓存文件，正确不保存退出应该是:q!
 
 
