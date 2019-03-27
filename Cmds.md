@@ -1,5 +1,5 @@
 # GPU info: 
-	$ nvidia-smi -q -g 0 -d UTILIZATION -l
+	nvidia-smi -q -g 0 -d UTILIZATION -l
 
 
 # Git:
