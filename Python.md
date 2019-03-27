@@ -15,42 +15,26 @@
 
 #### Data type: 
 python的数据类型会在initial的时候根据被赋值的值去初始化，并且数据类型在计算中也可以改变, 常见的数据类型有
-* int:
 ```python
+    # int:
     a = 1 
-```
-* float: 
-```python
+    # float: 
     a = 1.3 
     a= 35e-3
-```
-* complex:
-```python
+    # complex:
     a = 3+5j
-```
-* str: python中没有char这个概念，string的index位置依旧是一个string
-```python
+    # str: python中没有char这个概念，string的index位置依旧是一个string
     a = "hello"
     type(a[1]) #return "<class 'str'>"
-```
-* tuple: 
-```python
+    # tuple: 
     a = ()
-```
-* list:
-```python
+    # list:
     a = []
-```
-* dict:
-```python
+    # dict:
     a = {}
-```
-* object:
-```python
+    # object:
     a = Telephone()
-```
-* type (type本身也是一个type):
-```python
+    # type (type本身也是一个type):
     a = int
 ```
 
