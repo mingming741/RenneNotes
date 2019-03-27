@@ -13,7 +13,7 @@
 # 通用操作
 #### String
 * 字符串相加可以直接使用加号
-“”“python
+"""python
 a = "Renne"
 b = "Hello"
 c = a + b
