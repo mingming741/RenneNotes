@@ -9,15 +9,14 @@
 * 版本库(repository): 指的是本地.git的隐藏目录，同事同步了云端
 * 暂存区(stage/index): 属于版本库，接受工作区的内容（通过add），在通过commit更新到版本库对应的分支
 * 远程仓库(对应github): 其实github是一个给git提供远程仓库的平台，先有git才有github	
-### cmd方法
-##### git clone [url] 	
-	get git database from remote to local
+### cmd方法 	
+##### get git database from remote to local
+	git clone [url] 
 
-##### git status
-	check the detail of your modification, 本地文件结构修改的详细状态
-
-##### git status -s 		
-	--> check the file status local modified and old version, 本地文件结构修改的简略情况
+##### check the detail of your modification, 本地文件结构修改的详细状态
+	git status
+##### check the file status local modified and old version, 本地文件结构修改的简略情况
+	git status -s 		 
 * git checkout [branch_name]
 	--> switch到对应的branch中去，-b表示新建branch
 * git checkout --[file_name]
