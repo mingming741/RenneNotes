@@ -84,10 +84,8 @@ torch的cnn基于torch.nn，在这里用晖哥的code做例子，具体实现写
 
 
 ### MLP (Multi-layer Perceptron)多层感知机
-多层感知器即多个单层感知器链接而成，下图表示单层感知器的的结构
+多层感知器即多个单层感知器链接而成，下图表示单层感知机(PLA: Perceptron Learning Algorithm)的的结构，其实就是一个线性分类器的算法
 ![image](https://github.com/mingming741/RenneNotes/blob/master/Resource/Image/%E5%A4%9A%E5%B1%82%E6%84%9F%E7%9F%A5%E5%99%A8.png)
-
-
-
+更准确的说，PLA是一个线性的二分类器，但不能对非线性的数据并不能进行有效的分类
 
 
