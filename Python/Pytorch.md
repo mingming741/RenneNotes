@@ -63,6 +63,16 @@ print(z, out)
 out.backward() # 计算out的backward path这里会计算所有被grad_fn关联起来的，和out有关的tensor的".grad"的attribute 
 print(x.grad)  # tensor([[4.5000, 4.5000], [4.5000, 4.5000]]) 经过out的backward，x.grad已经被计算出来了。
 ```
-
+在计算gradient的时候，如果x个y都是vector，那么y对x的倒数会变成一个matrix，(Jacobian matrix)，下面的例子给出torch的处理方法
+```python
+x = torch.randn(3, requires_grad=True)
+y = x * 2
+while y.data.norm() < 1000: # 对y进行多次翻倍操作直到平均值大于1000
+    y = y * 2 
+print(y) # tensor([-333.7958, -287.0981, 1274.5677], grad_fn=<MulBackward0>)
+v = torch.tensor([0.1, 1.0, 0.0001], dtype=torch.float)
+y.backward(v)
+print(x.grad) # tensor([2.0480e+02, 2.0480e+03, 2.0480e-01])
+```
 
 
