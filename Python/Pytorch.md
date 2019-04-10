@@ -79,4 +79,6 @@ with torch.no_grad():
     print((x ** 2).requires_grad)
 ```
 
+### CNN
+torch的cnn基于torch.nn，在这里用晖哥的code做例子，具体实现写在confluence里面
 
