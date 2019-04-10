@@ -58,7 +58,7 @@ z = y * y * 3
 out = z.mean()
 print(z, out)
 # tensor([[27., 27.], [27., 27.]], grad_fn=<MulBackward0>)   tensor(27., grad_fn=<MeanBackward0>)
-# 不同的operation创建的tensor会有不同的grad_fn，记录backward的内容
+# 不同的operation创建的tensor会有不同的grad_fn，记录backward的内容，这就是autograd
 
 out.backward() # 计算out的backward path这里会计算所有被grad_fn关联起来的，和out有关的tensor的".grad"的attribute 
 print(x.grad)  # tensor([[4.5000, 4.5000], [4.5000, 4.5000]]) 经过out的backward，x.grad已经被计算出来了。
@@ -71,8 +71,12 @@ while y.data.norm() < 1000: # 对y进行多次翻倍操作直到平均值大于1
     y = y * 2 
 print(y) # tensor([-333.7958, -287.0981, 1274.5677], grad_fn=<MulBackward0>)
 v = torch.tensor([0.1, 1.0, 0.0001], dtype=torch.float)
-y.backward(v)
+y.backward(v) # 在y不是scaler的时候，需要pass一个同样的vector进去 （这里我没看懂）
 print(x.grad) # tensor([2.0480e+02, 2.0480e+03, 2.0480e-01])
+
+# 通常在最后prediction的时候，不需要再计算gradient，只要forward path，这样写可以避免一些问题
+with torch.no_grad():
+    print((x ** 2).requires_grad)
 ```
 
 
