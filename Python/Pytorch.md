@@ -43,7 +43,7 @@ if torch.cuda.is_available():
 ```
 
 
-### Tensor相关的函数
+### Tensor和Backward
 ```python
 requires_grad = True # track all operations on tensor
 .backward() # 用于计算全部的gradient，输出在.grad的attribute中
@@ -57,8 +57,11 @@ print(y) # tensor([[3., 3.], [3., 3.]], grad_fn=<AddBackward0>)
 z = y * y * 3
 out = z.mean()
 print(z, out)
-# tensor([[27., 27.], [27., 27.]], grad_fn=<MulBackward0>)
-# tensor(27., grad_fn=<MeanBackward0>) 不同的operation创建的tensor会有不同的grad_fn，记录backward的内容
+# tensor([[27., 27.], [27., 27.]], grad_fn=<MulBackward0>)   tensor(27., grad_fn=<MeanBackward0>)
+# 不同的operation创建的tensor会有不同的grad_fn，记录backward的内容
+
+out.backward() # 计算out的backward path这里会计算所有被grad_fn关联起来的，和out有关的tensor的".grad"的attribute 
+print(x.grad)  # tensor([[4.5000, 4.5000], [4.5000, 4.5000]]) 经过out的backward，x.grad已经被计算出来了。
 ```
 
 
