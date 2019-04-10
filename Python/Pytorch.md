@@ -41,3 +41,25 @@ if torch.cuda.is_available():
     print(z)  # tensor([-0.7816], device='cuda:0')
     print(z.to("cpu", torch.double))       # tensor([-0.7816], dtype=torch.float64)，to也可以改变类型
 ```
+
+
+### Tensor相关的函数
+```python
+requires_grad = True # track all operations on tensor
+.backward() # 用于计算全部的gradient，输出在.grad的attribute中
+```
+torch中，Function也是一个类，并且和tensor通过.grad_fn找到create他的Function。.backward()可以被tensor调用来看到他的训练过程，在这里tensor即训练data
+```python
+x = torch.ones(2, 2, requires_grad=True)
+y = x + 2
+print(y) # tensor([[3., 3.], [3., 3.]], grad_fn=<AddBackward0>)
+#在这里，y是通过加法操作被创建的，所有y有自己的grad_fn值，tensor默认print会print所有他有的attribute。这里AddBackword表示加法
+z = y * y * 3
+out = z.mean()
+print(z, out)
+# tensor([[27., 27.], [27., 27.]], grad_fn=<MulBackward0>)
+# tensor(27., grad_fn=<MeanBackward0>) 不同的operation创建的tensor会有不同的grad_fn，记录backward的内容
+```
+
+
+
