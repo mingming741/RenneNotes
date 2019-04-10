@@ -40,3 +40,19 @@
 	$ git merge
 ##### 将本地commit过之后的修改放入云端代码库
 	$ git push 
+	
+
+### 强制退回某一个版本
+有的时候commit了一些敏感内容的时候，需要退回到commit之前的版本，下面的操作可以实现，首先查找所有的历史，找到你要退回的哪个版本的commit_hash
+```
+$ git log
+```
+然后强制回到那个版本
+```
+$ git reset --hard [commit_hash] 
+```
+然后再push上去
+```
+$ git push origin HEAD –force
+```
+这样就找不到提交历史了
