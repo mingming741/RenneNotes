@@ -88,3 +88,17 @@ torch的cnn基于torch.nn，在这里用晖哥的code做例子，具体实现写
 <br/><img src = "https://github.com/mingming741/RenneNotes/blob/master/Resource/Image/多层感知器_单层.png" width = 375/><br/>
 而多层的分类器本质上是全链接层和激活层的嵌套链接，最后可以达到输出多个结果的效果
 <br/><img src = "https://github.com/mingming741/RenneNotes/blob/master/Resource/Image/多层感知器_多层.png" width = 375/><br/>
+
+
+### 实战操作
+```python
+#给神经网络添加initial weight
+def init_weights(m):
+    if type(m) == nn.Linear:
+    m.weight.data.fill_(1.0)
+    print(m.weight)
+>>> net = nn.Sequential(nn.Linear(2, 2), nn.Linear(2, 2))
+>>> net.apply(init_weights)
+
+
+```
