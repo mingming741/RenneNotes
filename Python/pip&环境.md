@@ -14,13 +14,13 @@ pip是python的packet manager
 # 虚拟环境
 python自己的有自己运行的虚拟环境，因为不同的library要求python的版本不同，虚拟环境可以避免一些兼容性的问题，安装虚拟环境lib
 ```
-    sudo pip3 install virtualenv 
+sudo pip3 install virtualenv 
 ```
 创建虚拟环境
 ```
-    virtualenv venv 
+virtualenv venv 
 ```
 激活虚拟环境，需要先找到虚拟环境下面的activate
 ```
-    source venv/bin/activate
+source venv/bin/activate
 ```
