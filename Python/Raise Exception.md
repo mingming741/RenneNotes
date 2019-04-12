@@ -17,7 +17,7 @@ else:
 # Python Exception的基类是Exception，Exception可以被任何except的类型捕获，如果捕获Exception，即可捕获任何抛出的异常，比如
 try:
     raise Exception("抛出一个异常")
-except IOError: # 无法catch，因为Exception是基类
+except (IOError,IndexError):: # 无法catch，因为Exception是基类，但是我们可以用tuple()来表示catch多个Exception
     print(2333)
 
 try:
