@@ -16,9 +16,10 @@ python自己的有自己运行的虚拟环境，因为不同的library要求pyth
 ```
 sudo pip3 install virtualenv 
 ```
-创建虚拟环境
+创建虚拟环境，或者指定python的版本创建虚拟环境
 ```
 virtualenv venv 
+virtualenv -p /usr/bin/python2.7 venv
 ```
 激活虚拟环境，需要先找到虚拟环境下面的activate
 ```
