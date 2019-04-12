@@ -13,6 +13,7 @@ except Exception:
 else:
     print(2334)
 # 执行结果是2333被print出来，并且程序可以执行下去不会被block，因为这个异常在程序内部被handle了。
+
 # Python Exception的基类是Exception，Exception可以被任何except的类型捕获，如果捕获Exception，即可捕获任何抛出的异常，比如
 try:
     raise Exception("抛出一个异常")
@@ -21,6 +22,6 @@ except IOError: # 无法catch，因为Exception是基类
 
 try:
     raise IOError("抛出一个异常")
-except Exception: # 可以catch
+except Exception: # 可以catch，这句话也等同于 "except: "，不申明也等于捕获全部
     print(2333)
 ```
