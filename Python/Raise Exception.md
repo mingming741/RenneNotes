@@ -39,7 +39,7 @@ class Networkerror(RuntimeError):
         self.args = arg
 #这里只要重载__init__(self,)即可，这个函数用于raise Exception，也可以将其重载为多个input参数的形式
 ```
-python常见的异常类型有这些，括号里表示的是Exception的基类，这里给出链接<a herf = https://docs.python.org/3.4/library/exceptions.html/>
+python常见的异常类型有这些，括号里表示的是Exception的基类，这里给出链接<a herf = "https://docs.python.org/3.4/library/exceptions.html" />
 ```python
 # Level 0
 BaseException #除了Exception之外还包括SystemExit，KeyboardInterrupt，GeneratorExit，表示程序运行之外的Exception
