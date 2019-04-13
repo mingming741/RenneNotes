@@ -49,11 +49,21 @@ Exception # 所有Exception的基类，user define的Exception都应该override�
 
 # Level 2
 ArithmeticError # 数学运算上的错误，如OverflowError, ZeroDivisionError, FloatingPointError
+AttributeError # 不存在属性(应该指的是class的属性)ref或者被赋值的时候产生
+AssertionError # assert返回false的时候触发，如pytest中就是用这个
 BufferError # 关系到buffer的error，如buffer overflow的情况
+ImportError # import的包找不到的时候触发，fail to find module
 LookupError # 表示找不到对应的key或者index给的那个target，如IndexError, KeyError
+NameError # 在local或者global定义的变量名不存在，或者没有赋值就被调用的情况触发
+OSError # 操作系统相关的error，包括IOError
+RuntimeError # 在error(exception)被raise并且不符合任何其他error的类型时候被触发
+SyntaxError # 语法错误，在python中即使语法错误，前面的code依旧会执行
 
 
-
-AttributeError # 不存在属性(应该指的是class的属性)
-IoError(OSError)  输入或输出异常
+# Level 3，括号表示对应的基类
+IOError(OSError) # 输入或输出异常
+IndexError(LookupError) # 在index out of range的时候触发，对应list
+IndentationError(SyntaxError) # 缩进错误，可能少打了tab之类的
+KeyError(LookupError) # 在dictionary的key不存在的时候触发，对应dict
+TypeError
 ```
