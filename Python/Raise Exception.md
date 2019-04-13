@@ -57,8 +57,9 @@ LookupError # 表示找不到对应的key或者index给的那个target，如Inde
     IndexError(LookupError) # 在index out of range的时候触发，对应list
     KeyError(LookupError) # 在dictionary的key不存在的时候触发，对应dict
 NameError # 在local或者global定义的变量名不存在，或者没有赋值就被调用的情况触发
-OSError # 操作系统相关的error，包括IOError，注意python中os和system的区别
+OSError # 操作系统相关的error，包括IOError，FileExistsError，FileNotFoundError，PermissionError，TimeoutError
     IOError(OSError) # 输入或输出异常
+    ConnectionError(OSError) # Socket中会出现
 RuntimeError # 在error(exception)被raise并且不符合任何其他error的类型时候被触发
 SyntaxError # 语法错误，在python中即使语法错误，前面的code依旧会执行
     IndentationError(SyntaxError) # 缩进错误，可能少打了tab之类的
