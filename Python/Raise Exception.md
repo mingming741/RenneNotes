@@ -8,7 +8,7 @@ raise Exception("抛出一个异常")
 ```python
 try:
     raise Exception("抛出一个异常")
-except Exception:
+except Exception as error: # 可以将这个Exception的object pass过来
     print(2333) 
 else:
     print(2334)
@@ -39,8 +39,21 @@ class Networkerror(RuntimeError):
         self.args = arg
 #这里只要重载__init__(self,)即可，这个函数用于raise Exception，也可以将其重载为多个input参数的形式
 ```
-python常见的异常类型有这些
+python常见的异常类型有这些，括号里表示的是Exception的基类，这里给出链接<a herf = https://docs.python.org/3.4/library/exceptions.html/>
 ```python
-AttributeError # 不存在属性
-IoError  输入或输出异常
+# Level 0
+BaseException #除了Exception之外还包括SystemExit，KeyboardInterrupt，GeneratorExit，表示程序运行之外的Exception
+
+# Level 1
+Exception # 所有Exception的基类，user define的Exception都应该override这个，或者他的派生类
+
+# Level 2
+ArithmeticError # 数学运算上的错误，如OverflowError, ZeroDivisionError, FloatingPointError
+BufferError # 关系到buffer的error，如buffer overflow的情况
+LookupError # 表示找不到对应的key或者index给的那个target，如IndexError, KeyError
+
+
+
+AttributeError # 不存在属性(应该指的是class的属性)
+IoError(OSError)  输入或输出异常
 ```
