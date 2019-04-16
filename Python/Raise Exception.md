@@ -63,7 +63,7 @@ OSError # 操作系统相关的error，包括IOError，FileExistsError，FileNot
 RuntimeError # 在error(exception)被raise并且不符合任何其他error的类型时候被触发
 SyntaxError # 语法错误，在python中即使语法错误，前面的code依旧会执行
     IndentationError(SyntaxError) # 缩进错误，可能少打了tab之类的
-TypeError # 操作类型不匹配，并且无法实现自动转化时触发
+TypeError # 操作类型不匹配，并且无法实现自动转化时触发，在函数的参数无法匹配的时候也会产生TypeError
 ValueError # 在类型正确但是数值不合适的时候被触发，如Unicode Error，在得到无法解码的时候触发
 ```
 最后再介绍一下python的warning，Warning也是继承了Exception，但是Warning不会阻止脚本的运行，有些warning在默认的时候是会被忽略的，有些会log出来，我们自己在写代码的时候也可以适当的raise一些warning来提醒用户的使用，暂时介绍下面几个warning
