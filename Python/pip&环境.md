@@ -25,3 +25,10 @@ virtualenv -p /usr/bin/python2.7 venv
 ```
 source venv/bin/activate
 ```
+
+# Pytest
+pytest是用来做python系统测试的python自带的库，通过检测assert的结果来生产输出报告，这里有一些可以使用的cmd：<br/>
+pytest默认会block一些print，-s可以解除这个限制
+```
+pytest testfile.py -s
+```
