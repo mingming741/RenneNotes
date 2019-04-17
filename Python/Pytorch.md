@@ -90,6 +90,10 @@ torch的cnn基于torch.nn，在这里用晖哥的code做例子，具体实现写
 <br/><img src = "https://github.com/mingming741/RenneNotes/blob/master/Resource/Image/多层感知器_多层.png" width = 375/><br/>
 
 
+### 训练
+
+
+
 ### 实战操作
 ```python
 #给神经网络添加initial weight
