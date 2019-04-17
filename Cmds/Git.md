@@ -40,6 +40,8 @@
 	$ git merge
 ##### 将本地commit过之后的修改放入云端代码库
 	$ git push 
+##### 删除一个branch(通常remote_name是origin)
+	$ git push --delete <remote_name> <branch_name>
 	
 
 ### 强制退回某一个版本
