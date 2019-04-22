@@ -176,5 +176,5 @@ list0 = [1, 2]
 it = list0.__iter__
 print(next(it)) # TypeError: 'method-wrapper' object is not an iterator
 ```
-
+我自己的代码链接<a href="https://github.com/mingming741/RenneCode/blob/master/Python/Learn%20Note%20Code/Generator.ipynb"> Generator</a>
 
