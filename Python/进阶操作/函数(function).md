@@ -150,6 +150,7 @@ def generator_function():
         yield i  # 每次调用next的时候，就会调用出下一个值，可以理解为自动打断和调用，在内存中，i的值是被保留的
 
 a = generator_function() # generator function返回值是一个generator的object
+print(type(a)) # <class 'generator'>
 for i in range(0, 10): 
     print(next(a))     
 for item in generator_function(): # 和上面的等价，每次调用generator_function返回的是不同的generator，但是一个generator只能iteration一次
