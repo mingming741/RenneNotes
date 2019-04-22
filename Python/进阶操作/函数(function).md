@@ -168,7 +168,13 @@ def fibon(n):
 for x in fibon(10):
     print(x)
 ```
-
-
+Generator在yield完成之后会throw ``StopIteration``的exception，而for循环会自己catch这个exception并且停止``next()``的操作。通常情况，许多本身不是iterator的object都可以通过iter()函数返回他的iterator的attribute，但是通常不能直接调用``__iter__``attribute，这个attribute被封装过，就如图``next()``这个method也封装过一样，只能接受iterator，并且不能直接调用``__next__``这个attribute
+```python
+my_string = "Renne"
+print(next(iter(my_string))) # R
+list0 = [1, 2]
+it = list0.__iter__
+print(next(it)) # TypeError: 'method-wrapper' object is not an iterator
+```
 
 
