@@ -35,8 +35,25 @@ t = np.arange(0., 5., 0.2) # t表示横坐标
 
 # red dashes, blue squares and green triangles
 plt.plot(t, t, 'r--', t, t**2, 'bs', t, t**3, 'g^')
-#这句话会plot出三条线，每三个参数合成一个函数，r--表示红色的
-
 plt.show()
 ```
+这句话会plot出三条线，每三个参数合成一个函数，r--表示红色的横线，bs表示蓝色正方形，g^表示绿色三角形，即颜色加形状的组合
 <img src="https://matplotlib.org/_images/sphx_glr_pyplot_004.png" height="400" width="640">
+
+如果要在一个figure中显示多个plot，就要用到subplot，下面是例子
+```python
+def f(t):
+    return np.exp(-t) * np.cos(2*np.pi*t)
+
+t1 = np.arange(0.0, 5.0, 0.1)
+t2 = np.arange(0.0, 5.0, 0.02)
+
+plt.figure(1) #这个参数1表示figure的id，在多个figure的时候不冲突，而这句话指定了我们下面的plot会对figure(1)进行操作
+plt.subplot(211) # 纵向分成两个图，表示指定上面的图
+plt.plot(t1, f(t1), 'bo', t2, f(t2), 'k') # 在指定的图上面plot东西
+plt.subplot(212) # 指定下面的图
+plt.plot(t2, np.cos(2*np.pi*t2), 'r--') # plot另一些东西
+plt.show()
+```
+subplot接受的参数一定是一个三位的数字，第一位表示figure纵向分成几份，第二位表示figure横向分成几份，第三位表示在前两位分割的情况下，这个subplot的index。比如322就表示，最多6个subplot，这个subplot位于6个的第二位，如果在一个figure下多个subplot的位置有重叠，那么后面的会override前面的，所以建议所有的subplot的前两位要一样。
+<img src="https://matplotlib.org/_images/sphx_glr_pyplot_007.png" height="400" width="640">
