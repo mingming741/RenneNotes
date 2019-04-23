@@ -40,7 +40,7 @@ plt.show()
 这句话会plot出三条线，每三个参数合成一个函数，r--表示红色的横线，bs表示蓝色正方形，g^表示绿色三角形，即颜色加形状的组合
 <img src="https://matplotlib.org/_images/sphx_glr_pyplot_004.png" height="400" width="640">
 
-如果要在一个figure中显示多个plot，就要用到subplot，下面是例子
+如果要在一个figure中显示多个plot，就要用到subplot，下面是例子。当指定了figure之后，所有的操作都是对这个figure，如果指定了subplot，那么操作就是对指定的subplot使用
 ```python
 def f(t):
     return np.exp(-t) * np.cos(2*np.pi*t)
@@ -48,7 +48,7 @@ def f(t):
 t1 = np.arange(0.0, 5.0, 0.1)
 t2 = np.arange(0.0, 5.0, 0.02)
 
-plt.figure(1) #这个参数1表示figure的id，在多个figure的时候不冲突，而这句话指定了我们下面的plot会对figure(1)进行操作
+plt.figure(1) #这个参数1表示figure的id，在多个figure的时候不冲突，而这句话指定了我们下面的plot会对figure(1)进行操作，默认就是figure(1)
 plt.subplot(211) # 纵向分成两个图，表示指定上面的图
 plt.plot(t1, f(t1), 'bo', t2, f(t2), 'k') # 在指定的图上面plot东西
 plt.subplot(212) # 指定下面的图
