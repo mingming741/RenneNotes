@@ -1,6 +1,8 @@
 # Matplotlib
 通常用于机器学习的数据集绘图和结果展示，plot接受的object为np.array
-```import matplotlib.pyplot as plt```
+```python
+import matplotlib.pyplot as plt
+```
 下面给出最简单的例子，在matplotlib中，figure指的是一张完整的图片，一个figure可以包含多个Axe，每个Axe包含一个坐标系，可以理解为一个subplot。Axes contains two (or three in the case of 3D) Axis objects。可以使用set_xlim() and set_ylim()改变对应的Axe的x和yAxis(坐标轴)的最大值。类``Artist``表示figure中的所有的object的基类，
 ```python
 import matplotlib.pyplot as plt
