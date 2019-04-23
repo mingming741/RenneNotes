@@ -39,4 +39,4 @@ plt.plot(t, t, 'r--', t, t**2, 'bs', t, t**3, 'g^')
 
 plt.show()
 ```
-<img src="https://matplotlib.org/_images/sphx_glr_pyplot_004.png" height="200" width="320">
+<img src="https://matplotlib.org/_images/sphx_glr_pyplot_004.png" height="400" width="640">
