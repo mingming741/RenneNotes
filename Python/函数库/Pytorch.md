@@ -116,12 +116,23 @@ class MyModule(nn.Module):
 ```
 和ModuleList类似，torch.nn.ModuleDict提供了类似的构建Module的方法，不过使用的参数是Dictionary
 
-#### Conv1d ``torch.nn.Conv1d``
+#### Convolution
+``torch.nn.Conv1d``
 表示一个卷积层，1D的convolution。即输入是一个1D的vertor。in_channels对应的每个kernal有几个层次，out_channels表示有几个kernal，kernel_size是每个kernal的大小，stride表示kernal移动的step size。对应的shape用下面的方法计算
 <img src = 'https://github.com/mingming741/RenneNotes/blob/master/Resource/Image/Torch_NN_Conv1d.png'/>
 Lout表示这一层输出之后的vertor length，Lin是输入的vertor length
+``torch.nn.Conv2d``
+通常用作对图像的卷积层，输入是一个二维矩阵，shape计算方法相似，W和H表示图片的宽度和高度。
+<img src = 'https://github.com/mingming741/RenneNotes/blob/master/Resource/Image/Torch_NN_Conv2d.png'/>
+Torch最多支持Conv3d，没有多的了。同样也支持transposed convolutional(Deconvolution)的操作，这操作可以看做convolution的逆操作，用``ConvTranspose1d``等层实现。
 
-#### Conv2d ``torch.nn.Conv2d``
+### Unfold 和Fold
+``torch.nn.Fold & torch.nn.Unfold``
+unfold是从一个batch取出一个小的block，比如用于取出一个sample。fold是将很多sample合成一个打的tensor，用来将sample合并成batch。
+
+### Pooling
+``torch.nn.MaxPool1d``
+表示一个最大池化层
 
 
 
