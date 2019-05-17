@@ -99,26 +99,4 @@ class Model(nn.Module):
 ```
 
 
-### MLP (Multi-layer Perceptron)多层感知机
-多层感知器即多个单层感知器链接而成，下图表示单层感知机(PLA: Perceptron Learning Algorithm)的的结构，其实就是一个线性分类器的算法。更准确的说，PLA是一个线性的二分类器，但不能对非线性的数据并不能进行有效的分类，所以在这里引用多层的结构，理论上，多层的网络可以模拟复杂的函数。
-<br/><img src = "https://github.com/mingming741/RenneNotes/blob/master/Resource/Image/多层感知器_单层.png" width = 375/><br/>
-而多层的分类器本质上是全链接层和激活层的嵌套链接，最后可以达到输出多个结果的效果
-<br/><img src = "https://github.com/mingming741/RenneNotes/blob/master/Resource/Image/多层感知器_多层.png" width = 375/><br/>
 
-
-### 训练
-
-
-
-### 实战操作
-```python
-#给神经网络添加initial weight
-def init_weights(m):
-    if type(m) == nn.Linear:
-    m.weight.data.fill_(1.0)
-    print(m.weight)
->>> net = nn.Sequential(nn.Linear(2, 2), nn.Linear(2, 2))
->>> net.apply(init_weights)
-
-
-```
