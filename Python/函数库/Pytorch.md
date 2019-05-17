@@ -80,7 +80,23 @@ with torch.no_grad():
 ```
 
 ### CNN
-torch的cnn基于torch.nn，在这里用晖哥的code做例子，具体实现写在confluence里面
+torch的cnn基于torch.nn，下面记录一下nn中的实现
+``torch.nn.Module``
+通常表示一个层，因为Module中也可以包括其他Module，所以也可以表示一个网络，这里给一个torch官网上面的的简单的例子
+```python
+import torch.nn as nn
+import torch.nn.functional as F # F可以提供一些操作，可以理解为将一些Layer变成函数的表达方式
+
+class Model(nn.Module):
+    def __init__(self):
+        super(Model, self).__init__()
+        self.conv1 = nn.Conv2d(1, 20, 5)
+        self.conv2 = nn.Conv2d(20, 20, 5)
+
+    def forward(self, x):
+       x = F.relu(self.conv1(x)) #一个层即是一个函数，调用这一层的函数可以得到输出
+       return F.relu(self.conv2(x)) 
+```
 
 
 ### MLP (Multi-layer Perceptron)多层感知机
