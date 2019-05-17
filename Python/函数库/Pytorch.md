@@ -81,7 +81,7 @@ with torch.no_grad():
 
 ### CNN
 torch的cnn基于torch.nn，下面记录一下nn中的实现
-``torch.nn.Module``
+####  Module ``torch.nn.Module``
 通常表示一个层，因为Module中也可以包括其他Module，所以也可以表示一个网络，这里给一个torch官网上面的的简单的例子
 ```python
 import torch.nn as nn
