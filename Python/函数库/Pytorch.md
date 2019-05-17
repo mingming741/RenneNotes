@@ -80,7 +80,9 @@ with torch.no_grad():
 # NN
 torch的cnn基于torch.nn，下面记录一下nn中的实现。
 ####  Module 
-```torch.nn.Module```
+```
+torch.nn.Module
+```
 Module的基类，所有的nn都继承了Module。可以理解为一个函数，对给定的input做了这个output的操作。通常表示一个层。也可以表示一个container，这时候用``nn.Sequential``表示。因为Module中也可以包括其他Module，所以也可以表示一个网络，这里给一个torch官网上面的的简单的例子
 ```python
 import torch.nn as nn
@@ -98,10 +100,14 @@ class Model(nn.Module):
 ```
 使用``add_module``函数给一个Module添加子的Module，``modules()``得到这个module的全部sub module，``cuda(device=None)``将内容放到gpu上去跑。``apply(fn)``将一个torch的函数使用到全部children中去。
 
-```torch.nn.Sequential```
+```
+torch.nn.Sequential
+```
 Sequential也是继承了Module，专门用来做container的结构。
 
-```torch.nn.ModuleList```
+```
+torch.nn.ModuleList
+```
 ModuleList和Sequential类似，不过method比Sequential要多一些，有insert，append，extend等方法，而Sequantial的方法是forward
 ```python
 class MyModule(nn.Module):
@@ -118,21 +124,29 @@ class MyModule(nn.Module):
 和ModuleList类似，torch.nn.ModuleDict提供了类似的构建Module的方法，不过使用的参数是Dictionary
 
 #### Convolution Layer
-```torch.nn.Conv1d```
+```
+torch.nn.Conv1d
+```
 表示一个卷积层，1D的convolution。即输入是一个1D的vertor。in_channels对应的每个kernal有几个层次，out_channels表示有几个kernal，kernel_size是每个kernal的大小，stride表示kernal移动的step size。对应的shape用下面的方法计算。一般情况下卷积操作都不会修改input的shape。
 <img src = 'https://github.com/mingming741/RenneNotes/blob/master/Resource/Image/Torch_NN_Conv1d.png'/>
 Lout表示这一层输出之后的vertor length，Lin是输入的vertor length
-```torch.nn.Conv2d```
+```
+torch.nn.Conv2d
+```
 通常用作对图像的卷积层，输入是一个二维矩阵，shape计算方法相似，W和H表示图片的宽度和高度。
 <img src = 'https://github.com/mingming741/RenneNotes/blob/master/Resource/Image/Torch_NN_Conv2d.png'/>
 Torch最多支持Conv3d，没有多的了。同样也支持transposed convolutional(Deconvolution)的操作，这操作可以看做convolution的逆操作，用``ConvTranspose1d``等层实现。
 
 ### Unfold 和Fold
-```torch.nn.Fold & torch.nn.Unfold```
+```
+torch.nn.Fold & torch.nn.Unfold
+```
 unfold是从一个batch取出一个小的block，比如用于取出一个sample。fold是将很多sample合成一个打的tensor，用来将sample合并成batch。
 
 ### Pooling Layer
-```torch.nn.MaxPool1d```
+```
+torch.nn.MaxPool1d
+```
 表示一个最大池化层，通常stride取kernal的大小，这样就可以缩小图片大小。Pooling因为有stride所有会改变input的size，计算方法和Conv1d一样。同理``MaxPool2d``用于做二维矩阵的pooling，output计算方法和Conv2d一样。并且Max Pooling会保留indices(即value来自原来的哪个block)。MaxUnpool1d可以用来做反操作，将不是最大值的位置全部设置成0。Pooling中还有AvgPool1d，LPPool1d，AdaptiveMaxPool1d，AdaptiveAvgPool1d类似。
 
 
