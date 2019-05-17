@@ -118,7 +118,7 @@ class MyModule(nn.Module):
 
 #### Conv1d ``torch.nn.Conv1d``
 表示一个卷积层，1D的convolution。即输入是一个1D的vertor。in_channels对应的每个kernal有几个层次，out_channels表示有几个kernal，kernel_size是每个kernal的大小，stride表示kernal移动的step size。对应的shape用下面的方法计算
-<img src = `https://github.com/mingming741/RenneNotes/blob/master/Resource/Image/Torch_NN_Conv1d.png`/>
+<img src = 'https://github.com/mingming741/RenneNotes/blob/master/Resource/Image/Torch_NN_Conv1d.png'/>
 Lout表示这一层输出之后的vertor length，Lin是输入的vertor length
 
 #### Conv2d ``torch.nn.Conv2d``
