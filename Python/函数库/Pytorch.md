@@ -1,7 +1,5 @@
-# Pytorth
+# 基础知识
 pytorch相当于用GPU来处理numpy的ndarray，在torch中即tensor，在torch中，tensor是一个类，每个tensor都自带一个datatype
-
-### 基础知识
 ```python
 #torch中有自己定义的一些datatype，
 x = torch.randn_like(x, dtype=torch.float)    # override dtype!
@@ -43,7 +41,7 @@ if torch.cuda.is_available():
 ```
 
 
-### Tensor和Backward
+# Tensor和Backward
 ```python
 requires_grad = True # track all operations on tensor
 .backward() # 用于计算全部的gradient，输出在.grad的attribute中
@@ -79,10 +77,10 @@ with torch.no_grad():
     print((x ** 2).requires_grad)
 ```
 
-### CNN
+# NN
 torch的cnn基于torch.nn，下面记录一下nn中的实现
-####  Module ``torch.nn.Module``
-通常表示一个层，因为Module中也可以包括其他Module，所以也可以表示一个网络，这里给一个torch官网上面的的简单的例子
+###  Module ``torch.nn.Module``
+通常表示一个层，也可以表示一个container，这时候用``nn.Sequential``表示。因为Module中也可以包括其他Module，所以也可以表示一个网络，这里给一个torch官网上面的的简单的例子
 ```python
 import torch.nn as nn
 import torch.nn.functional as F # F可以提供一些操作，可以理解为将一些Layer变成函数的表达方式
@@ -97,6 +95,7 @@ class Model(nn.Module):
        x = F.relu(self.conv1(x)) #一个层即是一个函数，调用这一层的函数可以得到输出
        return F.relu(self.conv2(x)) 
 ```
+使用``add_module``函数给一个Module添加子的Module，``modules()``得到这个module的全部sub module，``cuda(device=None)``将内容放到gpu上去跑。``apply(fn)``将一个torch的函数使用到全部children中去。
 
 
 
