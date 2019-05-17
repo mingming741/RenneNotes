@@ -123,7 +123,7 @@ class MyModule(nn.Module):
 ```
 和ModuleList类似，torch.nn.ModuleDict提供了类似的构建Module的方法，不过使用的参数是Dictionary
 
-#### Convolution Layer
+### Convolution Layer
 ```
 torch.nn.Conv1d
 ```
@@ -147,7 +147,19 @@ unfold是从一个batch取出一个小的block，比如用于取出一个sample�
 ```
 torch.nn.MaxPool1d
 ```
-表示一个最大池化层，通常stride取kernal的大小，这样就可以缩小图片大小。Pooling因为有stride所有会改变input的size，计算方法和Conv1d一样。同理``MaxPool2d``用于做二维矩阵的pooling，output计算方法和Conv2d一样。并且Max Pooling会保留indices(即value来自原来的哪个block)。MaxUnpool1d可以用来做反操作，将不是最大值的位置全部设置成0。Pooling中还有AvgPool1d，LPPool1d，AdaptiveMaxPool1d，AdaptiveAvgPool1d类似。
+MaxPool1d表示一个最大池化层，通常stride取kernal的大小，这样就可以缩小图片大小。Pooling因为有stride所有会改变input的size，计算方法和Conv1d一样。同理``MaxPool2d``用于做二维矩阵的pooling，output计算方法和Conv2d一样。并且Max Pooling会保留indices(即value来自原来的哪个block)。MaxUnpool1d可以用来做反操作，将不是最大值的位置全部设置成0。Pooling中还有AvgPool1d，LPPool1d，AdaptiveMaxPool1d，AdaptiveAvgPool1d类似。
+
+### Padding layers
+用来做padding的layer。ReflectionPad1d使用boundary的reflection来做padding，类似的有ReflectionPad2d，ReplicationPad1d(用最近的bounday)，ZeroPad2d，ConstantPad1d等等方法。并且padding的函数在`torch.nn.functional`中也有实现
+
+### Non-linear activations layer
+包括ELU，Hardshrink，Hardtanh，LeakyReLU，LogSigmoid，MultiheadAttention，PReLU，ReLU，SELU，CELU，Sigmoid，Softplus，Softshrink，Softsign，Tanh，Tanhshrink(即x-tanh(x))，Threshold，Softmax，等等。用的多的就是ReLU。
+
+### Normalization layers
+通常是在计算之前，对数据进行某些处理。包括BatchNorm1d(2d,3d)，GroupNorm,InstanceNorm1d(2d,3d),LayerNorm等等。
+
+
+
 
 
 
