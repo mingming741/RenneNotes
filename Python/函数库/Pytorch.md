@@ -78,9 +78,9 @@ with torch.no_grad():
 ```
 
 # NN
-torch的cnn基于torch.nn，下面记录一下nn中的实现
-###  Module ``torch.nn.Module``
-通常表示一个层，也可以表示一个container，这时候用``nn.Sequential``表示。因为Module中也可以包括其他Module，所以也可以表示一个网络，这里给一个torch官网上面的的简单的例子
+torch的cnn基于torch.nn，下面记录一下nn中的实现。
+####  Module ``torch.nn.Module``
+Module的基类，所有的nn都继承了Module。可以理解为一个函数，对给定的input做了这个output的操作。通常表示一个层。也可以表示一个container，这时候用``nn.Sequential``表示。因为Module中也可以包括其他Module，所以也可以表示一个网络，这里给一个torch官网上面的的简单的例子
 ```python
 import torch.nn as nn
 import torch.nn.functional as F # F可以提供一些操作，可以理解为将一些Layer变成函数的表达方式
@@ -96,6 +96,32 @@ class Model(nn.Module):
        return F.relu(self.conv2(x)) 
 ```
 使用``add_module``函数给一个Module添加子的Module，``modules()``得到这个module的全部sub module，``cuda(device=None)``将内容放到gpu上去跑。``apply(fn)``将一个torch的函数使用到全部children中去。
+
+####  Sequential ``torch.nn.Sequential``
+Sequential也是继承了Module，专门用来做container的结构。
+
+#### ModuleList ``torch.nn.ModuleList``
+ModuleList和Sequential类似，不过method比Sequential要多一些，有insert，append，extend等方法，而Sequantial的方法是forward
+```python
+class MyModule(nn.Module):
+    def __init__(self):
+        super(MyModule, self).__init__()
+        self.linears = nn.ModuleList([nn.Linear(10, 10) for i in range(10)])
+
+    def forward(self, x):
+        # ModuleList can act as an iterable, or be indexed using ints
+        for i, l in enumerate(self.linears):
+            x = self.linears[i // 2](x) + l(x)
+        return x
+```
+和ModuleList类似，torch.nn.ModuleDict提供了类似的构建Module的方法，不过使用的参数是Dictionary
+
+#### Conv1d ``torch.nn.Conv1d``
+表示一个卷积层，1D的convolution。即输入是一个1D的vertor。in_channels对应的每个kernal有几个层次，out_channels表示有几个kernal，kernel_size是每个kernal的大小，stride表示kernal移动的step size。对应的shape用下面的方法计算
+```（这里要放一张图）```
+Lout表示这一层输出之后的vertor length，Lin是输入的vertor length
+
+#### Conv2d ``torch.nn.Conv2d``
 
 
 
