@@ -54,3 +54,35 @@ class ChildB(Base):
 ChildA() 
 ChildB()
 ```
+
+### 3.4 Class的存储
+Class在python中，其attribute默认是用一个dict来存储的，这样可以做到在class生成对象之后，动态给对象添加新的attribute，例如
+```python
+class MyClass(object):
+    def __init__(self, name, identifier):
+        self.name = name
+        self.identifier = identifier
+        # self.set_up()
+        
+c = MyClass('Renne', 2)
+c.Cat = 'GuoGuo'
+print(c.Cat)
+# 输出 GuoGuo
+```
+但是这种方式，在class很小，但是生成的object很多的时候，会占据许多的RAM，我们可以使用__slots__来锁定class的attribute，使得attribute的内容被绑定，例如
+```python
+class MyClass(object):
+    __slots__ = ['name', 'identifier']
+    def __init__(self, name, identifier):
+        self.name = name
+        self.identifier = identifier
+        # self.set_up()
+        
+c = MyClass('Renne', 2)
+c.Cat = 'GuoGuo'
+
+# AttributeError: 'MyClass' object has no attribute 'Cat'
+```
+这种写法即告诉python，在创建对象的时候，不要使用dict，而是分配静态内存给这个object，这样会比较节省RAM。
+
+
