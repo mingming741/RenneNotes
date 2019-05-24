@@ -32,3 +32,28 @@ print(test) # 输出'僀'，得到一个对应的奇怪的文字
 ```python
 list1 = [x.fun() for x in list0]
 ```
+
+### 3.3 Map, Filter 和 Reduce
+Map函数是用于将一个函数的output map到一个list里面去，即循环赋值的简便写法，通常是
+```python
+map(function_to_apply, list_of_inputs)
+```
+下面给出一个等价的例子
+```python
+items = [1, 2, 3, 4, 5]
+squared = []
+for i in items:
+    squared.append(i**2)
+    
+# 等价于
+squared = list(map(lambda x: x**2, items))
+# 这里lambda返回一个函数，map的参数就是一个函数和一个list
+# 而map函数会返回一个map的object，应该室友iterable的属性
+```
+
+
+
+
+
+
+
