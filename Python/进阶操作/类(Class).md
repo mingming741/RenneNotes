@@ -1,4 +1,77 @@
 # 2. Class
+### 2.0 Introspection
+函数dir()可以列举出一个Class生产的object的全部attribute和function，例如，查看python list的内部接口。在这里，不同的attribute可以兼容不同的function，比如2.1里面提及的，print调用的就是object中的__repr__的值。
+```python
+my_list = [1, 2, 3]
+dir(my_list)
+# Output: ['__add__', '__class__', '__contains__', '__delattr__', '__delitem__',
+# '__delslice__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__',
+# '__getitem__', '__getslice__', '__gt__', '__hash__', '__iadd__', '__imul__',
+# '__init__', '__iter__', '__le__', '__len__', '__lt__', '__mul__', '__ne__',
+# '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__reversed__', '__rmul__',
+# '__setattr__', '__setitem__', '__setslice__', '__sizeof__', '__str__',
+# '__subclasshook__', 'append', 'count', 'extend', 'index', 'insert', 'pop',
+# 'remove', 'reverse', 'sort']
+```
+在python里面，所有的object都有独立unique的id，即便是const的value也有一个恒定的id，例如
+```python
+name = "Renne"
+print(id(name))
+# 140686421042208，在不同python环境中会有不同的值。
+```
+而inspect.getmembers这个method可以看到一个class或者object中全部的attribute和function。
+```python
+import inspect
+print(inspect.getmembers(str))
+```
+user自己定义的class中，也会默认存在一些attribute，即使这些attribute没有定义，例如：
+```python
+class Demo():
+    def __init__(self):
+        self.name = 'Renne'
+        self.pet = "Cat"
+
+    def action(self):
+        print("Make a choice")
+        
+a = Demo()
+for attr in dir(a):
+    print(attr)
+    
+'''result会print出来这些
+__class__
+__delattr__
+__dict__
+__dir__
+__doc__
+__eq__
+__format__
+__ge__
+__getattribute__
+__gt__
+__hash__
+__init__
+__init_subclass__
+__le__
+__lt__
+__module__
+__ne__
+__new__
+__reduce__
+__reduce_ex__
+__repr__
+__setattr__
+__sizeof__
+__str__
+__subclasshook__
+__weakref__
+action
+name
+pet
+'''
+```
+
+
 ### 2.1 列举和print的区别
 在一些编译器中，比如jupyter的解释器，直接列举某个变量可以达到print的效果
 ```
