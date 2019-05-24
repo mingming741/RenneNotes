@@ -33,8 +33,8 @@ print(test) # 输出'僀'，得到一个对应的奇怪的文字
 list1 = [x.fun() for x in list0]
 ```
 
-### 3.3 Map, Filter 和 Reduce
-Map函数是用于将一个函数的output map到一个list里面去，即循环赋值的简便写法，通常是
+### 3.3 Map和Filter
+Map函数是用于将一个函数的output map到一个list里面去，即循环赋值的简便写法，blueprint为
 ```python
 map(function_to_apply, list_of_inputs)
 ```
@@ -50,7 +50,31 @@ squared = list(map(lambda x: x**2, items))
 # 这里lambda返回一个函数，map的参数就是一个函数和一个list
 # 而map函数会返回一个map的object，应该室友iterable的属性
 ```
+同时，map还可以用作apply许多的函数，下面的例子
+```python
+def multiply(x):
+    return (x*x)
+def add(x):
+    return (x+x)
 
+funcs = [multiply, add]
+for i in range(5):
+    value = list(map(lambda x: x(i), funcs))
+    print(value) # 这里的value是一个2个元素的数组，即[0, 0]， [1, 2]， [4, 4]， [9, 6]， [16, 8]
+```
+Filter函数，会返回list中满足function条件的sublist，blueprint为
+```python
+map(function_to_apply, list_of_inputs)
+# 这里的function一定要是return bool值的函数。
+```
+例子，注意这里的lambda，也是返回一个函数，但是这样写的lambda返回的函数就是x < 0的时候返回True的函数。
+```python
+number_list = range(-5, 5)
+less_than_zero = list(filter(lambda x: x < 0, number_list))
+print(less_than_zero)
+
+# Output: [-5, -4, -3, -2, -1]
+```
 
 
 
