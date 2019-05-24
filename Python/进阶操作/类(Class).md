@@ -39,9 +39,9 @@ for attr in dir(a):
     print(attr)
     
 '''result会print出来这些
-__class__
-__delattr__
-__dict__
+__class__ (即这个object的Class，在这里是__main__.Demo)
+__delattr__ (delete attribute，在attribute被试图delete的时候，被call)
+__dict__ (The namespace supporting arbitrary function attributes.即用于调用attribute的一些信息，在这里是{'name': 'Renne', 'pet': 'Cat'})
 __dir__
 __doc__
 __eq__
