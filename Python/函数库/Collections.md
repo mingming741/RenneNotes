@@ -2,7 +2,7 @@
 collections是python自己的库，python除了一些默认的数据机构(list, dict...)之外，在collections中还implement了一些其他的常用数据结构，这里会说明几个常用的。
 
 ### defaultdict
-和dict类似，不过defaultdict不需要你去check某个key是否存在。并且使用defaultdict可以产生dict嵌套的结构，下面是使用的例子
+和dict类似，不过defaultdict不需要你去check某个key是否存在。在reference不存在的key的时候会输出0，即不会产生KeyError。并且使用defaultdict可以产生dict嵌套的结构，下面是使用的例子
 ```python
 from collections import defaultdict
 
@@ -50,4 +50,13 @@ print(d)
 ```
 
 ### namedtuple
+Namedtuple makes your tuples self-document。即可以用类的方法调用tuple中的元素，而不是用index的方法。但同时namedtuple和tuple也是兼容的，即index的调用也被保留下来了。
+```python
+from collections import namedtuple
+
+Animal = namedtuple('Animal', 'name age type')
+perry = Animal(name="perry", age=31, type="cat")
+print(perry) # Output: Animal(name='perry', age=31, type='cat')
+print(perry.name) # Output: 'perry'
+```
 
