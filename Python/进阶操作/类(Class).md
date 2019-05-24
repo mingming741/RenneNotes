@@ -39,35 +39,35 @@ for attr in dir(a):
     print(attr)
     
 '''result会print出来这些
-__class__ (即这个object的Class，在这里是__main__.Demo)
-__delattr__ (delete attribute，在attribute被试图delete的时候，被call)
-__dict__ (The namespace supporting arbitrary function attributes.即用于调用attribute的一些信息，在这里是{'name': 'Renne', 'pet': 'Cat'})
-__dir__
-__doc__
-__eq__
-__format__
-__ge__
-__getattribute__
-__gt__
-__hash__
-__init__
-__init_subclass__
-__le__
-__lt__
-__module__
-__ne__
-__new__
-__reduce__
-__reduce_ex__
-__repr__
-__setattr__
-__sizeof__
-__str__
-__subclasshook__
-__weakref__
-action
-name
-pet
+__class__ ：(type)，即这个object的Class，在这里是__main__.Demo
+__delattr__ ：(method-wrapper)，delete attribute，在attribute被试图delete的时候，被call
+__dict__ ：(dict)，即用于调用attribute的一些信息，在这里是{'name': 'Renne', 'pet': 'Cat'}
+__dir__ ：(builtin_function_or_method)，即dir函数的输出，a.__dir__()可以列举出全部attribute和function
+__doc__ ：(str)， document string，写在注释里面，在正确的格式下会被赋值
+__eq__ ：(method-wrapper)在==判定的时候，调用object.__eq__(self, other)这回method
+__format__ ：()
+__ge__ ：()
+__getattribute__ ：()
+__gt__ ：()
+__hash__ ：()
+__init__ ：()
+__init_subclass__ ：()
+__le__ ：()
+__lt__ ：()
+__module__ ：()
+__ne__ ：()
+__new__ ：()
+__reduce__ ：()
+__reduce_ex__ ：()
+__repr__ ：()
+__setattr__ ：()
+__sizeof__ ：()
+__str__ ：()
+__subclasshook__ ：()
+__weakref__ ：()
+action ：()
+name ：()
+pet ：()
 '''
 ```
 
