@@ -37,8 +37,10 @@ class Demo():
 a = Demo()
 for attr in dir(a):
     print(attr)
-    
-'''result会print出来这些
+
+```
+上面的result会print出来这些
+```
 __class__ ：(type)，即这个object的Class，在这里是__main__.Demo
 __delattr__ ：(method-wrapper)，delete attribute，在attribute被试图delete的时候，被call
 __dict__ ：(dict)，即用于调用attribute的一些信息，在这里是{'name': 'Renne', 'pet': 'Cat'}
@@ -46,14 +48,14 @@ __dir__ ：(builtin_function_or_method)，即dir函数的输出，a.__dir__()可
 __doc__ ：(str)， document string，写在注释里面，在正确的格式下会被赋值
 __eq__ ：(method-wrapper)在==判定的时候，调用object.__eq__(self, other)这回method
 __format__ ：(builtin_function_or_method)，被format函数调用的method
-__ge__ ：(method-wrapper)
-__getattribute__ ：()
-__gt__ ：()
+__ge__ ：(method-wrapper) great or equal，>=判定的warpper
+__getattribute__ ：(method-wrapper)，操作x.name的使用调用这个method，a.__getattribute__('name')等价于a.name
+__gt__ ：(method-wrapper) great，> 判定的warpper
 __hash__ ：()
 __init__ ：()
 __init_subclass__ ：()
-__le__ ：()
-__lt__ ：()
+__le__ ：(method-wrapper) less or equal，<= 判定的warpper
+__lt__ ：(method-wrapper) less，< 判定的warpper
 __module__ ：()
 __ne__ ：()
 __new__ ：()
@@ -68,11 +70,9 @@ __weakref__ ：()
 action ：()
 name ：()
 pet ：()
-'''
 # 这里面method-wrapper通常是一个operation或者是特殊字符串的重载（例如__eq__重载==）
 # 而builtin_function_or_method通常是被某个function调用 （例如__format__被format()调用）
 ```
-
 
 ### 2.1 列举和print的区别
 在一些编译器中，比如jupyter的解释器，直接列举某个变量可以达到print的效果
