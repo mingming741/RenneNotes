@@ -23,3 +23,31 @@ colours = OrderedDict([("Red", 198), ("Green", 170), ("Blue", 160)])
 for key, value in colours.items():
     print(key, value)
 ```
+
+### counter
+用来做计数，使用的最多的就是打开文件，并且计数共有多少行的问题
+```python
+with open('filename', 'rb') as f:
+    line_count = Counter(f)
+print(line_count)
+```
+
+### deque
+queue是先进先出的结构，而deque是一个双向的queue，即queue的两边都可以先进先出。deque的工作原理类似python的list，但是有pop和popleft的method在里面。
+```python
+d = deque(range(5))
+print(len(d))  # Output: 5
+d.popleft()  # Output: 0
+d.pop()  # Output: 4
+print(d) # Output: deque([1, 2, 3])
+```
+deque也有extend的method，用于给queue加元素，如果元素超过maxlength的话，另一端的元素会被丢弃
+```python
+d = deque([0, 1, 2, 3, 5], maxlen=5)
+d.extend([6])
+print(d)
+#Output: deque([1, 2, 3, 5, 6], maxlen=5)
+```
+
+### namedtuple
+
