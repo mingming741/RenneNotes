@@ -45,8 +45,8 @@ __dict__ ：(dict)，即用于调用attribute的一些信息，在这里是{'nam
 __dir__ ：(builtin_function_or_method)，即dir函数的输出，a.__dir__()可以列举出全部attribute和function
 __doc__ ：(str)， document string，写在注释里面，在正确的格式下会被赋值
 __eq__ ：(method-wrapper)在==判定的时候，调用object.__eq__(self, other)这回method
-__format__ ：()
-__ge__ ：()
+__format__ ：(builtin_function_or_method)，被format函数调用的method
+__ge__ ：(method-wrapper)
 __getattribute__ ：()
 __gt__ ：()
 __hash__ ：()
@@ -69,6 +69,8 @@ action ：()
 name ：()
 pet ：()
 '''
+# 这里面method-wrapper通常是一个operation或者是特殊字符串的重载（例如__eq__重载==）
+# 而builtin_function_or_method通常是被某个function调用 （例如__format__被format()调用）
 ```
 
 
