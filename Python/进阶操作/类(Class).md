@@ -1,5 +1,5 @@
 # 2. Class
-### 2.0 Introspection
+### 2.1 Introspection
 函数dir()可以列举出一个Class生产的object的全部attribute和function，例如，查看python list的内部接口。在这里，不同的attribute可以兼容不同的function，比如2.1里面提及的，print调用的就是object中的__repr__的值。
 ```python
 my_list = [1, 2, 3]
@@ -51,52 +51,62 @@ __format__ ：(builtin_function_or_method)，被format函数调用的method
 __ge__ ：(method-wrapper) great or equal，>=判定的warpper
 __getattribute__ ：(method-wrapper)，操作x.name的使用调用这个method，a.__getattribute__('name')等价于a.name
 __gt__ ：(method-wrapper) great，> 判定的warpper
-__hash__ ：()
-__init__ ：()
-__init_subclass__ ：()
+__hash__ ：(method-wrapper)，被hash()函数调用，会返回这个object在hash之后的值
+__init__ ：(method)，在__new__之后被调用，用于给新的object initialize一些static的value，object(instance)本身是new创建的
+__init_subclass__ ：(builtin_function_or_method)，在这个类被作为基类继承的时候，派生类在init的时候会call这个method
 __le__ ：(method-wrapper) less or equal，<= 判定的warpper
 __lt__ ：(method-wrapper) less，< 判定的warpper
-__module__ ：()
-__ne__ ：()
-__new__ ：()
-__reduce__ ：()
-__reduce_ex__ ：()
-__repr__ ：()
-__setattr__ ：()
-__sizeof__ ：()
-__str__ ：()
-__subclasshook__ ：()
-__weakref__ ：()
-action ：()
-name ：()
-pet ：()
+__module__ ：(str)，表示定义这个函数/类的module，在上面的例子输出__main__
+__ne__ ：(method-wrapper) not equal，!=判定的wrapper
+__new__ ：(builtin_function_or_method)用于create class的instance，__new__会在object生成的时候被调用，生产dir的静态的method
+__repr__ ：(method-wrapper)，“official” string representation of an object，在jupyter列举的时候被调用
+__setattr__ ：(method-wrapper)，等价于x.name = '233'这个操作，a.__setattr__('name','Kalu')等价于a.name = 'Kalu'
+__sizeof__ ：(builtin_function_or_method)，generator才有的method，返回其内存的大小(number of bytes)
+__str__ ：(method-wrapper)，被print()和format调用，通常表示informal的representation
+action ：() # user-define method
+name ：() # user-defined-attribute
+pet ：() # user-defined-attribute
 # 这里面method-wrapper通常是一个operation或者是特殊字符串的重载（例如__eq__重载==）
 # 而builtin_function_or_method通常是被某个function调用 （例如__format__被format()调用）
 ```
-
-### 2.1 列举和print的区别
-在一些编译器中，比如jupyter的解释器，直接列举某个变量可以达到print的效果
-```
-a = 10
-a # 输出 10
-```
-但是这个列举和print其实是不一样的，print会print对应的对象的str转化类型，即__str__的输出，而列举调用的是类里面的__repr__函数对象
+除了这些之外，class常用的Introspection还有（这些class常用的Introspection还有可能要自己定义）
 ```python
-class Renne():
-    def __init__(self):
-        self.word = "Hello Renne"
-        
-    def __str__(self):
-         return self.word
-         
-    def __repr__(self):
-        return "2333"
+# General的attribute
+__del__： 在删除的时候做一些操作，del x会间接的call __del__
+__bool__： bool()，被if(x) call，在没有__bool__的时候会call __len__。
+__slots__：即使用__slots__方式create object，3.4有说，会让 __dict__ 和 __weakref__ 不create
+__call__：function需要有的method，即x()等价于x.__call__()。
 
-r = Renne()
-print(r) # “Hello Renne”，实际为call back函数__str__的输出结果，即类Renne()对str的默认转化函数
-r # 2333
+# 对于container，下列
+__class_getitem__：Container应该有的method，似乎是看这个item有没有存在于这个container
+__len__：被函数len()调用，返回长度
+__length_hint__：被函数operator.length_hint()调用，返回预估的length
+__getitem__： list type应该有的method，x[key]等价于x.__class_getitem__(key) （__setitem__和__delitem__类似）
+__missing__：用于check item是否存在，（在dict中）
+__iter__： 返回一个iterator的object，并且iterate整个container
+__reversed__： 做reverse iteration
+
+# 对于数字的class，下列
+__add__(self, other): 重载 +
+__sub__(self, other): 重载 -
+__mul__(self, other): 重载 *
+__matmul__(self, other): 重载 @
+__truediv__(self, other): 重载 /
+__floordiv__(self, other): 重载 //
+__mod__(self, other): 重载 %
+__divmod__(self, other): 重载 divmod()
+__pow__(self, other[, modulo]): 重载 **
+__lshift__(self, other): 重载 <<
+__rshift__(self, other): 重载 >>
+__and__(self, other): 重载 &
+__xor__(self, other): 重载 ^
+__or__(self, other): 重载 |
+__neg__(self): 重载 -
+__pos__(self): 重载 +
+__abs__(self): 重载 abs()
+__invert__(self): 重载 ~
 ```
-这两个函数本身默认都是没有重载的，如果对于一个类，这两个函数都没有的话，那么就会输出内存的位置，如”<\_\_main\_\_.Renne at 0x7f76500b54e0>“
+
 
 ### 2.2 Alias & overload
 python的等号赋值都是重名(alias)，实际传递参数是引用传递。
