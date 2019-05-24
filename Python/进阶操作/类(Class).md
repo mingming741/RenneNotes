@@ -40,7 +40,7 @@ for attr in dir(a):
 
 ```
 上面的result会print出来这些
-```
+```python
 __class__ ：(type)，即这个object的Class，在这里是__main__.Demo
 __delattr__ ：(method-wrapper)，delete attribute，在attribute被试图delete的时候，被call
 __dict__ ：(dict)，即用于调用attribute的一些信息，在这里是{'name': 'Renne', 'pet': 'Cat'}
