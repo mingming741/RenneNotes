@@ -1,6 +1,6 @@
 # 2. Class
 ### 2.1 Introspection
-函数dir()可以列举出一个Class生产的object的全部attribute和function，例如，查看python list的内部接口。在这里，不同的attribute可以兼容不同的function，比如2.1里面提及的，print调用的就是object中的__repr__的值。
+函数dir()可以列举出一个Class生产的object的全部attribute和function，例如，查看python list的内部接口。在这里，不同的attribute可以兼容不同的function，比如2.1里面提及的，print调用的就是object中的__repr__的值。这些attribute被叫做dunder (double underscore) 
 ```python
 my_list = [1, 2, 3]
 dir(my_list)
@@ -112,18 +112,31 @@ import inspect
 print(inspect.getmembers(a))
 ```
 
-
-### 2.2 Alias & overload
-python的等号赋值都是重名(alias)，实际传递参数是引用传递。
-* 对于整数小数字符串等，等号赋值在内存上指向同一个constant的位置
-* 对于类的，等号赋值等价于指针赋值，同样指向相同的类
-同时，python本来的一些关键词也可以被alias，这种时候相当于你overload了这个name，比如
+### 2.2 Class继承的object
+python2中，class不继承任何东西和继承object是有区别的，不过到python3中，全部class都会继承object，被叫做new style class。这里介绍几个对与2.1中介绍的method-warpper的implementation。
 ```python
-def fun(a, b, range):
-    for i in range(range):
-        # do sth
-# 这个函数运行的时候会产生error，因为range这个关键词在传进来的时候被重载，可能不再是一个函数的类型
+class Person(object):
+
+    def __init__(self, petlist=["Cat", "Dog"]):
+        self.name = 'Renne'
+        self.pets = petlist
+        
+    def __getitem__(self, i): # 重载了[]操作符
+        return self.pets[i]
+    
+    def __add__(self, other): # 重载了+操作符
+        for pet in other.pets:
+            self.pets.append(pet)
+        return self
+    
+p0 = Person()
+p1 = Person(petlist=['Neko', 'Inu'])
+p2 = p0 + p1 # +操作符可以使用
+
+print(p2.pets[2]) # []操作符可以使用
 ```
+
+
 
 ### 2.3 Super() init
 用于类的继承，即子类在初始化的时候，调用父类的constructor，super()这个函数在单一层次继承和直接Base.\_\_init\_\_意思一样，在大于两个类的继承的时候，super比直接写要更加明确，推荐使用
@@ -176,3 +189,14 @@ c.Cat = 'GuoGuo'
 这种写法即告诉python，在创建对象的时候，不要使用dict，而是分配静态内存给这个object，这样会比较节省RAM。
 
 
+### 2.5 Alias & overload
+python的等号赋值都是重名(alias)，实际传递参数是引用传递。
+* 对于整数小数字符串等，等号赋值在内存上指向同一个constant的位置
+* 对于类的，等号赋值等价于指针赋值，同样指向相同的类
+同时，python本来的一些关键词也可以被alias，这种时候相当于你overload了这个name，比如
+```python
+def fun(a, b, range):
+    for i in range(range):
+        # do sth
+# 这个函数运行的时候会产生error，因为range这个关键词在传进来的时候被重载，可能不再是一个函数的类型
+```
