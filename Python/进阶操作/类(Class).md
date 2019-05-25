@@ -105,6 +105,8 @@ __neg__(self): 重载 -
 __pos__(self): 重载 +
 __abs__(self): 重载 abs()
 __invert__(self): 重载 ~
+__enter__: 被with调用，在进入的时候实现某种功能
+__exist__: 被with调用，在结束的时候实现某种功能
 ```
 使用inspect的函数可以看到全部的attribute和其内容
 ```python
