@@ -111,7 +111,18 @@ print(less_than_zero)
 ```
 
 
-
+### 3.4 for else
+python中的for loop同样可以衔接else语句，在有break的时候，如果break没有发生，则会执行else的语句。可以理解为else是在for loop循环结束之后自动被使用的。
+```python
+for item in container:
+    if search_something(item):
+        # Found it!
+        process(item)
+        break
+else:
+    # Didn't find anything..
+    not_found_in_container()
+```
 
 
 
