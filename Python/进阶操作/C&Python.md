@@ -67,8 +67,7 @@ static PyObject* addList_add(PyObject* self, PyObject* args){ //这是python直�
 
 static char addList_docs[] = "add( ): add all elements of the list\n"; //创建AddList函数的doc string
 
-// 下面给出四个mapping，分别表示 <function-name in python module>, <actual-function>, <type-of-args the function expects>, <docstring>
-
+// 下面给出四个mapping，分别表示 <function-name>, <function>, <type-of-args>, <docstring>
 static PyMethodDef addList_funcs[] = {
     {"add", (PyCFunction)addList_add, METH_VARARGS, addList_docs},
     {NULL, NULL, 0, NULL}
@@ -79,3 +78,8 @@ PyMODINIT_FUNC initaddList(void){
     Py_InitModule3("addList", addList_funcs, "Add all ze lists");
 }
 ```
+<Python.h>这个头文件中，包含了用c定义的python的全部datatype的类型，同时还有一些python的基础函数。然后我们用c语言的函数addList_add，命名遵循moduleName_functionName的规则。然后我们填写这个函数的info table，分别给出函数名(python中)，c代码对应的函数，python中接受的参数，docstring来说明这个函数，因为暂时就一个函数，所以这个info table第一个元素有效，第二个元素为NULL。最后我们填写这个module的信息，将function的info table放入，这个module的描述就完成了。<br/>
+这里我尝试用gcc编译，但是总是给我报错Python.h这个文件找不到，这个issue暂时没有解决，之后看的时候，继续参考这个部分最开始给出的教程来看吧
+
+
+
