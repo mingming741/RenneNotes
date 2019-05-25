@@ -106,6 +106,11 @@ __pos__(self): 重载 +
 __abs__(self): 重载 abs()
 __invert__(self): 重载 ~
 ```
+使用inspect的函数可以看到全部的attribute和其内容
+```python
+import inspect
+print(inspect.getmembers(a))
+```
 
 
 ### 2.2 Alias & overload
