@@ -28,9 +28,43 @@ test = u'\u50c0' #把一个unicode编码的字符串赋值给一个unicode的str
 print(test) # 输出'僀'，得到一个对应的奇怪的文字
 ```
 
-### 3.2 对一个list中所有元素apply某个函数
+### 3.2 Comprehensions
+在python中，comprehensions可以用来构建list，dict，set和generator。即通过for和if来构建，blueprint为
 ```python
-list1 = [x.fun() for x in list0]
+variable = [out_exp for out_exp in input_list if out_exp == 2]
+```
+下面给出例子
+```python
+# 对于list
+multiples = [i for i in range(30) if i % 3 == 0]
+# Output: [0, 3, 6, 9, 12, 15, 18, 21, 24, 27]
+
+#对于dict，用{}表示，为{v: k for k, v in some_dict.items()}
+mcase = {'a': 10, 'b': 34, 'A': 7, 'Z': 3}
+mcase_frequency = {
+    k.lower(): mcase.get(k.lower(), 0) + mcase.get(k.upper(), 0)
+    for k in mcase.keys()
+}
+# Output: {'a': 17, 'z': 3, 'b': 34}
+
+#对于set，和list构建方法类似，不过也用{}表示
+squared = {x**2 for x in [1, 1, 2]}
+print(squared)
+# Output: {1, 4}
+
+#对于generator，也和list差不多，用()，但是不占用内存
+multiples_gen = (i for i in range(30) if i % 3 == 0)
+```
+感受一下下面四个的区别
+```python
+multiples = (i for i in range(30) if i % 3 == 0)
+print(type(multiples)) # <class 'generator'>
+multiples = [i for i in range(30) if i % 3 == 0]
+print(type(multiples)) # <class 'list'>
+multiples = {i for i in range(30) if i % 3 == 0}
+print(type(multiples)) # <class 'set'>
+multiples = {i : 0 for i in range(30) if i % 3 == 0}
+print(type(multiples)) # <class 'dict'>
 ```
 
 ### 3.3 Map和Filter
