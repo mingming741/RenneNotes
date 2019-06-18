@@ -133,6 +133,13 @@ Self-Presentation是Self-Disclosure完成的，即有意识和无意识的自我
 这个theory表示了user在使用social media的基本全部动机，而不同的social media platform，强调的是不同特点，比如youtube就强调share，而facebook就强调Relationship。
 
 
+### Cognitive
+社会人认知强调的是cognition process在社会情景中的变化和结构。暗示环境，人的行为，和认知是互为因果的。而人的cognitive通常是三个level：
+1. Cognition：通常指个体的感觉，比如读，写，记忆的信息，强调信息本身
+2. Metacognition：即自己对自己cognition的一种认知，例如我自己控制我的感受和信息，监视自己的情绪，控制自己的行为。
+3. Epistemic Cognition：表示knowledge related问题，例如knowledge limitation，确定知道，这种。
+
+例如，给出26只绵羊和10只山羊，那么牧羊人多少岁了？这个问题很多人无法回答，因为Epistemic cognition层面上，这个问题触及到了knowledge limitation，但是很多小孩子却会尝试去猜这个问题的答案。Social Epistemic Cognition(SEC)可以引起collaborative knowledge construction，例如我们通过问卷的方式去交叉一些社会观念，或者学生通过在线讨论互相学习。
 
 
 
