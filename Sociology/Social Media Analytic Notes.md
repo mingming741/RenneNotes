@@ -115,10 +115,22 @@ media的Social presence都是不一样的，并且这种social presence会使得
 
 这么总结了一下，倒反许多人在微博中塑造的形象其实只是他们内心中自己的形象，并不一定和真实的自己一样。但是至少这是他们内心的样子，所以找对象还是找个喜欢二次元喜欢cosplay的妹子吧。
 
-### 
+### Self-Disclosure
+Self-Presentation是Self-Disclosure完成的，即有意识和无意识的自我揭示，比如我们平时的想法，感觉，喜欢和不喜欢，这些都是表现在别人的眼中的。因为我们有自己的Self-Presentation，所以我们会控制自己的Self-Disclosure去表现。
 
+可以任务Self-Disclosure是一种自我表现，用于构筑一个人的Self-Presentation
 
+### Honeycomb（蜂巢） Model （Kietzmann）
+表现了social media的7个functional block。用于描述不同的user experience的specific facts。包括：
+1. Identity(中心block)：user自己选择的，对自己的identities表现的social media setting。即网名，签名，位置，性别，还要你想要share给别人看的信息，可以理解为user自己对自己的定义。
+2. Group：这个group表示user对于自己分组信息的一些要求，并且研究表面，一个user最多同时maintain不超过150个其他人，无论如何分组。而一个用户对其他用户的分组，体现出了network的概念。
+3. Relationships：用户之间的relation，可以用箭头来表示，例如关注和被关注。
+4. Reputation：表示一个user被关注的程度，比如facebook被点赞的数目，微博被转发的数目，youtube的视频的rating等。
+5. Presence：即一个用户是否将自己的位置和availability显示给其他user看，即这个user是不是把真正的自己publish出来，网络到现实。
+6. Conversation：表示了media的传播，通常之内容和传播速度。
+7. Sharing：即分享信息给其他的user
 
+这个theory表示了user在使用social media的基本全部动机，而不同的social media platform，强调的是不同特点，比如youtube就强调share，而facebook就强调Relationship。
 
 
 
