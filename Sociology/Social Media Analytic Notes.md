@@ -93,9 +93,39 @@ Behavoir来自于intention，而这种intention的behavior被下面的三个因�
 2. Subjective norm（自身规范），对于游行这件事情，我有我自己的规范，就是不参加这类的聚众活动
 3. Perceived behavior contorl：察觉自己能否有效进行这件事情，即我参与这种活动能否达到某种目的。
 
-总结起来，就是态度，规范，和可行性。在你觉得这件事情是积极的，并且这件事符合你的行为规范，并且可行的时候，你可能就去做这件事情。所以也叫ｐｌａｎｎｅｄ的ｂｅｈａｖｉｏｒ　
+总结起来，就是态度，规范，和可行性。在你觉得这件事情是积极的，并且这件事符合你的行为规范，并且可行的时候，你可能就去做这件事情。所以也叫planned behavior。
 
-###
+### Uses & Gratification(满意) Theory
+解释了people用social media去满足到他们什么样的需求，例如：
+1. Cognitive needs：认知上的需要，例如收集信息，生存，理解周围的环境。例如刚来香港的时候，洞察周围情况。
+2. Affective needs：通常上是情感上的体验，aesthetic(美学的)。例如看可爱的小姐姐，好看的cosplay
+3. Personal Integrative（综合的） need：建立自信，可靠程度。例如秀恩爱秀旅游秀工作等，也是满足自己的虚荣
+4. Social Intergrative need：和朋友以及家人建立联系
+5. Tension-release needs：escapism，diversion，即逃避，减少压力，沉迷在虚拟世界的作用。
+
+这个理论说明了个体在使用social media都是出于满足自己的某种需求。我们在分析一个人的post的时候，可以尝试去分析一下ta使用post的动机，大概就是上面几类中的一类了。
+
+### Social Presence Theory
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
