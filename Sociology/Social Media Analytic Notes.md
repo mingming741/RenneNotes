@@ -106,7 +106,16 @@ Behavoir来自于intention，而这种intention的behavior被下面的三个因�
 这个理论说明了个体在使用social media都是出于满足自己的某种需求。我们在分析一个人的post的时候，可以尝试去分析一下ta使用post的动机，大概就是上面几类中的一类了。
 
 ### Social Presence Theory
+media的Social presence都是不一样的，并且这种social presence会使得两个partner会有交互。越强的social presence会让两个partner互相之间的影响越强。例如，面对面的social presence大于电话，大于live chat，再大于email。这也是**Media Richness Theory**的内容。通常reduce uncertainty是增强一个media的social presence的重要内容。
 
+这理论说明不同media对交互两方的影响程度不同。
+
+### Self-Presentation
+即任何social interaction中，参与者都会有desire去控制别人对自己的impression。例如我们的post，就是再给我们的朋友塑造我们自己想要在他们眼中的形象。
+
+这么总结了一下，倒反许多人在微博中塑造的形象其实只是他们内心中自己的形象，并不一定和真实的自己一样。但是至少这是他们内心的样子，所以找对象还是找个喜欢二次元喜欢cosplay的妹子吧。
+
+### 
 
 
 
