@@ -31,8 +31,30 @@ Social Media Analytic：研究个体和社会的行为，用户的喜好，人�
 而这种measurement通常被分成看(see), 说(say), 感觉(feel), 做(do)四个metric，看的信息是我们提供的，即暴露在环境下(exposure environment)，比如说logo。而说和感觉通常是来源于user的参与(engagement)。最后的做就是user的action，或者behavior，是我们可以measure的。而这四个metic有多种的measure的方式，比如：
 * see：user自己网站的流量，关注者，收藏者。例如一个微博博主的粉丝有多少。这个metric用于衡量一个user的社会曝光程度
 * say：user喜欢的，转发，回复的内容，主要体现了用户的参与。例如一个微博博主平时的发博和转发，还要回复等等
-* 
-*
+* feel：user的感觉，通常指带感情色彩的评论，例如微博下面撕逼，吹水这种现象。
+* do：对user的影响，例如捐赠，贩卖等等，例如用户在看到卖家的微博之后，去卖家淘宝店逛了逛这种。
+
+#### Twitter
+通常Social Media Analytic都在这种社交渠道上进行，比如推特。推特的简单形式就是140个字之内的一段文字配上图片或者视频(metadata)等。若使用twitter对社交媒体做严格分类的话，通过下面的mapping可以构建不同的模型：
+* follow：反应社会网络情况，可以用有向图表示
+* reply & mention：反应communication pattern，谁在和谁说话
+* retweets：表示信息的传播(diffusion)
+
+
+## Lecture 2
+
+#### Human Cognition
+Definition：使用知识和理解，去处理思考，感受，和感觉的精神过程，叫做**认知**。其来源为拉丁文的cognoscere，源意思为学习，getting to know。我觉得认知是可以概括三观这个概念的，比三观更加宏大的一个概念。
+
+例如，同一张图片，不同人看到了有不同的理解，比如说里面存在的隐藏pattern。（例如九张脸的图片），不是每个人都能够发觉的到，而发觉到的程度，可以理解为这个人对这张图片的认知。或者说，当你看到猫爪的时候，就会想到猫，你看到卡通的猫的图片的时候也会想到猫，这种联想也是一种认知。
+
+
+
+
+
+
+
+
 
 
 
