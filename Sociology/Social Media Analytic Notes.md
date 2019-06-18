@@ -69,6 +69,13 @@ Signified指的是某种确切的mental concept，例如clock，这个词它代�
 Signifier指的是represent了signified的一种表现形式，例如“clock”这个概念，我们可以用clock这个词来表示，也可以用一幅画来表示。
 
 ### Social Evidence
+Alvin Goldman将人们视为信念(doxastic)的agent，每个人都有内在的信念状态。而内在的信念状态会被social evidence从外在表现出来。我们所能够观察和分析的，只有social evidence，例如我们通过blog post去分析一个人的想法，post就是Social Evidence，而想法本身就是doxastic agent的doxastic state的部分表现。
+
+### Contextualization
+内容化，即将抽象的概念具体化。这也是我写笔记的时候潜意识用的最多的方式。例如下面的问题
+1. 给出一些卡片，两边一边是字母一边是数字，给出规则“元音字母(AEIOU)的背后移动是偶数”，给出四张卡片的一面：4，A，L，7。我们需要翻哪两张卡片来verify这个rule？ （答案应该是A和7，思路是充分条件和不必要条件）
+2. 给出一个情景，乘搭公共交通的人都需要票，我们如何验证这个rule？给出的可以验证的有：“有票的人”，“使用公共交通的人”，“没有使用公共交通的人”，“没有票的人”。很容易去想到用2和4去验证。
+上面的过程叫做Contextualization
 
 
 
