@@ -142,10 +142,22 @@ Self-Presentation是Self-Disclosure完成的，即有意识和无意识的自我
 例如，给出26只绵羊和10只山羊，那么牧羊人多少岁了？这个问题很多人无法回答，因为Epistemic cognition层面上，这个问题触及到了knowledge limitation，但是很多小孩子却会尝试去猜这个问题的答案。Social Epistemic Cognition(SEC)可以引起collaborative knowledge construction，例如我们通过问卷的方式去交叉一些社会观念，或者学生通过在线讨论互相学习。
 
 
+# Lecture 5 Sentiment Analysis & Opinion Mining
 
+### User-Generated Content
+通常在社交媒体中，user产生的信息有下面两种：
+1. Fact: 表示事实，例如 “明天大围有艺术展” 这种信息。
+2. Opinion & Feeling：表示user更加主管的感受，例如“我觉得这个电影很有趣”。
 
+### Emotion
+对于每一个人emotion，自我通常包括以下几点：
+1. Cognitive：认知，包括知识，批判性思维
+2. Emotional：感情，通常是感受或者社会关系
+3. Physical： 物理层面，包括动作和五官的感觉。
 
+感情(emotion)是会因为环境和被激发的，并且这是我们人类对于生存进化而来的。同时感情是共通的，英文中有550个词用于描述感情，但是人和人之间不需要任何词汇就可以做到感情上的交流。并且有研究表明，脸的下半部分表达的感情比上半部分要丰富...
 
+Nonverbal communication：通常代指不需要语言的沟通，例如手势，面部表情，音调，眼神等等。
 
 
 
