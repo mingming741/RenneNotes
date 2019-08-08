@@ -18,5 +18,6 @@ $ apt-get install package
 | apt search	| apt-cache search	| Searches for the program |
 | apt show	| apt-cache show	| Shows package details |
 | apt list	| 新cmd | Lists packages with criteria (installed, upgradable etc) |
-| apt edit-sources	| 新cmd | Edits sources list |
+| apt edit-sources	| 新cmd | Edits sources list | |
+
 有了apt的封装，apt-get依旧在被使用，并且还有些没有完全封装的功能。对于linux的用户来说，apt应该足够了
