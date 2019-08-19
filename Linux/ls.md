@@ -28,4 +28,16 @@ linux大部分的file都是这个format，而是不是一个可执行文件取�
 
 这里，我尝试讲一个Directory改成不可执行的，然后cd这个directory，发现cd没权限了，但是使用root还是可以进去。使用GUI进到这个文件夹，发现里面的图片不能preview，然后也打不开。这应该就是文件夹需要可执行的意义吧。
 
-#### Character device
+#### Character & block device
+这两个都是允许用户和程序于hardware的peripheral device做交互的，类似于分配硬盘内存这种程序的存在，硬件驱动。
+
+#### Local domain sockets & Named Pipes
+用于processes之间的交互，Named Pipes主要是local process的交互
+
+#### Symbolic Links
+快捷方式。分为hard和soft link。
+
+
+
+
+
