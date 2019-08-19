@@ -40,6 +40,15 @@ routing table用于记录，如果要发送packet去对应的destination的ip，
 ```
   $ ip link set veth1 netns Renne
 ```
+这时候再打`ip link list`的话，我们就看不到veth1了，因为默认`ip link list`显示的是namespace 'default'中的interface，我们可以使用下面的cmd看namespace Renne中的link list
+```
+  $ ip netns exec Renne ip link list
+```
+也可给这个namespace中的interface assign ip。最好一个设置成up表示这个interface是被active的，如果是down的话就是没激活，用ifconfig就看不到。
+```
+  $ ip netns exec Renne ifconfig veth1 10.1.1.1/24 up
+```
+这样就完成了。但是这里注意到的是，namespace中的veth1只能ping到veth0，还是ping不到我自己电脑的ip和实验室里面的任意一部机，可能是还有一些gateway之类的东西需要去调节。
 
 
 
