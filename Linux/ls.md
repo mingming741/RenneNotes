@@ -37,6 +37,8 @@ linux大部分的file都是这个format，而是不是一个可执行文件取�
 #### Symbolic Links
 快捷方式。分为hard和soft link。
 
+#### file type
+对于普通的regular file，在ubuntu的system上面可以用`file *`查看文件的mata data。这就会细分到图片，python/c的code，可执行文件，等等。而`file`这个cmd是基于linux操作系统之上的文件的细分
 
 
 
