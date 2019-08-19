@@ -37,6 +37,7 @@ $ apt-get upgrade
 ```
 所以通常是先跑update再跑upgrade，这样就可以完整的更新到系统的packet了。
 
-
+### AptUrl
+apt的GUI工具，也是在ubuntu中默认安装的，帮助user安装各种packet的。（不知道为什么）
 
 
