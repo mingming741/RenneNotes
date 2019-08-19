@@ -48,7 +48,7 @@ routing table用于记录，如果要发送packet去对应的destination的ip，
 ```
   $ ip netns exec Renne ifconfig veth1 10.1.1.1/24 up
 ```
-这样就完成了。但是这里注意到的是，namespace中的veth1只能ping到veth0，还是ping不到我自己电脑的ip和实验室里面的任意一部机，可能是还有一些gateway之类的东西需要去调节。
+这样就完成了。但是这里注意到的是，namespace中的veth1只能ping到veth0，还是ping不到我自己电脑的ip和实验室里面的任意一部机，可能是还有一些gateway之类的东西需要去调节。并且，这上面的操作，是对os本身网络环境的全局修改，mahimahi可以做到在shell中独立创建环境，然后进行操作。
 
 
 
