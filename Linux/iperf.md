@@ -21,7 +21,7 @@ $ iperf -u -c "server ip"
 这样使用的就是默认的UDP。
 
 ### 通用参数
-通用参数表示报告的模式，client和server都可以加，从man page上列举：
+通用参数表示报告的模式。每个参数都对于了一个环境变量，如`-l`对应了`$IPERF_LEN`。通用参数client和server都可以加，从man page上列举：
   * -h, --help： 帮助
   * -i, --interval n: 中途报告时间，默认的iperf只会在flow结束的时候报告一次，加了-i就会在途中每隔n时间报告一次
   * -l, --len n[KM]: 调整read/write buffer的长度(default 8 KB)。（为什么server和client都有buffer？并且据我的测试，client side的buffer对测试结果也有影响。）
@@ -29,19 +29,7 @@ $ iperf -u -c "server ip"
   * -m, --print_mss: 在结束后print TCP maximum segment size(MTU)
   * -p, --port n：在server打就表示server开启哪个port来listen client的request(default 5001)，在Client打表示client要连接server的哪个port。(我试了下如果一部机开了两个iperf的server，client不指定port的话好像只能根据某种priority连接到两个中的其中一个)
   * -w, --window n[KM]: TCP window size (socket buffer size)
--B, --bind <host>
-bind to <host>, an interface or multicast address
-
--N, --nodelay
-set TCP no delay, disabling Nagle's Algorithm
--v, --version
-print version information and quit
--V, --IPv6Version
-Set the domain to IPv6
--x, --reportexclude
-[CDMSV] exclude C(connection) D(data) M(multicast) S(settings) V(server) reports
--y, --reportstyle C|c
-if set to C or c report results as CSV (comma separated values)
+  * -B, --bind <host>: Bind to specific interfaces (我没看懂)
 
 ### Server和client的参数
 通常，iperf的参数可以实现各种组合，下面分别介绍每一个参数的作用。使用我lab电脑的server ip：192.168.80.77
