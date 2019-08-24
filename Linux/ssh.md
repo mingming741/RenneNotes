@@ -29,7 +29,11 @@ sftp username@host_name
 例如
 sftp mclab@192.168.80.39
 ```
-进到
+进到host的路径上去之后，可以使用help查看sftp的cmd。基本的linux command如ls，cd都可以直接使用。如果要从server上取file的话，使用get
+```console
+get filename
+```
+这样filename这个file会被host传输到本地路径，路径等于你terminal打开sftp的路径下去。
 
 
 # SCP
