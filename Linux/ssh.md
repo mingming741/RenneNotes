@@ -29,6 +29,7 @@ sftp username@host_name
 例如
 sftp mclab@192.168.80.39
 ```
+进到
 
 
 # SCP
