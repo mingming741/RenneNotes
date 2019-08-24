@@ -91,9 +91,9 @@ vm.overcommit_ratio = 50
 
 上面的列举只是列举了sysctl中的一小部分，具体的config可以打-a查看，如果遇到要改系统设置了，就可以用sysctl 的cmd了，例如改默认tcp的module，使用：
 ```console
-sysctl net.ipv4.tcp_congestion_control = cubic
+sysctl net.ipv4.tcp_congestion_control=cubic
 ```
-这样就可以讲tcp module换成cubic
+这样就可以讲tcp module换成cubic，注意等号不能空格哈。
 
 
 
