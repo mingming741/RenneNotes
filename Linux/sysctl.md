@@ -25,7 +25,8 @@ System control(sysctl)是在runtime调整kernal的工具，修改核心参数。
 * fs
 * kernal
 * net
-* vm (vurtial memory)
+* user
+* vm
 输入下面命令查看当前系统设置的默认值
 ```console
 sysctl -a
@@ -44,7 +45,7 @@ fs.pipe-max-size = 1048576
 ### sysctl kernal
 kernal attribute下存储的是kernal的一些参数，例如不同cpu的信息，随机函数的seed，最多几个thread这样的信息。
 ```console
-$ kernel.keys.maxbytes = 20000
+kernel.keys.maxbytes = 20000
 kernel.ngroups_max = 65536
 kernel.overflowuid = 65534
 kernel.random.poolsize = 4096
@@ -55,9 +56,44 @@ kernel.watchdog_thresh = 10
 ```
 
 ### sysctl net
-net attribute存储的是对网络的设置：
+net attribute存储的是对网络的设置，包括网络全局的设置，ipv4下的网卡的每个interface的设置，各种protocal的设置，ipv6的一些设置，防火墙的设置等等。
 ```console
-
-
+net.core.default_qdisc = pfifo_fast
+net.core.wmem_default = 88888888
+net.ipv4.conf.all.forwarding = 1
+net.ipv4.conf.default.drop_unicast_in_l2_multicast = 0
+net.ipv4.conf.eno1.secure_redirects = 1
+net.ipv4.conf.lo.forwarding = 1
+net.ipv4.icmp_msgs_per_sec = 1000
+net.ipv4.ip_forward = 1
+net.ipv4.route.gc_min_interval_ms = 500
+net.ipv4.tcp_congestion_control = cubic
+net.ipv4.tcp_sack = 1
+net.ipv4.udp_mem = 88149	117535	176298
+net.ipv6.neigh.eno1.proxy_delay = 80
+net.netfilter.nf_conntrack_max = 65536
 ```
+
+### sysctl user
+对用户的一些设置和控制
+```console
+user.max_mnt_namespaces = 15087
+user.max_pid_namespaces = 15087
+```
+
+### sysctl vm
+virtual memory，虚拟内存的一些设置。
+```console
+vm.dirtytime_expire_seconds = 43200
+vm.page-cluster = 3
+vm.overcommit_ratio = 50
+```
+
+上面的列举只是列举了sysctl中的一小部分，具体的config可以打-a查看，如果遇到要改系统设置了，就可以用sysctl 的cmd了，例如改默认tcp的module，使用：
+```console
+sysctl net.ipv4.tcp_congestion_control = cubic
+```
+这样就可以讲tcp module换成cubic
+
+
 
