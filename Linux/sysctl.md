@@ -16,5 +16,48 @@ Process configue file system. Unix like system的特殊文件系统，用于保�
 
 实际上，这些attribute都是对这个process的描述。
 
+# systemd
+system daemon，系统后台进程（或者叫守护进程。）貌似目前systemd有取代sysctl的趋势，但是两者似乎都有在使用。
+
 # sysctl
-sysctl是在runtime调整kernal的工具。可以理解为，kernal在系统开机的时候就
+System control(sysctl)是在runtime调整kernal的工具，修改核心参数。可以理解为，kernal在系统开机的时候就已经启动，而sysctl提供了开机之后modify kernal的各种函数，用于改变kernal运行的参数和调用的packet。sysctl在开机的时候会load一个默认的conf file，（大概是/etc/sysctl.d/99-sysctl.conf这个file，有些系统不一样），作为默认的system的config。当然作为control的工具，sysctl也可以动态修改，通常修改包括下面几块：
+* dev
+* fs
+* kernal
+* net
+* vm (vurtial memory)
+输入下面命令查看当前系统设置的默认值
+```console
+sysctl -a
+```
+
+### sysctl fs (file system)
+fs attribute下面储存了对当前系统的file system的各种config，例如（我从我电脑中截取的）：
+```console
+fs.file-max = 384595
+fs.lease-break-time = 45
+fs.overflowuid = 65534
+fs.pipe-max-size = 1048576
+```
+对于kernal来说这些似乎都是parameter，可以理解为c语言写的linux kernal在某些条件下会检查这些config，如果出现溢出等问题会发生相应的报告
+
+### sysctl kernal
+kernal attribute下存储的是kernal的一些参数，例如不同cpu的信息，随机函数的seed，最多几个thread这样的信息。
+```console
+kernel.keys.maxbytes = 20000
+kernel.ngroups_max = 65536
+kernel.overflowuid = 65534
+kernel.random.poolsize = 4096
+kernel.sched_domain.cpu0.domain1.idle_idx = 0
+kernel.sched_domain.cpu7.domain0.flags = 4783
+kernel.threads-max = 30175
+kernel.watchdog_thresh = 10
+```
+
+### sysctl net
+net attribute存储的是对网络的设置：
+```console
+
+
+```
+
