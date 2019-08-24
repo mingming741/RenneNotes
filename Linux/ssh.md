@@ -10,3 +10,4 @@ SSH File Transfor Protocal(SFTP)，是一种安全的文件传输协议，为SSH
 
 
 # SCP
+Secure Copy(SCP)，用于做文件的原创拷贝，通常都是host将数据传输到服务器上去。数据传输同样使用ssh（密钥或者账户密码的方式）。
