@@ -24,7 +24,7 @@ SSH File Transfor Protocal(SFTP)，是一种安全的文件传输协议，为SSH
 通常使用SFTP都是从服务器上取东西，通常port是22。因为SFTP是基于SSH的机制的，因此支持SSH的服务器，（即如果你能够ssh到那个server上去的话），就可以使用SFTP来取走server上的东西了。
 
 sftp的使用方式类似ssh，应该说是基于ssh产生的，用起来感觉和ssh有点不一样。使用sftp登录到server上去：
-```
+```console
 sftp username@host_name
 例如
 sftp mclab@192.168.80.39
@@ -37,4 +37,18 @@ get filename
 
 
 # SCP
-Secure Copy(SCP)，用于做文件的原创拷贝，通常都是host将数据传输到服务器上去。数据传输同样使用ssh（密钥或者账户密码的方式）。
+Secure Copy(SCP)，用于做文件的原创拷贝，通常都是host将数据传输到服务器上去。数据传输同样使用ssh（密钥或者账户密码的方式）。SCP可以使用upload也可用使用download的方式，首先介绍upload
+```console
+# upload: local -> remote
+scp local_file user@remote_host:remote_file
+```
+upload会把指定local file上传到host对应的指定路径下，如果没有给出绝对路径，则会传到对应user的home下面。因为upload不需要指定本地路径，因此相对也比较方便，因为download需要指定remote的路径，因此upload相对方便。比download用的要多，download可以用sftp来解决。
+
+download使用命令如下：
+```console
+# download: remote -> local
+scp user@remote_host:remote_file local_file 
+```
+remote_file需要指定绝对路径，并且每次都需要输入密码，非常的不好用，local_file会被保存在terminal当前的pwd位置。
+
+
