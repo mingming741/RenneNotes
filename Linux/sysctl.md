@@ -17,3 +17,4 @@ Process configue file system. Unix like system的特殊文件系统，用于保�
 实际上，这些attribute都是对这个process的描述。
 
 # sysctl
+sysctl是在runtime调整kernal的工具。可以理解为，kernal在系统开机的时候就
