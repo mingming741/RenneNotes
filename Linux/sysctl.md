@@ -44,7 +44,7 @@ fs.pipe-max-size = 1048576
 ### sysctl kernal
 kernal attribute下存储的是kernal的一些参数，例如不同cpu的信息，随机函数的seed，最多几个thread这样的信息。
 ```console
-kernel.keys.maxbytes = 20000
+$ kernel.keys.maxbytes = 20000
 kernel.ngroups_max = 65536
 kernel.overflowuid = 65534
 kernel.random.poolsize = 4096
