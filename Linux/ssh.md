@@ -5,14 +5,14 @@ ssh最基本的使用方法就是用户名(-l或者@)加上host name(IP)
 ```console
 ssh usename@host_name
 ssh -l username host_name
-例如
+# 例如
 ssh showing@192.168.80.77 
 ```
 当然也可以只打ip，这样的话ssh会使用你当前的用户名做登录。
 ```console
-例如，从我的电脑上ssh到lab的.39上面
+# 例如，从我的电脑上ssh到lab的.39上面
 ssh 192.168.80.39
-等价于
+# 等价于
 ssh showing@192.168.80.39
 ```
 如果server和client上有可以对应的密钥，那么就不需要username，直接可以ssh过去。
@@ -26,7 +26,7 @@ SSH File Transfor Protocal(SFTP)，是一种安全的文件传输协议，为SSH
 sftp的使用方式类似ssh，应该说是基于ssh产生的，用起来感觉和ssh有点不一样。使用sftp登录到server上去：
 ```console
 sftp username@host_name
-例如
+# 例如
 sftp mclab@192.168.80.39
 ```
 进到host的路径上去之后，可以使用help查看sftp的cmd。基本的linux command如ls，cd都可以直接使用。如果要从server上取file的话，使用get
