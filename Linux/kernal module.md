@@ -12,9 +12,6 @@ lsmod
 insmod modulename
 # 移除一个module
 rmmod modulename
-```console
-而modprobe更加系统，包含了上面几个cmd的内容。
 ```
-
-```
+系统在启动之后，所有module的信息都在/proc/modules文件中列出。而modprobe更加系统，包含了上面几个cmd的内容。modprobe比起insmod，可以做到载入module的dependence，但是需要module的ko文件保存在/lib/modules/这个路径下面的一个文件夹内。相反的是，insmod可以insert任何路径中的一个module。
 
