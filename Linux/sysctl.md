@@ -105,13 +105,16 @@ sudo sysctl -w net.ipv4.ip_forward=1
 * net.ipv4.ip_forward=1 : (设置允许ipv4做packet forwarding)
 * net.ipv4.tcp_rmem = 4096 87380 8388608 （receiver memory，第一个值是每个tcp connection的receiver buffer的最小值，这个buffer是绑定socket的，第二个值是kernal默认给每个TCP socket的receiver buffer的值，可以认为是初始的值，第三个值是receive buffer可以被assign的最大值。因为receiver buffer在不同os中有不同的动态调节的机制，因此这三个值都是需要的。）
 * net.ipv4.tcp_wmem = 4096 65536 8388608 （sender memory，第一个值是单一tcp connection的sender buffer的最小值，第二个是default sender buffer，第三个是max sender buffer）
-* net.ipv4.tcp_mem = 8388608 8388608 8388608 （memory，表示tcp connection使用buffer的threshold，类似于三个警戒区。若一条connection的memory分配小于第一个值，则memory分配不会收到影响，也不会被警告。如果超过第一个值小于第二个值，则会得到一些报告，如果超过第二个值，tcp connection的memory分配会收到限制而被压缩。第三个值是memory使用的上限，若大于第三个值，那么tcp connection就会开始drop packet，直到）
+* net.ipv4.tcp_mem = 8388608 8388608 8388608 （memory，表示tcp connection使用buffer的threshold，类似于三个警戒区。若一条connection的memory分配小于第一个值，则memory分配不会收到影响，也不会被警告。如果超过第一个值小于第二个值，则会得到一些报告，如果超过第二个值，tcp connection的memory分配会收到限制而被压缩。第三个值是memory使用的上限，若大于第三个值，那么tcp connection就会开始drop packet，直到低于第二个值）
 * net.core.rmem_max = 167772168
 * net.core.wmem_max = 88888888
 * net.core.wmem_default = 88888888
 * net.core.rmem_max = 88888888
 * net.core.rmem_default = 88888888
 * net.core.optmem_max = 88888888
+
+这里有一篇引用，写如何去除TCP受到memory限制的方法：https://wwwx.cs.unc.edu/~sparkst/howto/network_tuning.php
+
 
 
 
