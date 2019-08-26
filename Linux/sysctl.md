@@ -27,7 +27,8 @@ System control(sysctl)是在runtime调整kernal的工具，修改核心参数。
 * net
 * user
 * vm
-输入下面命令查看当前系统设置的默认值
+
+同时，这些参数会被映射到/proc/sys的路径下面，可以看到这些文件夹。输入下面命令查看当前系统设置的默认值
 ```console
 sysctl -a
 ```
@@ -103,36 +104,59 @@ sudo sysctl -w net.ipv4.ip_forward=1
 
 默认的sysctl.conf是没有东西的（应该说东西都comment掉了），这里记录一下平时我们用的多的几个参数：（单位都是bytes）
 ```console
-# 设置允许ipv4做packet forwarding
 net.ipv4.ip_forward=1 
+# 设置允许ipv4做packet forwarding
 
-# minimum, default and maximum size of the TCP socket receive buffer
+
 net.ipv4.tcp_rmem = 4096 87380 8388608
-# minimum, default and maximum size of the TCP socket sender buffer
+# minimum, default and maximum size of the TCP socket receive buffer
 net.ipv4.tcp_wmem = 4096 65536 8388608
+# minimum, default and maximum size of the TCP socket sender buffer
 
 net.ipv4.tcp_mem = 8388608 8388608 8388608 
 # 表示tcp connection使用buffer的threshold，类似于三个警戒区。若一条connection的memory分配小于第一个值，则memory分配不会收到影响，也不会被警告。如果超过第一个值小于第二个值，则会得到一些报告，如果超过第二个值，tcp connection的memory分配会收到限制而被压缩。第三个值是memory使用的上限，若大于第三个值，那么tcp connection就会开始drop packet，直到低于第二个值
 
-# system的所有类型的connection的最大receiver buffer size
 net.core.rmem_max = 8388608
-# default receiver buffer size
+# system的所有类型的connection的最大receiver buffer size
 net.core.rmem_default = 65536
+# default receiver buffer size
 
-# system的所有类型的connection的最大sender buffer size
 net.core.wmem_max = 8388608
-# default sender buffer size
+# system的所有类型的connection的最大sender buffer size
 net.core.wmem_default = 65536
+# default sender buffer size
 
-# maximum amount of option memory buffers
 net.core.optmem_max = 25165824
+# maximum amount of option memory buffers， 表示每个套接字所允许的最大缓冲区的大小。
 ```
 
-这里有一篇引用，介绍了里面不同的value的使用方法：https://www.ibm.com/support/knowledgecenter/en/linuxonibm/liaag/wkvm/wkvm_c_tune_tcpip.htm
+这里有一篇引用，介绍了里面不同的value的使用方法，系统默认值和如何优化：
+https://www.cnblogs.com/fczjuever/archive/2013/04/17/3026694.html
 
-下面介绍几个这个引用中的可以调节的值：
+下面介绍几个这个引用中的可以调节的值，这些值在开机之后，都被映射到/proc/sys/net的路径下面去。
 ```console
+net.ipv4.tcp_congestion_control
+# 显示当前使用的TCP，如果写'=bbr'的话就是设置成bbr。
+sysctl net.ipv4.tcp_available_congestion_control
+# 显示kernal中可用的TCP module，据我观察这个显示不完整。
 
+net.ipv4.tcp_fin_timeout
+# 对方没有反应是，强制断开connection的timeout时间
+
+net.core.netdev_max_backlog
+# 当前network interface允许queue的packet的最大数据，即平时说的buffer bottleneck
+net.ipv4.tcp_limit_output_bytes
+# 每一条tcp socket的queue最大长度，超过这个size这个socket就会开始drop packet
+
+net.core.tcp_max_syn_backlog
+# 当前发出了syn但是还没有ack的最大的connection的数量
+
+net.ipv4.tcp_sack
+# 默认开启，是否支持sack，并且sack的机制和flow control是分开的。
+net.ipv4.tcp_timestamps
+# 默认开启，需要12字节的header，很多estimation的TCP都需要这个。
+net.ipv4.tcp_window_scaling
+# 默认开启，是否允许window变动，肯定要变动的，对于window大于64KB必须开启
 ```
 
 
