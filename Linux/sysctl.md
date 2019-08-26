@@ -105,16 +105,27 @@ sudo sysctl -w net.ipv4.ip_forward=1
 ```console
 # 设置允许ipv4做packet forwarding
 net.ipv4.ip_forward=1 
+
 # minimum, default and maximum size of the TCP socket receive buffer
 net.ipv4.tcp_rmem = 4096 87380 8388608
 # minimum, default and maximum size of the TCP socket sender buffer
 net.ipv4.tcp_wmem = 4096 65536 8388608
-* net.ipv4.tcp_mem = 8388608 8388608 8388608 （memory，表示tcp connection使用buffer的threshold，类似于三个警戒区。若一条connection的memory分配小于第一个值，则memory分配不会收到影响，也不会被警告。如果超过第一个值小于第二个值，则会得到一些报告，如果超过第二个值，tcp connection的memory分配会收到限制而被压缩。第三个值是memory使用的上限，若大于第三个值，那么tcp connection就会开始drop packet，直到低于第二个值）
-* net.core.rmem_max = 8388608 （system的所有类型的connection的最大receiver buffer size）
-* net.core.rmem_default = 65536 （default receiver buffer size）
-* net.core.wmem_max = 8388608 （system的所有类型的connection的最大sender buffer size）
-* net.core.wmem_default = 65536 （default sender buffer size）
-* net.core.optmem_max = 25165824 （maximum amount of option memory buffers ）
+
+net.ipv4.tcp_mem = 8388608 8388608 8388608 
+# 表示tcp connection使用buffer的threshold，类似于三个警戒区。若一条connection的memory分配小于第一个值，则memory分配不会收到影响，也不会被警告。如果超过第一个值小于第二个值，则会得到一些报告，如果超过第二个值，tcp connection的memory分配会收到限制而被压缩。第三个值是memory使用的上限，若大于第三个值，那么tcp connection就会开始drop packet，直到低于第二个值
+
+# system的所有类型的connection的最大receiver buffer size
+net.core.rmem_max = 8388608
+# default receiver buffer size
+net.core.rmem_default = 65536
+
+# system的所有类型的connection的最大sender buffer size
+net.core.wmem_max = 8388608
+# default sender buffer size
+net.core.wmem_default = 65536
+
+# maximum amount of option memory buffers
+net.core.optmem_max = 25165824
 ```
 
 这里有一篇引用，介绍了里面不同的value的使用方法：https://www.ibm.com/support/knowledgecenter/en/linuxonibm/liaag/wkvm/wkvm_c_tune_tcpip.htm
