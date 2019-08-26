@@ -157,6 +157,10 @@ net.ipv4.tcp_timestamps
 # 默认开启，需要12字节的header，很多estimation的TCP都需要这个。
 net.ipv4.tcp_window_scaling
 # 默认开启，是否允许window变动，肯定要变动的，对于window大于64KB必须开启
+
+net.ipv4.ip_local_port_range
+# 表示TCP/UDP协议允许使用的本地端口号，默认值是[32768, 61000]即平时我们说的可以使用的port number，最多可以使用[1024, 65000]这么多
+
 ```
 
 
