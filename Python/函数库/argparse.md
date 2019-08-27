@@ -1,7 +1,7 @@
-# Argparse
+# argparse
 python常用对应command line的工具，用于处理输入的argument的格式，等于是python处理argument的便携库
 
-### Argparse python 2.7
+### argparse python 2.7
 因为是做pantheon用到的Argparse，因此这里介绍python2.7版本的。创建Argparse.py，并且在里面写：
 ```python
 import argparse
