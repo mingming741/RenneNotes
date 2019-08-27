@@ -58,7 +58,31 @@ elif args.verbosity == 1:
 else:
     print answer
 ```
+对于互相conflict的两个argument，我们可以将其添加到同一个group中，这样如果两个argument都不是NULL的话，就会报错
+```python
+import argparse
 
+parser = argparse.ArgumentParser()
+group = parser.add_mutually_exclusive_group() # 互斥的组
+group.add_argument("-v", "--verbose", action="store_true")
+group.add_argument("-q", "--quiet", action="store_true")
+parser.add_argument("x", type=int, help="the base")
+parser.add_argument("y", type=int, help="the exponent")
+args = parser.parse_args()
+answer = args.x**args.y
+
+if args.quiet:
+    print answer
+elif args.verbose:
+    print "{} to the power {} equals {}".format(args.x, args.y, answer)
+else:
+    print "{}^{} == {}".format(args.x, args.y, answer)
+```
+上面的example中，`python Argparse.py 4 2 -v -q`会报错。同事`--help`中会变成这样的显示：
+```
+   usage: Argparse.py [-h] [-v | -q] x y
+```
+这里`[-h]`表示`-h`是一个optional的argument，`[-v | -q]`表示这两个optional的argument最多只能选取一个，x和y表示`x`和`y`是positional的argument
 
 
 
