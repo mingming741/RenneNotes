@@ -33,7 +33,7 @@ args = parser.parse_args()
 print args.square**2
 ```
 同样，除去必要的'Positional argument'，我们也可用添加可选的'Optional arguments'，同样使用add_argument。optional的argument需要以单横杠`-`开头，通常人们对于简写会用`-`，对于全名会用双横杠`--`开头来表示。
-```
+```python
 import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("-v", "-V", "--verbose", help="increase output verbosity", action="store_true")
@@ -41,9 +41,23 @@ args = parser.parse_args()
 if args.verbose:
    print "verbosity turned on"
 ```
-这样argument "--verbosity"就会成为一个可选的argument，并且store_true这个action，可以做到在打了`--verbose`的时候，让`args.verbose`的值变成True，没打的时候就是False，类似一个flag的作用。这里不能使用`type=bool`，因为bool需要一个输入值，并且这个输入值无法被读取，自己可以试试看。
+这样argument "--verbosity"就会成为一个可选的argument，并且store_true这个action，可以做到在打了`--verbose`的时候，让`args.verbose`的值变成True，没打的时候就是False，类似一个flag的作用。这里不能使用`type=bool`，因为bool需要一个输入值，并且这个输入值无法被读取，自己可以试试看。同时`add_argument`可以给一个参数多个引用名称，并且这些引用名称的值等价(不知道本质的object是否等价，有可能是多个指针指向同一个object)，比如上面的例子的`-v, -V, --verbose`。
 
-同时`add_argument`可以给一个参数多个引用名称，并且这些引用名称的值等价(不知道本质的object是否等价，有可能是多个指针指向同一个object)，比如上面的例子的`-v, -V, --verbose`。
+'Positional argument'和'Optional arguments'也可用混合使用。下面的例子说明了如何实现不同的log level。使用`choice=[0, 1, 2]`限定log level的值。并且，下面这个script使用`python Argparse.py -v 2 3`的调用方式也是可以正常调用的。这说明，'Optional arguments'的位置可以是任意的，但是不推荐任意使用。
+```python
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument("square", type=int, help="display a square of a given number")
+parser.add_argument("-v", "--verbosity", type=int, choices=[0, 1, 2], help="increase output verbosity")
+args = parser.parse_args()
+answer = args.square**2
+if args.verbosity == 2:
+    print "the square of {} equals {}".format(args.square, answer)
+elif args.verbosity == 1:
+    print "{}^2 == {}".format(args.square, answer)
+else:
+    print answer
+```
 
 
 
