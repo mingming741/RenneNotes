@@ -85,4 +85,22 @@ else:
 这里`[-h]`表示`-h`是一个optional的argument，`[-v | -q]`表示这两个optional的argument最多只能选取一个，x和y表示`x`和`y`是positional的argument
 
 
+### 处理sub paser
+sub paser的作用是给一个脚本处理多个argument的option的能力，类似git commit和git push中，git这个脚本可以对commit和push有不同的操作。以Pantheon的test为例，这是test.py
+```python
+import argparse
+parser = argparse.ArgumentParser(description='perform congestion control tests')
+
+subparsers = parser.add_subparsers(dest='mode') # 添加一个subparsers的container
+local = subparsers.add_parser('local', help='test schemes locally in mahimahi emulated networks') # 给这个contrainer添加一个parser，即main parser的subparser。
+remote = subparsers.add_parser('remote', help='test schemes between local and remote in real-life networks') # 添加另一个subparser
+args = parser.parse_args()
+```
+运行`python test.py -h`会得到这样的说明：
+```
+usage: Argparse.py [-h] {local,remote} ...
+```
+这样，我们的调用就变成了`python test.py local arg1 arg2...`和`python test.py remote arg1 arg2...`。而`python test.py -h`也会被保留下来，同样我们给main paser添加其他的function依旧起作用。因此我们可以讲subparsers看做main parser添加二级命令的一个container，用于延展一级命令的长度。在二级命令create之后，`local`和`remote`的模式，添加argument和一级相同。
+
+
 
