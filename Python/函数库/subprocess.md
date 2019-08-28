@@ -31,21 +31,28 @@ print 'parent process'
 子进程在创建后，父进程中可以通过child这个指针下面的几个attribute来进行调整子进程的状态
 ```
 child.pid # 显示子进程的process id
-child.poll() # 检查子进程状态
+child.poll() # 检查子进程状态，并且set returncode
 child.kill() # 终止子进程
 child.send_signal() # 向子进程发送信号
 child.terminate() # 终止子进程
+child.communicate() # returns a tuple (stdoutdata, stderrdata).
 ```
-子进程默认的stdin,stdout,stderr都是没有的，即None。(但是我感觉就是占用父进程的这个shell的位置，或许是hi一种继承)，而PIPE可以用于承接子进程的输出，将多个子进程的输入和输出连接在一起，下面的例子，就是讲child1的输入写到了subprocess的PIPE中去。(未完成)
+子进程默认的stdin,stdout,stderr都是没有的，即None。(但是我感觉就是占用父进程的这个shell的位置，或许是hi一种继承)，而PIPE可以用于承接子进程的输出，将多个子进程的输入和输出连接在一起，下面的例子，就是讲child1的输入写到了subprocess的PIPE中去。在读入之后，可以用communicate的方法获取对于的subprocess的PIPE的值，每个child是有不同PIPE的。
 ```python
 import subprocess
 child1 = subprocess.Popen(["ls","-l"], stdout=subprocess.PIPE)
-# print child1.stdout.read()
-child2 = subprocess.Popen(["grep","0:0"],stdin=child1.stdout, stdout=subprocess.PIPE)
-out = child2.communicate()
-print out
+stdout, stderr = child1.communicate()
+print stdout
+```
+下面给出几个常用的使用方法，os也有popen的方法，不过用的是shell
+```python
+output = check_output(["cmd", "arg"]) # 等于sh的 output=`cmd arg`
+status = subprocess.call("mycmd" + " myarg", shell=True) # 等于status = os.system("mycmd" + " myarg")
+pipe = Popen("cmd", shell=True, bufsize=bufsize, stdin=PIPE).stdin # 等于 pipe = os.popen("cmd", 'w', bufsize)
+pipe = Popen("cmd", shell=True, bufsize=bufsize, stdout=PIPE).stdout # 等于 pipe = os.popen("cmd", 'r', bufsize)
 
 ```
+
 
 
 
