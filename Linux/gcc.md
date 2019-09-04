@@ -137,7 +137,7 @@ $ ./hello
 Makefile(or makefile)最基本的定义是，告诉binary executable 'make'所指定的的命令。并不局限于c的编译，make指定的命令可以是任何的cmd或者是调用其他binary executable，有点类似带参数的sh执行方式。
 
 要使用Makefile，则在对应的目录下创建Makefile文件，这样在这个目录下调用make的时候，make会检查Makefile中的option的entry，来实现不同的调用。Makefile最基本的entry格式为：
-```console
+```makefile
 makecmd:
 	action
 
@@ -146,7 +146,7 @@ say_hello:
 	echo "Hello World"
 ```
 类似于‘函数名’ + 空格TAB + 功能，上面的例子就是，输入`make`或者`make say_hello`都会输出"Hello World"。更加通用的格式是：
-```
+```makefile
 target: prerequisites # 先决条件
 <TAB> recipe
 
@@ -158,7 +158,7 @@ sub_target: sub_target.c
         Recipe_to_create_sub_target
 ```
 我们举几个例子看看上面的格式的使用，如果我们不想在make的时候，同时print出来make的cmd，则在前面加@。同时我们增加两个function为generate和clean。
-```
+```makefile
 say_hello:
 	@echo "Hello World"
 	
