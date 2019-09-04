@@ -208,7 +208,36 @@ CC = ${CC}
 all:
 	@echo ${CC}
 ```
-会报错，line2会递归的reference自己，使用`:=`可以解决这个问题。这里`:=`又被叫做simply expanded variable。
+会报错，line 2会递归的reference自己，使用`:=`可以解决这个问题。这里`:=`又被叫做simply expanded variable。
+
+下面介绍一个更加全的例子，#开头的表示comment
+```makefile
+# Usage:
+# make        # compile all binary
+# make clean  # remove ALL binaries and objects
+
+.PHONY = all clean  # 强制重新执行的cmd
+
+CC = gcc                        # compiler to use
+LINKERFLAG = -lm  		# defines flags to be used with gcc in a recipe
+
+SRCS := $(wildcard *.c) 	# $(wildcard pattern)是一个filename的函数，all files with the .c extension will be stored in SRCS， wildcard的中文意思是通配符
+BINS := $(SRCS:%.c=%)		# substitution reference. if SRCS has values 'foo.c bar.c', BINS will have 'foo bar'，类似于冲SRCS中取出来了%代表的部分
+
+all: ${BINS}		
+
+%: %.o
+	@echo "Checking.."
+	${CC} ${LINKERFLAG} $< -o $@
+
+%.o: %.c
+	@echo "Creating object.."
+  ${CC} -c $<
+
+clean:
+	@echo "Cleaning up..."
+	rm -rvf *.o ${BINS}
+```
 
 
 
