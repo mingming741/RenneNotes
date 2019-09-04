@@ -1,5 +1,5 @@
-bianyi# 关于C语言的编译问题
-大概总结一些C从代码带可执行代码的过程，希望分到linux和window的不同区别。
+# gcc 
+关于C语言的编译问题，大概总结一些C从代码带可执行代码的过程，希望分到linux和window的不同区别。
 
 ## 文件组成
 c语言在gcc的编译之后，会生产不同的后缀形式的代码，而每个后缀都有自己的含义
@@ -31,7 +31,7 @@ int main()
 $ gcc -E -o hello.i hello.c
 ```
 * 处理所有的条件编译指令，#ifdef #ifndef #endif等，就是带#的那些，这些语句相当于预处理的逻辑语句，而普通的if else是代码执行的逻辑语句。预处理在编译过程已经执行，并且会决定编译的方向，比如说编译完成之后，程序的可执行文件是linux版本还是window版本，是32为系统还是64为系统等等，这些的实现都需要#ifdef这类的逻辑语句，配合一些Marco的支持得以完成。
-```c
+```cgcc
 #ifdef _WIN32
 #include <windows.h>
 
@@ -132,4 +132,45 @@ $ gcc -o hello hello.o
 ```
 $ ./hello
 ```
+
+## Makefile
+Makefile(or makefile)最基本的定义是，告诉binary executable 'make'所指定的的命令。并不局限于c的编译，make指定的命令可以是任何的cmd或者是调用其他binary executable，有点类似带参数的sh执行方式。
+
+要使用Makefile，则在对应的目录下创建Makefile文件，这样在这个目录下调用make的时候，make会检查Makefile中的option的entry，来实现不同的调用。Makefile最基本的entry格式为：
+```console
+makecmd:
+	action
+
+# 例如
+say_hello:
+	echo "Hello World"
+```
+类似于‘函数名’ + 空格TAB + 功能，上面的例子就是，输入`make`或者`make say_hello`都会输出"Hello World"。更加通用的格式是：
+```
+target: prerequisites # 先决条件
+<TAB> recipe
+
+# 或者是
+final_target: sub_target final_target.c
+        Recipe_to_create_final_target
+
+sub_target: sub_target.c
+        Recipe_to_create_sub_target
+```
+我们举几个例子看看上面的格式的使用，如果我们不想在make的时候，同时print出来make的cmd，则在前面加@。同时我们增加两个function为generate和clean。
+```
+say_hello:
+	@echo "Hello World"
+	
+generate:
+	@echo "Creating empty text files..."
+	touch file-{1..10}.txt
+
+clean:
+	@echo "Cleaning up..."
+	rm *.txt
+```
+这时候我们`make`的话，只有`say_hello`会被执行，因为第一个function是`make`的default option。
+
+
 
