@@ -170,7 +170,45 @@ clean:
 	@echo "Cleaning up..."
 	rm *.txt
 ```
-这时候我们`make`的话，只有`say_hello`会被执行，因为第一个function是`make`的default option。
+这时候我们`make`的话，只有`say_hello`会被执行，因为第一个function是`make`的default option。因为make本身也是binary executable，所以自己也有一些config的API，例如`.DEFAULT_GOAL := generate`可以讲`make`默认的default option修改成function`generate`。makefile有许多选项可以设置：
+```makefile
+.DEFAULT_GOAL := func_name # 设置默认执行的命令
+.PHONY: func_name # 强制执行，即会刷新原本的，如gcc命令会重新编译
+```
+
+同时，makefile最常用的是`all`的选项，用于决定`make`的default执行中间的哪些function。需要注意的是，`all`并不是特殊的名称，你也可以将其换成`2333`，而是仅仅需要放在makefile的第一个位置，代表默认执行即可：
+```makefile
+all: say_hello generate
+
+say_hello:
+	@echo "Hello World"
+	
+generate:
+	@echo "Creating empty text files..."
+	touch file-{1..10}.txt
+
+clean:
+	@echo "Cleaning up..."
+	rm *.txt
+```
+
+### Makefile Variable
+上面介绍的都是静态的，并且没有target的make的操作。make也可用使用变量。变量在被cmd赋值之后，用`${var}`表示，例如：
+```makefile
+CC = gcc
+
+hello: hello.c
+	${CC} hello.c -o hello
+```
+这里的`${CC}`等价于`gcc`，或者`$(CC)`的小括号形式也可以。在makefile中，`=`和`:=`有微小的区别，例如：
+```makefile
+CC = gcc
+CC = ${CC}
+
+all:
+	@echo ${CC}
+```
+会报错，line2会递归的reference自己，使用`:=`可以解决这个问题。这里`:=`又被叫做simply expanded variable。
 
 
 
