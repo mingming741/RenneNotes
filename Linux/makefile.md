@@ -1,4 +1,4 @@
-## Makefile
+# Makefile
 Makefile(or makefile)最基本的定义是，告诉binary executable 'make'所指定的的命令。并不局限于c的编译，make指定的命令可以是任何的cmd或者是调用其他binary executable，有点类似带参数的sh执行方式。
 
 要使用Makefile，则在对应的目录下创建Makefile文件，这样在这个目录下调用make的时候，make会检查Makefile中的option的entry，来实现不同的调用。Makefile最基本的entry格式为：
@@ -157,3 +157,15 @@ clean:
 到这里，我们可以认为target在function的output是一个文件的情况下，会生成对应的文件，prerequisites则是执行这个function需要的文件，如果不存在的话，就去尝试生成这个文件。
 
 需要注意的是，make这个command在linux的kernal中似乎本来就有定义，因此有的路径下即使没有makefile，`make hello.o`和`make hello`依旧可以执行（我本地测试出现了这种情况，并且自己写的Rule无法替换default的rule）。目前还不知道怎么解决
+
+
+### Automake
+Automake是GNU project中的一种工具，是通过Perl语言，编写生成makefile的程式，而不是通过传统的手写的方式编写makefile。
+
+
+
+
+
+
+
+
