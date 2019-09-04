@@ -147,7 +147,7 @@ say_hello:
 ```
 类似于‘函数名’ + 空格TAB + 功能，上面的例子就是，输入`make`或者`make say_hello`都会输出"Hello World"。更加通用的格式是：
 ```makefile
-target: prerequisites # 先决条件
+target: prerequisites # 先决条件，即会先运行prerequisites
 <TAB> recipe
 
 # 或者是
@@ -221,10 +221,14 @@ all:
 CC = gcc                        # compiler to use
 LINKERFLAG = -lm  		# defines flags to be used with gcc in a recipe
 
-SRCS := $(wildcard *.c) 	# $(wildcard pattern)是一个filename的函数，all files with the .c extension will be stored in SRCS， wildcard的中文意思是通配符
-BINS := $(SRCS:%.c=%)		# substitution reference. if SRCS has values 'foo.c bar.c', BINS will have 'foo bar'，类似于冲SRCS中取出来了%代表的部分
+SRCS := $(wildcard *.c) 	
+# $(wildcard pattern)是一个filename的函数，all files with the .c extension will be stored in SRCS， wildcard的中文意思是通配符
 
-all: ${BINS}		
+BINS := $(SRCS:%.c=%)		
+# substitution reference. if SRCS has values 'foo.c bar.c', BINS will have 'foo bar'，类似于冲SRCS中取出来了%代表的部分
+
+all: ${BINS}
+# 即指定全部的指令，这里${BINS}类似一个数组，包含'foo bar'这些名称，即通用名称
 
 %: %.o
 	@echo "Checking.."
@@ -238,6 +242,56 @@ clean:
 	@echo "Cleaning up..."
 	rm -rvf *.o ${BINS}
 ```
+前半部分有对于的comment解释，后半部分对应不同的Rules，下面会介绍这些rules，例如：
+```makefile
+%: %.o
+	@echo "Checking.."
+	${CC} ${LINKERFLAG} $< -o $@
+```
+表示一个rule，即从object到binary executable的过程。在具体执行过程中，变量会被替换，以`foo`为例子，可以写作：
+```makefile
+foo: foo.o
+  @echo "Checking.."
+  gcc -lm foo.o -o foo
+```
+可以看到，这里`${CC}`和`${LINKERFLAG}`作为link的操作参数被传进去。`%`用来match输入的参数，类似于input的一个位置。而`$<`是match prerequisites的patterned，`$@`是 matches target的patterned。这里的logic是，首先根据输入，target(func_name)和prerequisites(:后面的参数类似)先被赋值，然后继续向下传递，类似函数的传参。
+
+通过理解了.o到binary的规则，也不难理解.c到.o的规则了。如果我们使用`make`，则默认会make all，加入这个folder下包含了`foo.c`和`bar.c`两个文件的话，就等价于`all: foo bar`，即会执行`foo`和`bar`这两个make。
+
+对于任意的make，Makefile中的Rules会进行match，例如`foo`，会被match到`foo`这个function中，因为foo有prerequisites(即dependence)的`foo.o`，这样又会跳转到`foo.o`这边去，先将c文件转化成object，然后在执行`foo`。
+
+所以如果只有一个file `foo.c`的话，上面的script等价于：
+```makefile
+# Usage:
+# make        # compile all binary
+# make clean  # remove ALL binaries and objects
+
+.PHONY = all clean
+
+CC = gcc                        # compiler to use
+
+LINKERFLAG = -lm
+
+SRCS := foo.c
+BINS := foo
+
+all: foo
+
+foo: foo.o
+	@echo "Checking.."
+	gcc -lm foo.o -o foo
+
+foo.o: foo.c
+	@echo "Creating object.."
+	gcc -c foo.c
+
+clean:
+	@echo "Cleaning up..."
+	rm -rvf foo.o foo
+```
+到这里，我们可以认为target在function的output是一个文件的情况下，会生成对应的文件，prerequisites则是执行这个function需要的文件，如果不存在的话，就去尝试生成这个文件。
+
+需要注意的是，make这个command在linux的kernal中似乎本来就有定义，因此有的路径下即使没有makefile，`make hello.o`和`make hello`依旧可以执行（我本地测试出现了这种情况，并且自己写的Rule无法替换default的rule）。目前还不知道怎么解决
 
 
 
