@@ -122,7 +122,15 @@ automake --add-missing
 ```
 然后就可以make并且运行hello啦。
 
+总结一下这个过程中所有的操作和文件：
+* autoscan: 在project路径下，收取基本信息，用于构建configure.ac，这样用户只需要修改一点点信息，而不需要重写整个configure.ac
+* configure.ac： autoconf需要的mata data，即用户设置的基本configure，之后autocof会根据平台，讲configure.ac的configure设置成不同的脚本。
+* aclocal: aclocal.m4包含了一些autoconf需要的Marco，而aclocal就是根据configure.ac，将这些Marco配置好的程序
+* autoheader: 从configure.ac中生成的帮助生成Makefile的文件。
+* autoconf: 根据configure.ac和aclocal.m4的信息，生成configure。这个configure是对应了平台的configure，集成了project binary的工作环境。
+* Makefile.am: 用户手写的，Makefile的mata data，告诉automake你需要make那些file
+* automake: 根据Makefile.am生成Makefile.in，Makefile.in在对应的configure下，可以生成最终的Makefile
 
-
+可以看到，automake和autoconf最后生成的是Makefile.in和configure文件，而他们对应的mata文件分别是Makefile.am和configure.ac，即我们只需要在这两个文件中修改参数，后面全部可以自动化。最后一步是通过configure文件，生成makefile。这样整个project就可以work了。
 
 
