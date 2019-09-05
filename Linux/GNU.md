@@ -114,12 +114,36 @@ AC_OUTPUT(Makefile)
 * AC_OUTPUT： configure产生的文件，如果是makefile，configure会把它检查出来的结果带入makefile.in文件产生合适的makefile。使用Automake时，还需要一些其他的参数，这些额外的宏用aclocal工具产生
 
 然后我们跑下面的指令：
-```concole
+```console
 aclocal
 ```
+这个指令会生成aclocal.m4的文件和autom4te.cache的文件夹，aclocal会根据configure.ac中定义的Macro生成这两个文件。然后我们跑autoconf：
+```console
+autoconf
+```
+生成`configure`文件，（这个文件我完全看不明白。。）如果`AC_CONFIG_HEADER`在`configure.ac`中定义了，我们还需要autoheader生成configure.h.in
+```console
+autoheader
+```
+然后就是automake，我们自己创建一个Makefile.am的文件，在中间写:
+```makefile
+AUTOMAKE_OPTIONS=foreign 
+bin_PROGRAMS=hello 
+hello_SOURCES=hello.cpp hello.h
+```
+* AUTOMAKE_OPTIONS:设置Automake的选项。Automake提供了3种软件等级：foreign、gnu和gnits，供用户选择，默认等级为gnu。本例使需用foreign等级，它只检测必须的文件。
+* bin_PROGRAMS:定义要产生的执行文件名。如果要产生多个执行文件，每个文件名用空格隔开。
+* hello_SOURCES 定义”hello”这个执行程序所需要的原始文件。如果”hello”这个程序是由多个原始文件所产生的，则必须把它所用到的所有原始文件都列出来，并用空格隔开。例如：若目标体”hello”需要”hello.c”、”hello.h”两个依赖文件，则定义hello_SOURCES=hello.c hello.h。
 
-
-
+这样我们就凑齐了生成Makefile的全部零件，使用automake来生成Makefile，参数`--add-missing`会自动安装缺少的文件
+```console
+automake --add-missing
+```
+完成之后，生成了Makefile.in，我们apply config，会生成Makefile
+```
+./configure
+```
+然后就可以make并且允许hello啦。
 
 
 
