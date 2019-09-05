@@ -2,7 +2,7 @@
 Makefile(or makefile)最基本的定义是，告诉binary executable 'make'所指定的的命令。并不局限于c的编译，make指定的命令可以是任何的cmd或者是调用其他binary executable，有点类似带参数的sh执行方式。
 
 要使用Makefile，则在对应的目录下创建Makefile文件，这样在这个目录下调用make的时候，make会检查Makefile中的option的entry，来实现不同的调用。Makefile最基本的entry格式为：
-```makefile
+```makefilescan
 makecmd:
 	action
 
@@ -159,8 +159,12 @@ clean:
 需要注意的是，make这个command在linux的kernal中似乎本来就有定义，因此有的路径下即使没有makefile，`make hello.o`和`make hello`依旧可以执行（我本地测试出现了这种情况，并且自己写的Rule无法替换default的rule）。目前还不知道怎么解决
 
 
-### Automake
-Automake是GNU project中的一种工具，是通过Perl语言，编写生成makefile的程式，而不是通过传统的手写的方式编写makefile。
+### automake
+automake是GNU project中的一种工具，允许使用户使用高阶语言编写Makefile。只需要将基本信息写入'Makefile.am'，通过automake可以生成'Makefile.in'，然后再同autoconf就可以生成Makefile了。
+
+而autoconf，通常需要autoscan，aclocal，acheader等的支持，用于生成`configure`文件。应该说Autoconf除了构建了makefile，同时还构建了makefile在运行的时候需要的环境。
+
+Autoconf将configure.ac中的命令转化为对应特定平台的配置脚本。Autoconf本身并不具备编译能力，它仅仅用于产生通常附带在软件包中的配置脚本。
 
 
 
