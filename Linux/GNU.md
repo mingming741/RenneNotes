@@ -12,6 +12,8 @@ GNU Compiler Collection，即GNU编译器套件，其初衷是为了给GNU编写
 ### Autoconf
 Autoconf是一个用于生成shell脚本的工具，可以自动配置软件源代码以适应多种类似POSIX的系统。为了让你的软件包在所有的不同系统上都可以进行编译。类似于有的code代码在mac和window上面会有不同的生成文件这样子。
 
+<img src = "https://github.com/mingming741/RenneNotes/blob/master/Resource/Image/automake.jpg"/>
+
 这里有一个教程，告诉我们怎么使用autoconf和automake生成conf文件。首先，需要os安装了以下binary：
 ```console
 autoscan 
