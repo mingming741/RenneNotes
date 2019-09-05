@@ -9,7 +9,7 @@ LGPL， GNU Lesser General Public License，是旧版的GPL的更新的版本，
 ### GCC
 GNU Compiler Collection，即GNU编译器套件，其初衷是为了给GNU编写一套开源的编译软件，包括了不至于C，还要C++，Java等其他软件的编译系统。
 
-### Autoconf
+### Autoconf & Automake
 Autoconf是一个用于生成shell脚本的工具，可以自动配置软件源代码以适应多种类似POSIX的系统。为了让你的软件包在所有的不同系统上都可以进行编译。类似于有的code代码在mac和window上面会有不同的生成文件这样子。
 
 <img src = "https://github.com/mingming741/RenneNotes/blob/master/Resource/Image/automake.jpg"/>
@@ -17,15 +17,9 @@ Autoconf是一个用于生成shell脚本的工具，可以自动配置软件源�
 这里有一个教程，告诉我们怎么使用autoconf和automake生成conf文件。首先，需要os安装了以下binary：
 ```console
 autoscan 
-
 aclocal 
-# 根据已经安装的宏，用户定义宏和acinclude.m4文件中的宏将configure.ac文件所需要的宏集中定义到文件 aclocal.m4中。aclocal是一个perl 脚本程序，它的定义是：“aclocal - create aclocal.m4 by scanning configure.ac”
-
 automake 
-# 将Makefile.am中定义的结构建立Makefile.in，然后configure脚本将生成的Makefile.in文件转换 为Makefile。如果在configure.ac中定义了一些特殊的宏，比如AC_PROG_LIBTOOL，它会调用libtoolize，否则它 会自己产生config.guess和config.sub
-
 autoconf 
-# 将configure.ac中的宏展开，生成configure脚本。这个过程可能要用到aclocal.m4中定义的宏。
 ```
 可以直接type `autoscan`看看能不能找到这个cmd即可验证安装。以c++为例，我们有hello.cpp和hello.h文件：
 ```c++
@@ -68,26 +62,7 @@ autoscan会生成`autoscan.log`和`configure.scan`这两个文件，他会检查
 ```console
 mv configure.scan configure.ac
 ```
-`configure.ac`中包含了一些发行的基本信息，前几行大概是这样
-```
-#                                               -*- Autoconf -*-
-# Process this file with autoconf to produce a configure script.
-
-AC_PREREQ([2.69])
-AC_INIT([FULL-PACKAGE-NAME], [VERSION], [BUG-REPORT-ADDRESS])
-AC_CONFIG_SRCDIR([hello.h])
-AC_CONFIG_HEADERS([config.h])
-
-# Checks for programs.
-AC_PROG_CXX
-AC_PROG_CC
-# Checks for libraries.
-# Checks for header files.
-# Checks for typedefs, structures, and compiler characteristics.
-# Checks for library functions.
-AC_OUTPUT
-```
-包括`[FULL-PACKAGE-NAME], [VERSION], [BUG-REPORT-ADDRESS]`，我们将其替换为我们自己的信息：
+`configure.ac`中包含了一些发行的基本信息，我们将其替换为我们自己的信息：
 ```
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
@@ -119,11 +94,11 @@ AC_OUTPUT(Makefile)
 ```console
 aclocal
 ```
-这个指令会生成aclocal.m4的文件和autom4te.cache的文件夹，aclocal会根据configure.ac中定义的Macro生成这两个文件。然后我们跑autoconf：
+这个指令会生成aclocal.m4,aclocal会根据configure.ac中定义的Macro，辅助生成configure文件。然后我们跑autoconf：
 ```console
 autoconf
 ```
-生成`configure`文件，（这个文件我完全看不明白。。）如果`AC_CONFIG_HEADER`在`configure.ac`中定义了，我们还需要autoheader生成configure.h.in
+生成`configure`文件，如果`AC_CONFIG_HEADER`在`configure.ac`中定义了，我们还需要autoheader生成configure.h.in
 ```console
 autoheader
 ```
@@ -145,7 +120,7 @@ automake --add-missing
 ```
 ./configure
 ```
-然后就可以make并且允许hello啦。
+然后就可以make并且运行hello啦。
 
 
 
