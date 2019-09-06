@@ -151,7 +151,7 @@ $ ./hello
 1. 来自compiler的option /I
 2. 来自INCLUDE的环境变量
 
-对于unix类的系统，基本和windows类似，只是最后一步的环境变量会替换为下面几个系统路径中寻找： "/usr/local/include", "libdir/gcc/target/version/include", "/usr/target/include", "/usr/include"。
+对于unix类的系统，基本和windows类似，只是最后一步的环境变量会替换为下面几个系统路径中寻找： "/usr/local/include", "libdir/gcc/target/version/include", "/usr/target/include", "/usr/include"。用户也可以通过在环境变量C_INCLUDE_PATH和CPLUS_INCLUDE_PATH中添加路径，给默认的lib路径中找到
 
 编译器会在按照顺序查找，在找到一个符合的就会立即停止，多的不会覆盖。
 
