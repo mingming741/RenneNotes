@@ -57,7 +57,7 @@ $ gcc -E -o hello.i hello.c
 }
 ```
 
-* 将#include的文件，直接插入改行的位置。所以说在一个文件执行的时候，会暴力插入其#include的其他文件，让其先编译。反过来说，include是为了能让一个文件不至于过大，和某些通用函数能重复使用的定义规则。
+* 将#include的文件，直接插入改行的位置。所以说在一个文件执行的时候，会暴力插入其#include的其他文件，让其先编译。反过来说，include是为了能让一个文件不至于过大，和某些通用函数能重复使用的定义规则。同时，这里也揭露了include的本质，即将另一个文件插入到include的位置，因此，include的文件是.c还是.h其实并不重要，include可以插入任何的文件。
 
 * 删除所有注释。
 
@@ -141,10 +141,18 @@ $ ./hello
 #include "sys/socket.h"
 #include <sys/socket.h>
 ```
-写法在寻找这个头文件的顺序上有少许不同，对于打引号的`#include "sys/socket.h"`，绝对路径的寻找顺序为：
+写法在寻找这个头文件的顺序上有少许不同，对于window和unix系统，也有少许出入。对于windows，打引号的`#include "sys/socket.h"`，绝对路径的寻找顺序为：
 1. 当前路径，即调用#include文件现在的directory （In the same directory as the file that contains the #include statement.）
 2. In the directories of the currently opened include files, in the reverse order in which they were opened. The search begins in the directory of the parent include file and continues upward through the directories of any grandparent include files.（没看懂...）
-3. 
+3. 来自compiler的option /I
+4. 来自INCLUDE的环境变量
 
+对于打括号的格式`#include <sys/socket.h>`，顺序为：
+1. 来自compiler的option /I
+2. 来自INCLUDE的环境变量
+
+对于unix类的系统，基本和windows类似，只是最后一步的环境变量会替换为下面几个系统路径中寻找： "/usr/local/include", "libdir/gcc/target/version/include", "/usr/target/include", "/usr/include"。
+
+编译器会在按照顺序查找，在找到一个符合的就会立即停止，多的不会覆盖。
 
 
