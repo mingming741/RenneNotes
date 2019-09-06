@@ -133,6 +133,18 @@ $ gcc -o hello hello.o
 $ ./hello
 ```
 
+## 编译细节
+
+### include path
+当我们调用#include的时候，编译器会试图寻找include的这个文件的路径。可以理解为在include的前面添加了某个绝对路径（因为include允许子路径的存在）。对于include来说，可以有下面两种写法
+```c
+#include "sys/socket.h"
+#include <sys/socket.h>
+```
+写法在寻找这个头文件的顺序上有少许不同，对于打引号的`#include "sys/socket.h"`，绝对路径的寻找顺序为：
+1. 当前路径，即调用#include文件现在的directory （In the same directory as the file that contains the #include statement.）
+2. In the directories of the currently opened include files, in the reverse order in which they were opened. The search begins in the directory of the parent include file and continues upward through the directories of any grandparent include files.（没看懂...）
+3. 
 
 
 
