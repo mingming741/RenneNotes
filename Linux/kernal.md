@@ -47,6 +47,7 @@ printenv PWD
 * PATH (... /usr/local/bin:/usr/sbin: ...): 在shell中打executable的时候，system回去`$PATH`中寻找这个binary executable文件。
 * LANG (en_HK.UTF-8): Language，当前使用的语言设置和字符编码.
 * HOME (/home/showing): The current user’s home directory.
+* LD_LIBRARY_PATH (... /usr/local/lib ...):shared library object的path，某些程序在搜索lib的时候会找这里。
 
 同样的是Shell变量，用`set`查看，或者使用`echo`查看，因为这些变量都是当前terminal工作正在运行的变量，因此可以直接echo出来。
 ```
@@ -97,10 +98,7 @@ export TCL_LIBRARY="$TCL_LIB:$USR_LIB:$TCL_LIBRARY"
 ```
 source ~/.bashrc
 ```
-上面的修改是对于一个user的，整个系统的修改需要修改`/etc/profile` (系统全局shell), `/etc/bash.bashrc`(interactive bash), or `/etc/environment`。这些地方可以添加新的环境变量进去。
-
-但是我还是没有找到一个地方，包括了全部的system environment variable的呀。。。
-If you want to make it permanent for all users, you can edit the corresponding files under /etc/, i.e. /etc/profile for Bourne-like shells, /etc/csh.login for (t)csh, and /etc/zsh/zprofile and /etc/zsh/zshrc for zsh
+上面的修改是对于一个user的，整个系统的修改需要修改`/etc/profile` (系统全局shell), `/etc/bash.bashrc`(interactive bash), `/etc/profile.d/`, or `/etc/environment`。这些地方可以添加新的环境变量进去。
 
 
 
