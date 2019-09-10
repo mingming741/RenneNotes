@@ -18,6 +18,8 @@ rmmod modulename
 ### Environment Variables (环境变量)
 和windows类似，Linux同样有一些内置的环境变量，在一些程序运行的时候following这些config。应该说，环境变量本身是一些全局变量，不同的程序在安装的时候，都会默认设置一些系统的环境变量，用于辅助这个程序的运行。
 
+严格意义上来说，平时说的环境变量，是环境变量和shell变量的统称。环境变量(Environment Variables)定义于当前shell和child shells或者processes，通常用于向子进程pass information processes。而Shell variables仅在当前shell中定义，通常用于记录短暂的data,例如current working directory.
+
 使用`printenv`或者`env`查看`csh/tcsh`中的环境变量，也可用查看指定的，使用`set`查看`sh/ksh/bash`中的环境变量。
 ```
 printenv PWD （等价于pwd）
@@ -29,11 +31,11 @@ set （查看全部）
 * export: 将这个环境变量export到shell和其subprocess中发挥作用。
 
 下面是设置环境变量的方法：
-为当前运行的shell设置环境变量
+为当前运行的shell设置环境变量（其实是shell variable）
 ```
 VARNAME="my value"
 ```
-为当前运行的shell和其开启的sub processes设置环境变量:（可以看做export比直接设置多了一层作用）
+为当前运行的shell和其开启的sub processes设置环境变量:（export设置的是Environment Variables）
 ```
 export VARNAME="my value"      # shorter, less portable version
 ```
