@@ -19,6 +19,9 @@ rmmod modulename
 ## Shell & Terminal
 Shell值得是运行的程序，而Terminal是Shell运行的载体，Linux默认运行的Shell一般是`/bin/bash`。bash在开启terminal的时候，通常也会follow一些参数，根据这些启动option读取不同的文件，生成不同的Shell Variable来控制shell的运行。
 
+#### bash
+bash即Bourne-Again Shell，最早的Bourne shell，即command-line interpreter，被研发出来用于解释user input的各种command，而bash是Bourne的一个改版，目前广泛使用。被bash调用的脚本，也就是我们平时执行的command line，被叫做Shell script。
+
 #### Login Shell
 即有user authentication的Shell，例如我们用putty远程登录到别的host上去，这里的terminal在我们的Host上，但是SSH的Shell则是在被我们SSH的那个Host上，这个Shell和Terminal的组合，就是一个session。这时候我们在用bash开启个新的shell，这个shell就是non-login shell。是否是login决定了这个shell在开启的时候，reading了哪些configure file
 
@@ -97,7 +100,7 @@ source ~/.bashrc
 上面的修改是对于一个user的，整个系统的修改需要修改`/etc/profile` (系统全局shell), `/etc/bash.bashrc`(interactive bash), or `/etc/environment`。这些地方可以添加新的环境变量进去。
 
 但是我还是没有找到一个地方，包括了全部的system environment variable的呀。。。
-
+If you want to make it permanent for all users, you can edit the corresponding files under /etc/, i.e. /etc/profile for Bourne-like shells, /etc/csh.login for (t)csh, and /etc/zsh/zprofile and /etc/zsh/zshrc for zsh
 
 
 
