@@ -1,7 +1,7 @@
 # Kernal
 Linux Kernal即操作系统本身，平时我们说的kernal base即操作系统内部的运行环境，而各种application通常是调用kernal中的一些method来达到目的的，kernal的中文翻译叫“内核”
 
-### Linux Kernal Module
+## Linux Kernal Module
 在linux中，"Kernel modules are pieces of code that can be loaded and unloaded into the kernel upon demand"。意思就是，module等价于一段code，这段code不绑定在linux系统本身，而是可以根据需要，动态的被导入到linux系统中。这样的好处是，使得系统本身至于太重。并且各种module之间有可以替换性，使得os本身可以适应不同的工作环境需求。
 
 例如，Golf的stateful和Cubic+就是作为linux的一个module被插入系统，module本身独立于系统，但是可以成为系统操作的一部分。linux在开机的时候会自动load系统中的部分module，取决于linux的implementation。对module的操作主要使用insmod和rmmod，也可用使用modprobe。
@@ -16,12 +16,18 @@ rmmod modulename
 系统在启动之后，所有module的信息都在/proc/modules文件中列出。而modprobe更加系统，包含了上面几个cmd的内容。modprobe比起insmod，可以做到载入module的dependence，但是需要module的ko文件保存在/lib/modules/这个路径下面的一个文件夹内。相反的是，insmod可以insert任何路径中的一个module。
 
 
-### Shell & Terminal
-Shell值得是运行的程序，而Terminal是Shell运行的载体，Linux默认运行的Shell一般是`/bin/bash`
+## Shell & Terminal
+Shell值得是运行的程序，而Terminal是Shell运行的载体，Linux默认运行的Shell一般是`/bin/bash`。bash在开启terminal的时候，通常也会follow一些参数，根据这些启动option读取不同的文件，生成不同的Shell Variable来控制shell的运行。
 
+#### Login Shell
+即有user authentication的Shell，例如我们用putty远程登录到别的host上去，这里的terminal在我们的Host上，但是SSH的Shell则是在被我们SSH的那个Host上，这个Shell和Terminal的组合，就是一个session。这时候我们在用bash开启个新的shell，这个shell就是non-login shell。是否是login决定了这个shell在开启的时候，reading了哪些configure file
 
+### interactive shell
+interactive shell就是attached to a terminal session的Shell，反之就是non-interactive shell。
 
-### Shell Variables and Environment Variables (环境变量)
+Shell本身也是code scirpt，和众多在shell中运行的其他script一样。我们可以认为，用bash运行的其他程序，usually run in a non-interactive, non-login shell。
+
+## Shell Variables and Environment Variables (环境变量)
 和windows类似，Linux同样有一些内置的环境变量。平时说的环境变量，是环境变量和shell变量的统称。环境变量(Environment Variables)定义于当前shell和child shells或者processes，通常用于向子进程pass information processes，由export定义，使用`printenv`或者`env`查看`csh/tcsh`中的环境变量。而Shell variables仅在当前shell中定义，由set定义，使用`set`查看`sh/ksh/bash`中的shell变量。通常用于记录短暂的data。例如current working directory。环境变量等级高于Shell变量。
 
 记录Linux os中常见的环境变量，用`printenv`查看，括号中为其在我system中的值，空括号表示没有，可以看出数组类型是用`:`间隔开的。
