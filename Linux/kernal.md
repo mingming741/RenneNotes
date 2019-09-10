@@ -22,7 +22,7 @@ Shell值得是运行的程序，而Terminal是Shell运行的载体，Linux默认
 #### Login Shell
 即有user authentication的Shell，例如我们用putty远程登录到别的host上去，这里的terminal在我们的Host上，但是SSH的Shell则是在被我们SSH的那个Host上，这个Shell和Terminal的组合，就是一个session。这时候我们在用bash开启个新的shell，这个shell就是non-login shell。是否是login决定了这个shell在开启的时候，reading了哪些configure file
 
-### interactive shell
+#### interactive shell
 interactive shell就是attached to a terminal session的Shell，反之就是non-interactive shell。
 
 Shell本身也是code scirpt，和众多在shell中运行的其他script一样。我们可以认为，用bash运行的其他程序，usually run in a non-interactive, non-login shell。
@@ -82,11 +82,21 @@ echo $VARNAME
 export -n VARNAME
 printenv VARNAME
 ```
-上面的修改都是临时性的，如果要永久性修改这个环境变量，就需要修改configure file。如果修改当前user的环境变量，就去修改`$HOME`中的`.bashrc`（或者是.bash_profile）。如果要修改整个系统的环境变量，去到`/etc/environment`，然后这样添加或者修改变量，不要用export
-```
-VARNAME="my value"
-```
+上面的修改都是临时性的，如果要永久性修改这个环境变量，就需要修改configure file。(对于Ubuntu12.04)如果一个shell是login session，那么这个shell在开启的时候，会读取`/etc/profile`， 找到对应的user的Home directory，然后读取Home中的`~/.bash_profile`, `~/.bash_login`, 和`~/.profile`。如果一个shell不是一个login shell，那么就会读取`/etc/bash.bashrc`和`~/.bashrc`。如果一个shell是Non-interactive shells，说明这个shell没有attach一个terminal，那么他会去环境变量`BASH_ENV`中寻找configure file的路径。
 
+不过当前很多Linux的系统，都用login configuration files去source了non-login configuration files。这就意味着其实configure file使用的的都相同，最后一通操作之后，变成了`~/.bashrc`这个file。我们可以通过向`~/.bashrc`添加variable，然后export这些变量，例如：
+```
+TCL_LIB="/home/showing/ns-allinone-2.35/tcl8.5.10/library"
+USR_LIB="/usr/lib"
+export TCL_LIBRARY="$TCL_LIB:$USR_LIB:$TCL_LIBRARY"
+```
+然后应用这些环境变量的configure：
+```
+source ~/.bashrc
+```
+上面的修改是对于一个user的，整个系统的修改需要修改`/etc/profile` (系统全局shell), `/etc/bash.bashrc`(interactive bash), or `/etc/environment`。这些地方可以添加新的环境变量进去。
+
+但是我还是没有找到一个地方，包括了全部的system environment variable的呀。。。
 
 
 
