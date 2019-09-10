@@ -153,6 +153,9 @@ $ ./hello
 
 对于unix类的系统，基本和windows类似，只是最后一步的环境变量会替换为下面几个系统路径中寻找： "/usr/local/include", "libdir/gcc/target/version/include", "/usr/target/include", "/usr/include"。用户也可以通过在环境变量C_INCLUDE_PATH和CPLUS_INCLUDE_PATH中添加路径，给默认的lib路径中添加新的item
 
-编译器会在按照顺序查找，在找到一个符合的就会立即停止，多的不会覆盖。
-
+编译器会在按照顺序查找，在找到一个符合的就会立即停止，多的不会覆盖。使用下面的命令查看gcc查找lib的路径：
+```
+gcc -print-search-dirs
+```
+因为gcc相比kernal来说，是独立的program，因此gcc可以有自己的configure，不一定要follow kernal的configure，如`LD_LIBRARY_PATH`
 
