@@ -31,7 +31,7 @@ interactive shell就是attached to a terminal session的Shell，反之就是non-
 Shell本身也是code scirpt，和众多在shell中运行的其他script一样。我们可以认为，用bash运行的其他程序，usually run in a non-interactive, non-login shell。
 
 ## Shell Variables and Environment Variables (环境变量)
-和windows类似，Linux同样有一些内置的环境变量。平时说的环境变量，是环境变量和shell变量的统称。环境变量(Environment Variables)定义于当前shell和child shells或者processes，通常用于向子进程pass information processes，由export定义，使用`printenv`或者`env`查看`csh/tcsh`中的环境变量。而Shell variables仅在当前shell中定义，由set定义，使用`set`查看`sh/ksh/bash`中的shell变量。通常用于记录短暂的data。例如current working directory。环境变量等级高于Shell变量。
+和windows类似，Linux同样有一些内置的环境变量。平时说的环境变量，是环境变量和shell变量的统称，是系统的环境变量。环境变量(Environment Variables)定义于当前shell和child shells或者processes，通常用于向子进程pass information processes，由export定义，使用`printenv`或者`env`查看`csh/tcsh`中的环境变量。而Shell variables仅在当前shell中定义，由set定义，使用`set`查看`sh/ksh/bash`中的shell变量。通常用于记录短暂的data。例如current working directory。环境变量等级高于Shell变量。
 
 记录Linux os中常见的环境变量，用`printenv`查看，括号中为其在我system中的值，空括号表示没有，可以看出数组类型是用`:`间隔开的。
 ```
@@ -64,6 +64,7 @@ echo $HOSTNAME
 * IFS ($' \t\n'): Internal Field Separator，用于切断command line的标示符号，告诉shell如何分割command。
 * SHELLOPTS (... emacs:hashall:histexpand:history: ...): Shell options，用于开启这个shell
 * UID (1000): The UID of the current user.
+* PS1 :基本提示符，对于root用户是#，对于普通用户是$
 
 设置Shell变量
 ```
@@ -100,6 +101,7 @@ source ~/.bashrc
 ```
 上面的修改是对于一个user的，整个系统的修改需要修改`/etc/profile` (系统全局shell), `/etc/bash.bashrc`(interactive bash), `/etc/profile.d/`, or `/etc/environment`。这些地方可以添加新的环境变量进去。
 
+同样的，kernal中的环境变量不一定被每一个binary executable继承。例如`LD_LIBRARY_PATH`本质是系统predefined environmental variable，用于给linker找到dynamic libraries/shared libraries，寻找的是可执行文件，为linker path。而gcc的编译需要的是c文件，所以有着自己一套不同的path，为compiler dependency。从某种角度上来说，gcc的compile输出gcc本身的范畴，但是linker属于kernal的范畴，gcc的工作只是编译，而不需要care到动态链接，这就是为什么环境变量这样分的。
 
 
 
