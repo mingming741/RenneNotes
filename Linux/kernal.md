@@ -43,12 +43,12 @@ export VARNAME="my value"      # shorter, less portable version
 ```
 VARNAME="my value"
 ```
-Linux中常见的环境变量有：
-* DISPLAY
-* 
-* 
-* 
-* 
+记录Linux os中常见的环境变量，括号中为其在我system中的值：
+* SHELL (/bin/bash): Shell本身的binary executable。通常默认是bash,也是default的linux shell。我们平时的terminal都是通过开这个文件产生的。
+* TERM (xterm-256color): 表示emulate shell的这个terminal类型。
+* USER (showing): The current logged in user.
+* PWD (/home/showing): The current working directory.
+* OLDPWD (/home/showing/Desktop): 上一个路径，等于windows的返回键，可以通过 `cd -`回到这个路径。我的电脑的记录说明我从`/home/showing/Desktop`回到了`/home/showing`
 * 
 * 
 * 
