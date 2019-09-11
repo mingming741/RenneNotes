@@ -16,7 +16,7 @@ linux的根目录`/`下面有许多文件夹，每个文件夹都有自己的意
 * `/media` - media，在插入U盘的时候，U盘的路径会被mount到`/media/USER_NAME/USB_NAME`的路径下
 * `/var` - variable data，有log，mail，cache，lib等文件夹。`/var`的文件通常是可以被不同的program read和write的，类似于一种保存cache的位置，例如
 * `/tmp` - temporary，默认temporary file放置的位置，我电脑里有fcitx，sougou，atom的一些temp file
-* `/usr` - user，如果说`/`是根目录的话，`/usr`就是对于user来说的二级根目录，包括了bin, sbin, lib, inclode, local, share等文件夹
+* `/usr` - user，如果说`/`是根目录的话，`/usr`就是对于user来说的二级根目录，包括了bin, sbin, lib, inclode, local, share等文件夹，这个不是对每个user都有个对应的路径，而是表示user level的文件。
 * `/etc` - etcetera，(或者every thing config)，以前的意义是系统附加物，现在被用于保存system的configuration file。可以找到apt.conf.d，sysctl.d，debian_version，environment，hostname，protocal等文件夹和文件。
 * `/opt` - 不在linux标准库的third party package被安装在这里。
 * `/proc` - process，这个路径不在disk中而是在ram中，保存了process运行中的变量，每个变量都用一个file来表示。
@@ -26,14 +26,11 @@ linux的根目录`/`下面有许多文件夹，每个文件夹都有自己的意
 
 
 
-
 ### Difference of /bin & /usr/bin等
 对于bin：
-* `/bin` - Binaries needed for normal/standard system functioning at any run level.
-* `/sbin` - Binaries needed for booting, low-level system repair, or maintenance (run level 1 or S)
-* `/usr/bin` - Application/distribution binaries meant to be accessed by locally logged in users
-* `/usr/sbin` - Application/distribution binaries that support or configure stuff in /sbin.
-* `/usr/share/bin` - Application/distribution binaries or scripts meant to be accesed via the web, i.e. Apache web applications
+* `/bin` - 通常是整个系统都需要的binary
+* `/usr/bin` - 当前用户级别执行的binary，例如apt，file，gcc，git，ldd(List Dynamic Dependencies)，make，perl，python2.7，top。可以看出这个分级只是system level和user level的分级，并不是非常的明确，两个路径都在`$PATH`中。
+* `/usr/share/bin` - 可以被web accesed的binary, 通常是Apache web applications
 
 对于`/usr/local/bin`和`/usr/local/share/bin`，`local`意味着这个binary不是linux distribution中标准的软件，而是用户自己写的和安装的。
 
