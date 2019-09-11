@@ -1,27 +1,26 @@
 # GNU
-GNU是一个自由的操作系统，参与者在参与开发的时候，只要遵循其中的GPL协议做软件开发即可达到目的。目的是为了制造开源的环境，类似一个linux的开源天堂，允许任何创作者在遵循GPL开发规范的情况下，在其中加入新的内容。
+GNU是一个自由的操作系统，目的是为了制造开源的环境，允许任何创作者在遵循GPL开发规范的情况下，在其中加入新的内容。
 
 ## GPL & LGPL
-GPL， GNU General Public License的缩写，即GNU通用公共授权。目的在于，试图保证你共享和修改自由软件的自由，保证自由的软件对于所有的用户来说是自由的。比方说，遵循GPL开发协议的软件，在release之后，开发者必须将自己的所有right共享，即需要将源代码公开。并且允许其他人在你的代码基础之上，进行修改，和重新发布。
+GPL(GNU General Public License)，即GNU通用公共授权。目的在于，保证你共享和修改自由软件的自由。遵循GPL开发协议的软件，在release之后，开发者必须将自己的所有right共享，将源代码公开，允许其他人在你的代码基础之上，进行修改和重新发布。
 
-LGPL， GNU Lesser General Public License，是旧版的GPL的更新的版本，修改了某些条目。同样需要保证软件的开源性，不能将别人的开源代码私有化，并且用作商业发布。
+LGPL(GNU Lesser General Public License)，是旧版的GPL的更新的版本，修改了某些条目。同样需要保证软件的开源性，不能将别人的开源代码私有化，并且用作商业发布。
 
-# GCC
-GNU Compiler Collection，即GNU编译器套件，其初衷是为了给GNU编写一套开源的编译软件，包括了不至于C，还要C++，Java等其他软件的编译系统。关于C语言的编译问题，大概总结一些C从代码带可执行代码的过程，希望分到linux和window的不同区别。
+## GCC
+GNU Compiler Collection，初衷为了给GNU编写一套开源的编译软件，包括C，还要C++，Java等其他软件的编译系统。关于C的编译问题，这里总结C从代码带可执行文件的过程，希望分到linux和window的不同区别。
 
-## 文件组成
+### 文件组成
 c语言在gcc的编译之后，会生产不同的后缀形式的代码，而每个后缀都有自己的含义
 * .c文件：源代码文件，在c++中，通常是.C, .cc和.cxx这种形式的文件
 * .h文件：程序包含的头文件
 * .i文件：经过预处理之后的c文件，其代码格式依旧是c的格式，在这一个文档的编译过程这个项目中，会介绍预处理，将hello.c预处理变成hello_pre.c。但是对于编译器来说，通常是变成hello.i这个文件。而.ii通常是c++的预编译完成的文件。
-* .a文件：
-* .o文件：二进制对象文件。
 * .s文件：汇编语言文件，.i文件经过处理产生，表示机器的指令集。
+* .o文件：二进制对象文件。
 
-## 编译过程
+### 编译过程
 
-#### 1. 获取代码
-说白了，就是完成你的代码，用下面的代码作为例子，hello.c
+#### 1. 写C代码
+用下面的代码作为例子，hello.c
 ```c
 #include <stdio.h>
 
@@ -33,13 +32,13 @@ int main()
 }
 ```
 
-### 2. 预处理
-预处理，即生成.i的预处理文件，gcc中使用下面的代码：
+#### 2. 预处理
+生成.i的预处理文件，gcc中使用下面的代码，会以下面的顺序执行：
 ```
 $ gcc -E -o hello.i hello.c
 ```
-* 处理所有的条件编译指令，#ifdef #ifndef #endif等，就是带#的那些，这些语句相当于预处理的逻辑语句，而普通的if else是代码执行的逻辑语句。预处理在编译过程已经执行，并且会决定编译的方向，比如说编译完成之后，程序的可执行文件是linux版本还是window版本，是32为系统还是64为系统等等，这些的实现都需要#ifdef这类的逻辑语句，配合一些Marco的支持得以完成。
-```cgcc
+这个命令会处理所有的条件编译指令，包括带#的预处理的逻辑语句，例如#ifdef #ifndef #endif等。预处理会决定编译方向，比如说程序的可执行文件是linux版还是window版，是32位还是64位等，这些需要#ifdef这类逻辑语句，配合Marco的得以完成。下面的例子中，就通过`#ifdef _WIN32`决定是否要`#include <windows.h>`
+```c
 #ifdef _WIN32
 #include <windows.h>
 
@@ -47,60 +46,32 @@ $ gcc -E -o hello.i hello.c
 #define AVUTIL_CPU_H
 ```
 
-* 将所有的#define删除，并且#define定义的宏(Marco)进行替换，而宏(Marco)表示一种批处理的称谓，或者叫语法替换。比如说，可以是用一个命令代表一系列命令的统称，定义这个命令的Marco为这一系列命令，之后只需要执行这一个命令即可完成批量操作。而在C中，Marco可以代表一个文件，也可以代表一下静态的全局变量，在整个project中被使用。常用的写法有：（来自ffmpeg的源代码）
+c的`#define`是定义了宏(Marco)，是一种批处理的称谓。宏可以是一系列命令的总结，之后只需要执行宏，即可完成批量操作。预处理会将所有#define删除，并用对应的宏(Marco)替换。在C中，Marco可以代表一个文件，也可以代表静态全局变量，在整个project中被使用。常用的写法有：（来自ffmpeg的源代码）
 ```c
 #define VSYNC_AUTO       -1
 #define DEFAULT_PASS_LOGFILENAME_PREFIX "ffmpeg2pass"
 
 #define MATCH_PER_STREAM_OPT(name, type, outvar, fmtctx, st)\
 {\
-    int i, ret;\
-    for (i = 0; i < o->nb_ ## name; i++) {\
-        char *spec = o->name[i].specifier;\
-        if ((ret = check_stream_specifier(fmtctx, st, spec)) > 0)\
-            outvar = o->name[i].u.type;\
-        else if (ret < 0)\
-            exit_program(1);\
-    }\
+    // do something
 }
 ```
 
-* 将#include的文件，直接插入改行的位置。所以说在一个文件执行的时候，会暴力插入其#include的其他文件，让其先编译。反过来说，include是为了能让一个文件不至于过大，和某些通用函数能重复使用的定义规则。同时，这里也揭露了include的本质，即将另一个文件插入到include的位置，因此，include的文件是.c还是.h其实并不重要，include可以插入任何的文件。
+将#include文件暴力插入对应位置。这里也揭露了include的本质，因此，include的文件是.c还是.h并不重要，include可以插入任何文件。然后删除所有注释，给code添加行号和文件标示，这些attribute可以通过__LINE__和__FILE__这些静态值获取到，辅助编译器报错。最后保留#pragma编译器指令，编译器需要它们（暂时不懂为什么）。
 
-* 删除所有注释。
-
-* 给code添加行号和文件标示，这些attribute可以通过__LINE__和__FILE__这些静态值获取到。并且这些标示会在编译出错的时候，给编译器报告出来。
-
-* 保留#pragma编译器指令，因为编译器需要使用它们（暂时不懂为什么）。
-
-我们可以通过gcc只执行预编译过程，执行知乎生产hello.i的文件，Marco中SENTENCE会被替换成"hello world!\n"。同时我们search hello.i中的printf文件，可以找到以下定义：
+我们可以只执行预编译过程，产生hello.i的文件，Marco中SENTENCE会被替换成"hello world!\n"。同时我们search hello.i中的printf文件，可以找到以下定义：
 ```c
 extern int printf (const char *__restrict __format, ...);
 ```
-这就是头文件#include <stdio.h>中对printf的定义，extern表示这是一个外部的链接，之后在链接的时候，会找到执行这个头文件的动态链接库，即一个implement了printf的.c文件编译出来的可执行文件。下面就是生成的hello.i的最后几行
-```c
-# 5 "hello.c"
-int main()
-{
-  printf("hello world!\n");
-  return 0;
-}
-```
+这就是头文件#include <stdio.h>中对printf的定义，extern表示这是一个外部的链接，在link时，会去标准库找对应的动态链接库，这个库是一个implement了printf.c文件编译出来的lib。这里也说明，动态链接库的header需要被调用者#include和重新编译，但是implementation并不需要，而是早就编译好并且放在系统的lib路径下，交给linker去找。
 
-### 3.编译
-编译，即将高级语言转化成机器语言，将预处理的hello.i作为输入（输入也可以是hello.c），生成hello.s，而中的输出是汇编级指令。
+#### 3.编译
+编译将预处理的hello.i作为输入（也可以是hello.c），生成hello.s，输出是汇编级指令。
 ```
 $ gcc -S -o hello.s hello.i
 ```
-下面是hello.s的内容，可以发现，汇编语言依旧human readable，虽然阅读难度较大。操作类似于对register层面上的操作。
+下面是hello.s的部分内容，汇编语言阅读难度较大，依旧human readable，操作类似于对register层面操作。
 ```
-	.file	"hello.c"
-	.section	.rodata
-.LC0:
-	.string	"hello world!"
-	.text
-	.globl	main
-	.type	main, @function
 main:
 .LFB2:
 	.cfi_startproc
@@ -116,16 +87,11 @@ main:
 	.cfi_def_cfa 7, 8
 	ret
 	.cfi_endproc
-.LFE2:
-	.size	main, .-main
-	.ident	"GCC: (Ubuntu 5.4.0-6ubuntu1~16.04.11) 5.4.0 20160609"
-	.section	.note.GNU-stack,"",@progbits
-
 ```
-编译的过程可以理解为，编译器对c style的语言(.c & .i)进行了词法语法语义分析，在优化之后，产生了机器语言汇编。
+编译的过程可以理解为，编译器对c style的语言(.c & .i)进行了词法语法语义分析，优化后产生了汇编语言。
 
-### 4.组装(汇编)
-将汇编语言的作为输入，产生一个对象文件的过程叫组装，或者叫汇编。这一步将hello.s的汇编文件作为输入，产生了hello.o的对象文件，使用命令：
+#### 4.组装(汇编)
+组装(汇编)过程将汇编语言(hello.s)作为输入，产生一个对象文件(hello.o)。使用命令：
 ```bash
 $ gcc -c -o hello.o hello.s
 ```
