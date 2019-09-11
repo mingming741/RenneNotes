@@ -2,7 +2,27 @@
 Linux Kernal(内核)，即操作系统本身，平时我们说的kernal base即操作系统内部的运行环境，而各种application通常是调用kernal中的一些method来达到目的。
 
 
-## OS
+## Linux File System Hierarchy
+
+### / directory folders
+linux的根目录`/`下面有许多文件夹，每个文件夹都有自己的意义，下面列举一些：
+* `/bin` - Binary，通常的Binaries executable文件，例如cat, ip, chmod, ls, mv, rm, pwd, tar等
+* `/sbin` - System Binary，用于系统booting和维护等功能，例如bridge, ifconfig, insmod, route, reboot, sulogin等
+* `/boot` -  
+* ``
+* ``
+* ``
+
+
+### Difference of /bin & /usr/bin等
+对于bin：
+* `/bin` - Binaries needed for normal/standard system functioning at any run level.
+* `/sbin` - Binaries needed for booting, low-level system repair, or maintenance (run level 1 or S)
+* `/usr/bin` - Application/distribution binaries meant to be accessed by locally logged in users
+* `/usr/sbin` - Application/distribution binaries that support or configure stuff in /sbin.
+* `/usr/share/bin` - Application/distribution binaries or scripts meant to be accesed via the web, i.e. Apache web applications
+
+对于`/usr/local/bin`和`/usr/local/share/bin`，`local`意味着这个binary不是linux distribution中标准的软件，而是用户自己写的和安装的。
 
 
 ## Linux Kernal Module
