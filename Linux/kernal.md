@@ -1,42 +1,44 @@
 # Kernal
-Linux Kernal即操作系统本身，平时我们说的kernal base即操作系统内部的运行环境，而各种application通常是调用kernal中的一些method来达到目的的，kernal的中文翻译叫“内核”
+Linux Kernal(内核)，即操作系统本身，平时我们说的kernal base即操作系统内部的运行环境，而各种application通常是调用kernal中的一些method来达到目的。
+
 
 ## OS
 
 
 ## Linux Kernal Module
-在linux中，"Kernel modules are pieces of code that can be loaded and unloaded into the kernel upon demand"。意思就是，module等价于一段code，这段code不绑定在linux系统本身，而是可以根据需要，动态的被导入到linux系统中。这样的好处是，使得系统本身至于太重。并且各种module之间有可以替换性，使得os本身可以适应不同的工作环境需求。
-
-例如，Golf的stateful和Cubic+就是作为linux的一个module被插入系统，module本身独立于系统，但是可以成为系统操作的一部分。linux在开机的时候会自动load系统中的部分module，取决于linux的implementation。对module的操作主要使用insmod和rmmod，也可用使用modprobe。
+在linux中，Kernel module等价于一段code，不绑定在kernal本身，而是根据需要，动态导入kernal中。好处是使得系统至于太重，并且module之间有替换性，使得kernal适应不同的工作环境需求。linux在开机时会根据configure，load系统中部分module，所有module的信息都在/proc/modules文件中列出。对module的操作主要使用insmod和rmmod。
 ```console
-# 查看linux中已有的module
 lsmod
-# 插入一个module
+# 查看linux中已有的module
+
 insmod modulename
-# 移除一个module
+# 插入一个module
+
 rmmod modulename
+# 移除一个module
 ```
-系统在启动之后，所有module的信息都在/proc/modules文件中列出。而modprobe更加系统，包含了上面几个cmd的内容。modprobe比起insmod，可以做到载入module的dependence，但是需要module的ko文件保存在/lib/modules/这个路径下面的一个文件夹内。相反的是，insmod可以insert任何路径中的一个module。
+也可用使用更系统的modprobe，包含了上面几个cmd的内容。modprobe比起insmod，可以做到载入module的dependence，但是需要module的ko文件保存在/lib/modules/这个路径下面的一个文件夹内。相反的是，insmod可以insert任何路径中的一个module。
 
 
 ## Shell & Terminal
-Shell值得是运行的程序，而Terminal是Shell运行的载体，Linux默认运行的Shell一般是`/bin/bash`。bash在开启terminal的时候，通常也会follow一些参数，根据这些启动option读取不同的文件，生成不同的Shell Variable来控制shell的运行。
+Shell是正在运行的程序，而Terminal是Shell运行的载体，Linux默认的Shell一般是`/bin/bash`。bash在开启terminal的时候，会follow一些参数，根据这些启动option读取不同的configure，生成不同的Shell Variable来控制shell的运行。
 
 #### bash
-bash即Bourne-Again Shell，最早的Bourne shell，即command-line interpreter，被研发出来用于解释user input的各种command，而bash是Bourne的一个改版，目前广泛使用。被bash调用的脚本，也就是我们平时执行的command line，被叫做Shell script。
+bash即Bourne-Again Shell，最早的Bourne shell，即command-line interpreter，被研发出来用于解释user input的各种command，而bash是Bourne的一个改版，目前广泛使用。
+
+被bash调用的脚本，也就是我们平时执行的command line，被叫做Shell script。Shell script不限定文件类型，可以是c也可用是sh等等。Shell本身也是scirpt。
 
 #### Login Shell
-即有user authentication的Shell，例如我们用putty远程登录到别的host上去，这里的terminal在我们的Host上，但是SSH的Shell则是在被我们SSH的那个Host上，这个Shell和Terminal的组合，就是一个session。这时候我们在用bash开启个新的shell，这个shell就是non-login shell。是否是login决定了这个shell在开启的时候，reading了哪些configure file
+即有user authentication的Shell，例如我们用putty远程登录到别的host上去，这里的terminal在我们的Host上，但是SSH的Shell则是在被我们SSH的那个Host上，这个Shell和Terminal的组合，叫一个session。这时我们用bash开启个新的shell，这个shell就是non-login shell。是否是login决定了这个shell在开启的时候，reading了哪些configure file
 
 #### interactive shell
-interactive shell就是attached to a terminal session的Shell，反之就是non-interactive shell。
+interactive shell就是attached了terminal的Shell，反之就是non-interactive shell。用bash运行的其他程序基本都是non-interactive, non-login shell。
 
-Shell本身也是code scirpt，和众多在shell中运行的其他script一样。我们可以认为，用bash运行的其他程序，usually run in a non-interactive, non-login shell。
 
-## Shell Variables and Environment Variables (环境变量)
-和windows类似，Linux同样有一些内置的环境变量。平时说的环境变量，是环境变量和shell变量的统称，是系统的环境变量。环境变量(Environment Variables)定义于当前shell和child shells或者processes，通常用于向子进程pass information processes，由export定义，使用`printenv`或者`env`查看`csh/tcsh`中的环境变量。而Shell variables仅在当前shell中定义，由set定义，使用`set`查看`sh/ksh/bash`中的shell变量。通常用于记录短暂的data。例如current working directory。环境变量等级高于Shell变量。
+### Shell Variables and Environment Variables
+和windows类似，Linux也有环境变量。平时说的环境变量，是Shell Variables and Environment Variables的统称，两者有少许不同。环境变量(Environment Variables)由`export`定义，在整个Shell和其subprocess中起作用，并且在定义后会生成对应的Shell Variable。对应的，Shell variables由set定义，在当前Shell中全局存在。
 
-记录Linux os中常见的环境变量，用`printenv`查看，括号中为其在我system中的值，空括号表示没有，可以看出数组类型是用`:`间隔开的。
+记录Linux os中常见的Environment Variables，用`printenv`查看，括号中为其在我system中的值，空括号表示没有，数组类型是用`:`间隔开的。
 ```
 printenv PWD
 ```
@@ -52,7 +54,7 @@ printenv PWD
 * HOME (/home/showing): The current user’s home directory.
 * LD_LIBRARY_PATH (... /usr/local/lib ...):shared library object的path，某些程序在搜索lib的时候会找这里。
 
-同样的是Shell变量，用`set`查看，或者使用`echo`查看，因为这些变量都是当前terminal工作正在运行的变量，因此可以直接echo出来。
+记录Linux os中常见的Shell Variables是变量，用`set`或者`echo`查看，这些变量都是当前terminal工作正在运行的变量。
 ```
 echo $HOSTNAME
 ```
@@ -69,7 +71,7 @@ echo $HOSTNAME
 * UID (1000): The UID of the current user.
 * PS1 :基本提示符，对于root用户是#，对于普通用户是$
 
-设置Shell变量
+这些变量也可用被runtime的时候临时修改，设置Shell变量
 ```
 VARNAME="my value"
 echo $VARNAME
@@ -85,14 +87,13 @@ export VARNAME="my value"      # shorter, less portable version
 printenv VARNAME
 echo $VARNAME
 ```
-取消环境变量，环境变量取消之后，被加进shell的变量不会取消，需要再取消一次。
+取消环境变量，环境变量取消之后，被加进shell的变量不会取消。
 ```
 export -n VARNAME
-printenv VARNAME
 ```
-上面的修改都是临时性的，如果要永久性修改这个环境变量，就需要修改configure file。(对于Ubuntu12.04)如果一个shell是login session，那么这个shell在开启的时候，会读取`/etc/profile`， 找到对应的user的Home directory，然后读取Home中的`~/.bash_profile`, `~/.bash_login`, 和`~/.profile`。如果一个shell不是一个login shell，那么就会读取`/etc/bash.bashrc`和`~/.bashrc`。如果一个shell是Non-interactive shells，说明这个shell没有attach一个terminal，那么他会去环境变量`BASH_ENV`中寻找configure file的路径。
+修改configure file可以做到每次开机都永久性修改这些变量。(Ubuntu12.04为例)Login shell开启时会读取`/etc/profile`，找对应的user的Home directory，然后读取Home的`~/.bash_profile`, `~/.bash_login`, 和`~/.profile`。Non login shell会读取`/etc/bash.bashrc`和`~/.bashrc`。Non-interactive shells会去环境变量`BASH_ENV`中寻找configure file的路径。
 
-不过当前很多Linux的系统，都用login configuration files去source了non-login configuration files。这就意味着其实configure file使用的的都相同，最后一通操作之后，变成了`~/.bashrc`这个file。我们可以通过向`~/.bashrc`添加variable，然后export这些变量，例如：
+不过当前很多Linux的系统，都用login configuration files去source了non-login configuration files。这就意味一通操作后，configure file都变成了`~/.bashrc`这个file。我们通过给`~/.bashrc`添加variable，然后export这些变量，例如：
 ```
 TCL_LIB="/home/showing/ns-allinone-2.35/tcl8.5.10/library"
 USR_LIB="/usr/lib"
@@ -104,7 +105,7 @@ source ~/.bashrc
 ```
 上面的修改是对于一个user的，整个系统的修改需要修改`/etc/profile` (系统全局shell), `/etc/bash.bashrc`(interactive bash), `/etc/profile.d/`, or `/etc/environment`。这些地方可以添加新的环境变量进去。
 
-同样的，kernal中的环境变量不一定被每一个binary executable继承。例如`LD_LIBRARY_PATH`本质是系统predefined environmental variable，用于给linker找到dynamic libraries/shared libraries，寻找的是可执行文件，为linker path。而gcc的编译需要的是c文件，所以有着自己一套不同的path，为compiler dependency。从某种角度上来说，gcc的compile输出gcc本身的范畴，但是linker属于kernal的范畴，gcc的工作只是编译，而不需要care到动态链接，这就是为什么环境变量这样分的。
+同样的，kernal中的环境变量不一定被每一个binary executable继承。例如`LD_LIBRARY_PATH`本质是系统predefined environmental variable，用于给linker找到dynamic libraries/shared libraries，寻找的是可执行文件，为linker path。而gcc的编译需要的是c文件，所以有着自己一套不同的path，为compiler dependency。gcc的compile输出gcc本身的范畴，但是linker属于kernal的范畴，gcc的工作只是编译，而不需要care到动态链接，这就是为什么环境变量这样分的。
 
 
 
