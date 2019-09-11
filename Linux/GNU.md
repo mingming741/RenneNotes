@@ -35,7 +35,7 @@ int main()
 #### 2. 预处理
 生成.i的预处理文件，gcc中使用下面的代码，会以下面的顺序执行：
 ```
-$ gcc -E -o hello.i hello.c
+gcc -E -o hello.i hello.c
 ```
 这个命令会处理所有的条件编译指令，包括带#的预处理的逻辑语句，例如#ifdef #ifndef #endif等。预处理会决定编译方向，比如说程序的可执行文件是linux版还是window版，是32位还是64位等，这些需要#ifdef这类逻辑语句，配合Marco的得以完成。下面的例子中，就通过`#ifdef _WIN32`决定是否要`#include <windows.h>`
 ```c
@@ -68,7 +68,7 @@ extern int printf (const char *__restrict __format, ...);
 #### 3.编译
 编译将预处理的hello.i作为输入（也可以是hello.c），生成hello.s，输出是汇编级指令。
 ```
-$ gcc -S -o hello.s hello.i
+gcc -S -o hello.s hello.i
 ```
 下面是hello.s的部分内容，汇编语言阅读难度较大，依旧human readable，操作类似于对register层面操作。
 ```
@@ -93,30 +93,30 @@ main:
 #### 4.组装(汇编)
 组装(汇编)过程将汇编语言(hello.s)作为输入，产生一个对象文件(hello.o)。使用命令：
 ```bash
-$ gcc -c -o hello.o hello.s
+gcc -c -o hello.o hello.s
 ```
-会生成机器语言文件hello.o。这是一个二进制文件，通常打开会直接乱码。如果不指定输出对象名称的话，会产生a.out的输出文件，而现在通用的是ELF格式，据说是比out文件更加复杂的编码方式。
+hello.o是一个二进制文件，人类不可读。如果不指定输出对象名称会产生a.out的输出文件。现在通用的是ELF格式，据说是比out文件更加复杂的编码方式。
 
-### 5.链接
+#### 5.链接
 函数调用的最后一个阶段。使用命令(即gcc本身)
 ```
 $ gcc -o hello hello.o
 ```
-直到现在，gcc并不知道printf（）函数的定义。在编译器确切地知道所有这些函数的实现之前，它只是使用占位符来进行函数调用。在这个阶段，printf（）的定义被解析，并且printf（）函数的实际地址被插入。链接器在此阶段开始执行此任务。所有可以理解hello文件是hello.o链接了外部调用库的可执行结果文件。这个文件不需要放到某个特定的位置，也不需要引用某些库，直接就可以执行，（大概是标准了全局引用library的位置）执行cmd为：
+在这之前，gcc不知道printf()函数的定义(implementation)，只使用占位符来进行函数调用。在link阶段，printf()函数的实际地址被插入。所有hello文件是hello.o链接了外部调用库，即printf()的implementation之后生成的的可执行文件，`hello`不需要放到特定位置，也不需要引用库，可以直接执行，执行cmd为：
 ```
 $ ./hello
 ```
 
-## 编译细节
+### 编译细节
 
-### include path
-当我们调用#include的时候，编译器会试图寻找include的这个文件的路径。可以理解为在include的前面添加了某个绝对路径（因为include允许子路径的存在）。对于include来说，可以有下面两种写法
+#### include path
+当我们调用#include的时候，编译器会试图寻找#include文件的在系统的位置。即在#include的前面添加了某个绝对路径，有下面两种写法
 ```c
 #include "sys/socket.h"
 #include <sys/socket.h>
 ```
-写法在寻找这个头文件的顺序上有少许不同，对于window和unix系统，也有少许出入。对于windows，打引号的`#include "sys/socket.h"`，绝对路径的寻找顺序为：
-1. 当前路径，即调用#include文件现在的directory （In the same directory as the file that contains the #include statement.）
+写法在寻找这个头文件的顺序上有少许不同，打引号的`#include "sys/socket.h"`，绝对路径的寻找顺序为：
+1. 当前路径
 2. In the directories of the currently opened include files, in the reverse order in which they were opened. The search begins in the directory of the parent include file and continues upward through the directories of any grandparent include files.（没看懂...）
 3. 来自compiler的option /I
 4. 来自INCLUDE的环境变量
@@ -125,18 +125,19 @@ $ ./hello
 1. 来自compiler的option /I
 2. 来自INCLUDE的环境变量
 
-对于unix类的系统，基本和windows类似，只是最后一步的环境变量会替换为下面几个系统路径中寻找： "/usr/local/include", "libdir/gcc/target/version/include", "/usr/target/include", "/usr/include"。用户也可以通过在环境变量C_INCLUDE_PATH和CPLUS_INCLUDE_PATH中添加路径，给默认的lib路径中添加新的item
-
-编译器会在按照顺序查找，在找到一个符合的就会立即停止，多的不会覆盖。使用下面的命令查看gcc查找lib的路径：
+这里unix类的系统和windows的区别在于INCLUDE的环境变量寻找方法有一点不同。linux环境变量为C_INCLUDE_PATH和CPLUS_INCLUDE_PATH，默认通常是： "/usr/local/include", "libdir/gcc/target/version/include", "/usr/target/include", "/usr/include"。使用下面的命令查看gcc查找lib的路径：
 ```
 gcc -print-search-dirs
 ```
-因为gcc相比kernal来说，是独立的program，因此gcc可以有自己的configure，不一定要follow kernal的configure，如`LD_LIBRARY_PATH`
+编译器会在按顺序查找，找到一个同名文件会立即停止。
+
+### GCC configure
+gcc相比kernal来说，是独立的program。因此gcc可以有自己的环境变量为`C_INCLUDE_PATH`和`CPLUS_INCLUDE_PATH`，不一定要follow kernal的configure，如`LD_LIBRARY_PATH`
 
 
 
-# Autoconf & Automake
-Autoconf是一个用于生成shell脚本的工具，可以自动配置软件源代码以适应多种类似POSIX的系统。为了让你的软件包在所有的不同系统上都可以进行编译。类似于有的code代码在mac和window上面会有不同的生成文件这样子。
+## Autoconf & Automake
+Autoconf是用于生成shell script的工具，可自动配置软件源代码，让你的软件包在不同系统上都可以进行编译。
 
 <img src = "https://github.com/mingming741/RenneNotes/blob/master/Resource/Image/automake.jpg"/>
 
