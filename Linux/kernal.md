@@ -8,10 +8,23 @@ Linux Kernal(内核)，即操作系统本身，平时我们说的kernal base即�
 linux的根目录`/`下面有许多文件夹，每个文件夹都有自己的意义，下面列举一些：
 * `/bin` - Binary，通常的Binaries executable文件，例如cat, ip, chmod, ls, mv, rm, pwd, tar等
 * `/sbin` - System Binary，用于系统booting和维护等功能，例如bridge, ifconfig, insmod, route, reboot, sulogin等
-* `/boot` -  
-* ``
-* ``
-* ``
+* `/boot` -  Boot loader的静态文件，即Linux kernel本身和一些boot loader
+* `/dev` - device，驱动，例如CD drive, hard disk, 或者其他physical device。包含了bus, cpu, disk, net等文件夹
+* `/home` - home，包含所有user的home directory
+* `/lib` - library，关键的share library和kernal module，`/lib64`应该是64位的。
+* `/mnt` - 
+* `/media` - media，在插入U盘的时候，U盘的路径会被mount到`/media/USER_NAME/USB_NAME`的路径下
+* `/var` - variable data，有log，mail，cache，lib等文件夹。`/var`的文件通常是可以被不同的program read和write的，类似于一种保存cache的位置，例如
+* `/tmp` - temporary，默认temporary file放置的位置，我电脑里有fcitx，sougou，atom的一些temp file
+* `/usr` - user，如果说`/`是根目录的话，`/usr`就是对于user来说的二级根目录，包括了bin, sbin, lib, inclode, local, share等文件夹
+* `/etc` - etcetera，(或者every thing config)，以前的意义是系统附加物，现在被用于保存system的configuration file。可以找到apt.conf.d，sysctl.d，debian_version，environment，hostname，protocal等文件夹和文件。
+* `/opt` - 不在linux标准库的third party package被安装在这里。
+* `/proc` - process，这个路径不在disk中而是在ram中，保存了process运行中的变量，每个变量都用一个file来表示。
+* `/srv` - service，系统service的data
+* `/run` - 
+* `/sys` - system
+
+
 
 
 ### Difference of /bin & /usr/bin等
