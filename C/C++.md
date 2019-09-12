@@ -79,15 +79,15 @@ int main(){
 using namespace std;
 
 void func(int ** addressOFpointer){
-  int* anotherpointer = (int*) malloc(1*sizeof(int));
-  *anotherpointer = 2;
-  *addressOFpointer = anotherpointer; // *a表示对指针对应的位置赋值
+  int* anotherpointer = (int*) malloc(1*sizeof(int)); //新的指针分配内存
+  *anotherpointer = 2; //给刚刚分配的内存赋值
+  *addressOFpointer = anotherpointer; // 将传入的pointer的地址修改成刚刚新分配的内存地址
 }
 
 int main(){
-  int* pointer = (int*) malloc(1*sizeof(int)); // 如果要给pointer指向的地址赋值，需要先分配这个地址
+  int* pointer = (int*) malloc(1*sizeof(int));
   *pointer = 1;
-  func(&pointer); // &b表示b的地址
+  func(&pointer); // &pointer表示pointer的地址
   cout << *pointer << "\n"; // 2
 }
 ```
