@@ -88,7 +88,7 @@ void func(int ** addressOFpointer){
   *anotherpointer = 2; //给刚刚分配的内存赋值
   *addressOFpointer = anotherpointer; // 将传入的pointer的地址修改成刚刚新分配的内存地址
 }
-
+ma
 int main(){
   int* pointer = (int*) malloc(1*sizeof(int));
   *pointer = 1;
