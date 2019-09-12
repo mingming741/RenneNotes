@@ -50,31 +50,3 @@ routing table用于记录，如果要发送packet去对应的destination的ip，
 ```
 这样就完成了。但是这里注意到的是，namespace中的veth1只能ping到veth0，还是ping不到我自己电脑的ip和实验室里面的任意一部机，可能是还有一些gateway之类的东西需要去调节。并且，这上面的操作，是对os本身网络环境的全局修改，mahimahi可以做到在shell中独立创建环境，然后进行操作。
 
-# Network相关的C编程
-这里简单记录一下pantheon的tunnel中使用到的packet，如果还要可以继续补充。
-
-sys/socket.h
-```c++
-#include <sys/socket.h>
-
-```
-
-```c++
-#include <netinet/in.h>
-// Internet Protocol family
-/*
-这个header定义了IP相关的typedef
-in_port_t： 
-in_addr_t：
-sockaddr_in： used to store addresses for the Internet protocol family. Values of this type must be cast to struct sockaddr for use with the socket interfaces defined in this document
-sa_family_t： 
-*/
-```
-
-```c++
-#include <netdb.h>
-// definitions for network database operations
-```
-
-
-
