@@ -7,11 +7,11 @@ gcc FILENAME.cpp -o FILENAME -lstdc++
 ### type
 和c一样，c++的最基本的类型还是只有：
 ```c++
-int	      // 4 bytes	
-float	    // 4 bytes	
-double	  // 8 bytes	
-boolean   // 1 byte	
-char	    // 1 byte
+int    // 4 bytes	
+float  // 4 bytes	
+double // 8 bytes	
+bool   // 1 byte	
+char   // 1 byte
 ```
 
 ### pointer
