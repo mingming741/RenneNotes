@@ -4,6 +4,11 @@
 gcc FILENAME.cpp -o FILENAME -lstdc++
 ```
 
+### tips
+1. `&v`表示变量v的地址，如果v是kernal space中的变量，这个会seg fault
+2. `int* p; p++;`，p在内存中会移动一个int的大小，即4位
+
+
 ### type
 和c一样，c++的最基本的类型还是只有：
 ```c++
