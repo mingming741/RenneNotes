@@ -38,13 +38,15 @@ printf("%d\n",*a); // segmentation falut，因为引用了未分配的地址。
 ```
 a是一个指针变量，但是a仅仅是被申明，而没有被赋值。如要使用这个地址，使用malloc，这时候`a[10]`的值在heap中。
 
-下面总结一个各种指针引用搭配的组合table
+下面总结一个各种指针引用搭配的组合table，我们可以认为在c中，所有变量名其实都是一个引用。
 
-|  Target             | value           | reference                 | pointer                     |   pointer_of_pointer|
+|  Target             | value (copy)    | reference (给了个新名字)    | pointer (另一个变量)         |   pointer_of_pointer (修改内存位置)|
 |---|---|---|---|---|
 | variable            | int a = 1;      |  int& ref_of_a  = a;      | int* pointer_of_a = &a;     |   |
 | function parameter  | void func(int a)|  void func(int& ref_of_a) | void func(int* pointer_of_a)|  void func(int** pointer_of_pointer) |
-| object              | Foo foo;        |  Foo& foo2 = \*foo        | Foo* foo3 = &foo; |
+| object              | Foo foo;        |  Foo& foo2 = foo;         | Foo* foo3 = &foo; |
+
+这个table也揭露了等号`=`的本质，等号左右两边必须有相同的type。`int a = 1`，a自己就是对一块内存的引用，表示"这个引用所引用的内存位置的值是1"。 `int& ref_of_a  = a;`，对引用进行copy赋值。变量ref_of_a和a引用了内存相同的位置，本质是是相同变量。`int* pointer_of_a = &a;`，pointer_of_a是一个指针变量，表示内存中的一块位置中存储了引用a的地址。这也表示了指针和引用的本质区别，引用就是变量本身，或者变量的另一个名字，而指针本质是是另外一个变量，只是指针的值存储的是这个变量的地址，地址其实就是引用要引用的那一块内存。
 
 ### function parameter
 这里记录c的传参
