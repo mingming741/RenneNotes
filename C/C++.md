@@ -19,7 +19,7 @@ bool   // 1 byte
 char   // 1 byte
 ```
 
-### pointer
+### pointer & reference
 A pointer is a variable whose value is the address of another variable。这里记录c(不是c++)的pointer的一些常用方法。
 
 1. 指针赋值 + 内存赋值
@@ -37,6 +37,14 @@ printf("%d\n",a); // 得到一个32位的地址，即a指向的位置，这个�
 printf("%d\n",*a); // segmentation falut，因为引用了未分配的地址。
 ```
 a是一个指针变量，但是a仅仅是被申明，而没有被赋值。如要使用这个地址，使用malloc，这时候`a[10]`的值在heap中。
+
+下面总结一个各种指针引用搭配的组合table
+
+|  Target             | value           | reference                 | pointer                     |   pointer_of_pointer|
+|---|---|---|---|---|
+| variable            | int a = 1;      |  int& ref_of_a  = a;      | int* pointer_of_a = &a;     |   |
+| function parameter  | void func(int a)|  void func(int& ref_of_a) | void func(int* pointer_of_a)|  void func(int** pointer_of_pointer) |
+| object              | Foo foo;        |  Foo& foo2 = \*foo        | Foo* foo3 = &foo; |
 
 ### function parameter
 这里记录c的传参
