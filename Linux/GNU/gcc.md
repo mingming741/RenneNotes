@@ -1,6 +1,17 @@
 ## GCC
 GNU Compiler Collection，初衷为了给GNU编写一套开源的编译软件，包括C，还要C++，Java等其他软件的编译系统。关于C的编译问题，这里总结C从代码带可执行文件的过程，希望分到linux和window的不同区别。
 
+查看gcc的include path
+```
+echo | gcc -E -Wp,-v -
+```
+在我的ubuntu16.04中，输出结果大概是下面的几个dir：
+* `/usr/lib/gcc/x86_64-linux-gnu/5/include` & `/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed`这里的5表示gcc-version5，这些library应该是安装gcc的时候，顺带给我安装的，表示跟gcc有关的lib，里面的lib都是不常见的。
+* `/usr/include`：这应该是系统主要的c include path的位置，包括了这些文件夹：GL(OpenGL)，net，c++，nodejs，openssl等文件夹，有点像是系统的许多支持插件调用源文件的位置，同时还有很多文件，包括一些GNU C library的文件，如：`arrest.h`, `elf.h`, `netdb.h`, `pthread.h`, `printf.h`, `regex.h`, `signal.h`, `string.h`, `time.h`等。而c++对应的库其实就是对c的一种延伸，通过object的方式。c++的库在这个路径下的c++文件夹中，里面包括：`array`, `cctype`, `exception`, `fstream`, `iostream`, `list`, `vector`, `string`。同时很多这些文件都reference了某一个对应的c的文件，例如`cctype` include了`ctype.h`，`signal`include了`signal.h`。
+* `/usr/include/x86_64-linux-gnu`： 包含了另外一些，里面的文件夹有：`sys`, `bits`, `sys`, `unicode`。中间也有一些和`/usr/include`有一些重复。
+* `/usr/local/include`: 我电脑里面没有东西，这个路径应该是user自己可以安装的c library的dependency。
+
+
 ### 文件组成
 c语言在gcc的编译之后，会生产不同的后缀形式的代码，而每个后缀都有自己的含义
 * .c文件：源代码文件，在c++中，通常是.C, .cc和.cxx这种形式的文件
