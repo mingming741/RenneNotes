@@ -136,6 +136,102 @@ int main()
 对于常用的`cout`和`endl`，其实都是`iostream`下的namespace `std`中的，正确的full path应该是`std::cout`和`std::endl`
 
 
+### class
+c++的class的实现方式很类似一个class的namespace，下面给出这个例子：
+```c++
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Car {        // The class
+  public:          // Access specifier
+    string brand;  // Attribute
+    string model;  // Attribute
+    int year;      // Attribute
+    Car(string x, string y, int z); // 而这个constructor其实是个返回Car object的函数
+
+    Car(){ // 这是默认的constructor，用申明变量的方式构造
+      this->brand = "undefined";
+    }
+};
+
+// Constructor definition outside the class
+Car::Car(string x, string y, int z) {
+  this->brand = x;
+  this->model = y;
+  this->year = z;
+}
+
+int main() {
+  Car carObj1;
+  cout << carObj1.brand << endl;
+
+  Car carObj2("Ford", "Mustang", 1969);
+  carObj2.year = 2007;
+  cout << carObj2.brand << " " << carObj2.model << " " << carObj2.year << "\n";
+  return 0;
+}
+```
+这里要注意的是，class的内部等同于class自己的namespace。只要在`Car`的namespace中，修改变量使用`this->var`。而在class生成了object之后，修改变量使用`carObj1.brand`。
+
+关于`this`，`this` is a pointer to the instance of the class。给下面的例子：
+```c++
+#include <iostream>
+
+class Foo{
+    public:
+        Foo(){
+            this->value = 0;
+        }
+        Foo get_copy(){ // 这个函数会构建一个object Foo，通过this这个指针的值来构建，因此调用应该是foo2 = foo.get_copy();
+            return *this;
+        }
+        Foo& get_copy_as_reference(){ //返回一个object的引用，
+            return *this;
+        }
+        Foo* get_pointer(){ //返回对应对象的指针
+            return this;
+        }
+        void increment(){
+            this->value++;
+        }
+        void print_value(){
+            std::cout << this->value << std::endl;
+        }
+    private:
+        int value;
+};
+
+int main()
+{
+    Foo foo;
+    foo.increment();
+    foo.print_value(); // 1
+
+    Foo foo1 = foo.get_copy();
+    foo1.increment();
+    foo.print_value(); // 1
+
+    Foo& foo2 = foo.get_copy_as_reference();
+    //注意下面的写法，Foo foo2同样可以通过编译，但是此时foo2不再是引用，而是一个new object，这个写法和copy结果一样
+    //Foo foo2 = foo.get_copy_as_reference();
+    foo2.increment();
+    foo.print_value(); // 2
+
+    Foo* foo_pointer = foo.get_pointer();
+    foo_pointer->increment();
+    foo.print_value(); // 3
+    foo2.print_value(); // 3, foo2和foo是相同的object
+
+    return 0;
+}
+
+```
+在c中，对象指针的引用使用`pointer->attribute`，而创建的object的对象`foo`其实也是自己本身的引用，因此引用的调用大部分是`ref.attribute`。如果说`this`是指向class创建的对象的指针，那么`*this`其实就是这个对象的引用了。
+
+总结一下，所谓的指针，引用和对象的关系。
+* 指针(pointer)，即存储地址的变量，对于class同样奏效，定义方式为`Foo* foo_pointer`，首位地址为`*foo_pointer`，其实就是这个对象的引用，通过指针access object或者是class的attribute使用`foo_pointer->attribute`和`foo_pointer->function`
+* 引用(reference)，即一种重命名，在申明变量`Foo foo`的时候，`foo`可以看做object本身，也可用看做自己对自己的引用。如果要创建新的引用，使用`Foo& = foo`。如果引用指向了同一个instance，那么这两个引用变量其实完全等价。
 
 
 
