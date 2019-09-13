@@ -1,6 +1,8 @@
-## Linux File System Hierarchy
+# Linux File System
+描述了从底层开始和FS相关的一些implementation
+
+### Linux File System Hierarchy
 参考http://www.pathname.com/fhs/pub/fhs-2.3.html
-### / directory folders
 linux的根目录`/`下面有许多文件夹，每个文件夹都有自己的意义，下面列举一些：
 * `/bin` - Binary，通常的Binaries executable文件，例如cat, ip, chmod, ls, mv, rm, pwd, tar等
 * `/sbin` - System Binary，用于系统booting和维护等功能，例如bridge, ifconfig, insmod, route, reboot, sulogin等
@@ -28,3 +30,30 @@ linux的根目录`/`下面有许多文件夹，每个文件夹都有自己的意
 * `/usr/share/bin` - 可以被web accesed的binary, 通常是Apache web applications
 
 对于`/usr/local/bin`和`/usr/local/share/bin`，`local`意味着这个binary不是linux distribution中标准的软件，而是用户自己写的和安装的。通常sudo make产生的可执行文件都放在这里，并且被所有与user使用。
+
+
+### File descriptor (Unix like系统才有)
+File descriptor(文件描述符)，其值是一个非负的integer，指向内存中的某一个文件。当process打开一个file的时候，kernal会给这个process一个File descriptor，来指向这个文件。通常所有的process都有标准的三个文件描述符：
+* Standard input (STDIN_FILENO/stdin)
+* Standard output (STDOUT_FILENO/stdout)
+* Standard error (STDERR_FILENO/stderr)
+
+例如，system call `open`返回的就是一个file descriptor。同时，`socket()`，`pipe()`返回的也是一个fd
+```c
+char path[] = "file";
+fd = open(path, O_CREAT | O_RDONLY, 0644);
+``` 
+linux的设计就是将所有东西视为文件。
+
+
+
+
+
+
+
+
+
+
+
+
+
