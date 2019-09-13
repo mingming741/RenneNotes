@@ -7,7 +7,7 @@ echo | gcc -E -Wp,-v -
 ```
 在我的ubuntu16.04中，输出结果大概是下面的几个dir：
 * `/usr/lib/gcc/x86_64-linux-gnu/5/include` & `/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed`这里的5表示gcc-version5，这些library应该是安装gcc的时候，顺带给我安装的，表示跟gcc有关的lib，里面的lib都是不常见的。
-* `/usr/include`：这应该是系统主要的c include path的位置，包括了这些文件夹：GL(OpenGL)，net，c++，nodejs，openssl等文件夹，有点像是系统的许多支持插件调用源文件的位置，同时还有很多文件，包括一些GNU C library的文件，如：`arrest.h`, `elf.h`, `netdb.h`, `pthread.h`, `printf.h`, `regex.h`, `signal.h`, `string.h`, `time.h`等。而c++对应的库其实就是对c的一种延伸，通过object的方式。c++的库在这个路径下的c++文件夹中，里面包括：`array`, `cctype`, `exception`, `fstream`, `iostream`, `list`, `vector`, `string`。同时很多这些文件都reference了某一个对应的c的文件，例如`cctype` include了`ctype.h`，`signal`include了`signal.h`。
+* `/usr/include`：这应该是系统主要的c include path的位置，包括了这些文件夹：GL(OpenGL)，net，c++，nodejs，openssl等文件夹，有点像是系统的许多支持插件调用源文件的位置，同时还有很多文件，包括一些GNU C library的文件，如：`arrest.h`, `elf.h`, `netdb.h`, `pthread.h`, `printf.h`, `regex.h`, `signal.h`, `string.h`, `time.h`等。而c++对应的库其实就是对c的一种延伸，通过object的方式。c++的Standard library在这个路径下的c++文件夹中，里面包括：`array`, `cctype`, `exception`, `fstream`, `iostream`, `list`, `vector`, `string`。同时很多这些文件都reference了某一个对应的c的文件，例如`cctype` include了`ctype.h`，`signal`include了`signal.h`。
 * `/usr/include/x86_64-linux-gnu`： 包含了另外一些，里面的文件夹有：`sys`, `bits`, `sys`, `unicode`。中间也有一些和`/usr/include`有一些重复。
 * `/usr/local/include`: 我电脑里面没有东西，这个路径应该是user自己可以安装的c library的dependency。
 
