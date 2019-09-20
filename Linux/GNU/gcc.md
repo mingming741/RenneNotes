@@ -143,8 +143,9 @@ c/c++预编译需要处理的对象
 * Marco在惯例中都是使用大写来定义，当然小写也可以，只是看code会很难受。
 * 预编译的过程是in sequence的，所以Marco仅仅在定义了之后才会生效，这也是为什么大部分Marco定义在`.h`中的原因
 
-### Object-like Macros
-最简单的marco，在预编译的时候会被code替换，例如：`define BUFFER_SIZE 1024`，那么对于`foo = (char *) malloc (BUFFER_SIZE);`，在预编译的过程中，`BUFFER_SIZE`就已经被替换成1024，从编译器的角度看，这个`BUFFER_SIZE`并不存在，编译器只能看到1024。这种用法很常见，通常是用于指定函数的选项，例如在`sys/socket.h`中，函数`socket(domain, type, protocol)`使用的参数，都有对应的Marco：
+Marco大致分为Object-like Macros和Function-like Macros。
+
+Object-like Macros是最简单的marco，在预编译的时候会被code替换，例如：`define BUFFER_SIZE 1024`，那么对于`foo = (char *) malloc (BUFFER_SIZE);`，在预编译的过程中，`BUFFER_SIZE`就已经被替换成1024，从编译器的角度看，这个`BUFFER_SIZE`并不存在，编译器只能看到1024。这种用法很常见，通常是用于指定函数的选项，例如在`sys/socket.h`中，函数`socket(domain, type, protocol)`使用的参数，都有对应的Marco：
 ```c
 socket(domain, type, protocol)
 // domain: AF_INET (IPv4 protocol) , AF_INET6 (IPv6 protocol)
@@ -160,11 +161,21 @@ Marco也可以用于定义数组，例如
 int x[] = { NUMBERS };
 // 等价于 int x[] = { 1, 2, 3 };
 ```
-广义上，#define只会读取Marco定义的一行，并且在行尾结束。而使用`\`符号等于延长了这一行。上面的些法，在实践中大都用于定义error message。可以看出，预编译同样是完全等价替换，`NUMBERS`被替换成了`1, 2, 3`这样。
+广义上，`#define`只会读取Marco定义的一行，并且在行尾结束。而使用`\`符号等于延长了这一行。上面的些法，在实践中大都用于定义error message。可以看出，预编译同样是完全等价替换，`NUMBERS`被替换成了`1, 2, 3`这样。
 
+同时，Marco也可以被其他Marco定义。Marco在定义的时候会被替换，并且只有在使用的时候才会展开，如果ref了其他Marco，那么preprocessor会继续寻找，直到找到一个不是Marco的定义。下面给出了一些idea，当然in practive我们最好避免这种写法。
+```c
+#define TABLESIZE BUFSIZE
+#define BUFSIZE 1024
+// TABLESIZE  → BUFSIZE  → 1024
 
+#undef BUFSIZE
+#define BUFSIZE 37
+// TABLESIZE will be 37
+```
+Function-like Macros，因为Marco的本质是替换，所以我们可以定义长得像函数的Marco来替换函数本身，直观上类似一种别名alias。例如`#define lang_init()  c_init()`，在调用的时候这两个等价。
 
-
+### Macro Arguments
 
 
 
