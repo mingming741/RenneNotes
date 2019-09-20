@@ -137,7 +137,7 @@ gcc -print-search-dirs
 ### GCC configure
 gcc相比kernal来说，是独立的program。因此gcc可以有自己的环境变量为`C_INCLUDE_PATH`和`CPLUS_INCLUDE_PATH`，不一定要follow kernal的configure，如`LD_LIBRARY_PATH`
 
-## Marco
+## Macro
 c/c++预编译需要处理的对象
 * Marco和编译器独立，可以使用编译器使用的关键词，但是不能使用Marco自己的关键词，例如`#define`。
 * Marco在惯例中都是使用大写来定义，当然小写也可以，只是看code会很难受。
@@ -175,7 +175,6 @@ int x[] = { NUMBERS };
 ```
 Function-like Macros，因为Marco的本质是替换，所以我们可以定义长得像函数的Marco来替换函数本身，直观上类似一种别名alias。例如`#define lang_init()  c_init()`，在调用的时候这两个等价。
 
-### Stringizing
 同样Marco也可以定义一段code，附带一些argument，例如：
 ```c
 #define WARN_IF(EXP) \
@@ -190,8 +189,24 @@ WARN_IF (x == 0);
 */
 ```
 
+### Predefined Macros
+C和C++中都有一些Predefined的Macro，应该说他们是编译器在某些地方定义的，可以辅助我们的programming。Predefined的Macro无法被我们再次define。
 
+Standard Predefined Macro，即基本上所有版本的编译器都会有定义。
+* `__FILE__`： Marco所在file的路径，例如`"/usr/local/include/myheader.h"`
+* `__LINE__`： Marco所在的行数。
+* `__FUNCTION__`/`__func__`： 调用这个Marco的函数名
+* `__DATE__`： 预编译的日期，例如`"Feb 12 1996"`。注意Marco是替换，因此预编译完成之后，这些Marco的值已经被确定
+* `__TIME__`： 预编译的时间，例如`"23:59:01"`。
+* `__STDC__`: 表示是否使用C Standard编译的流程，值取决于编译器，GNU中的GCC这个值是1，取决于编译option`-traditional-cpp`，如果有些编译器使用不同于标准C的convention编译的话，这个值会被编译器设置成0。类似一个告诉程序员，当前使用编译器是否使用标准C编译那一套的flag。对应的还有`__STDC_VERSION__`，`__STDC_HOSTED__`，即这个host是否支持标准C编译。
+* `__cplusplus`： 如果这个marco定义了，则使用C++的library来编译，`__cplusplus`会变成c++的version。
+* `__OBJC__`： 这个marco=1说明使用Objective-C compiler
+* `__ASSEMBLER__`： 这个marco=1说明预处理的是assembly language
 
+Common Predefined Macro，GNU所支持的Macro，无论你使用什么OS，只要用了gcc，这些都会被Predefined
+* 
+* 
+* 
 
 
 
