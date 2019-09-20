@@ -203,8 +203,16 @@ Standard Predefined Macro，即基本上所有版本的编译器都会有定义�
 * `__OBJC__`： 这个marco=1说明使用Objective-C compiler
 * `__ASSEMBLER__`： 这个marco=1说明预处理的是assembly language
 
-Common Predefined Macro，GNU所支持的Macro，无论你使用什么OS，只要用了gcc，这些都会被Predefined
-* 
+Common Predefined Macro，GNU所支持的Macro，无论你使用什么OS，只要用了gcc，这些都会被Predefined。中间通常包括了一些GNU的版本信息，使用的是c还是c++还是objective c，
+* `__BASE_FILE__`： main函数所在的file的名字
+* `__INCLUDE_LEVEL__`： Macro所在的file被include了多少次，例如`b.h`中调用了`a.h`，那么`a.h`中的`__INCLUDE_LEVEL__`在b编译出来的可执行中，值为1，而`b.h`的`__INCLUDE_LEVEL__`在同一个可执行的值为0
+* `__OPTIMIZE__`： 是否使用optimize来编译
+* `__INT_MAX__`： int的最大值，类似的还有`__LONG_MAX__`，`__UINT16_MAX__`，`__WCHAR_MIN__`等，表示变量最大值和最小值。在c中，像`int8_t`这样的通常是一个structure，来自c的convention，定义structure的时候一般是`int8_t`，然后再`typedefine struct int8_t int8`，这样就可以用`int8`来定义变量了。
+* `__DEPRECATED`：等于1时表示deprecated的feature开启了，即warning给程序员，某些function在新版本中不再支持。
+* `__EXCEPTIONS`：等于1的时候表示支持exception，默认开启，来自compiler的选项-fno-exceptions。同样类似的，很多Macro的define都是来自于一些compiler的option，例如，`__SSP__`对应`-fstack-protector`，`__SANITIZE_THREAD__`对应` -fsanitize=thread`，`__NO_MATH_ERRNO__`对应`-fno-math-errno`。
+* `__TIMESTAMP__`： 表示当前file最后被修改的时间，例如`"Sun Sep 16 01:03:52 1973"`
+
+
 * 
 * 
 
