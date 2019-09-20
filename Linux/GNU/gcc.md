@@ -138,7 +138,10 @@ gcc -print-search-dirs
 gcc相比kernal来说，是独立的program。因此gcc可以有自己的环境变量为`C_INCLUDE_PATH`和`CPLUS_INCLUDE_PATH`，不一定要follow kernal的configure，如`LD_LIBRARY_PATH`
 
 ## Marco
-c/c++预编译需要处理的对象，Marco和编译器独立，可以使用编译器使用的关键词，但是不能使用Marco自己的关键词，例如`#define`
+c/c++预编译需要处理的对象
+* Marco和编译器独立，可以使用编译器使用的关键词，但是不能使用Marco自己的关键词，例如`#define`。
+* Marco在惯例中都是使用大写来定义，当然小写也可以，只是看code会很难受。
+* 预编译的过程是in sequence的，所以Marco仅仅在定义了之后才会生效，这也是为什么大部分Marco定义在`.h`中的原因
 
 ### Object-like Macros
 最简单的marco，在预编译的时候会被code替换，例如：`define BUFFER_SIZE 1024`，那么对于`foo = (char *) malloc (BUFFER_SIZE);`，在预编译的过程中，`BUFFER_SIZE`就已经被替换成1024，从编译器的角度看，这个`BUFFER_SIZE`并不存在，编译器只能看到1024。这种用法很常见，通常是用于指定函数的选项，例如在`sys/socket.h`中，函数`socket(domain, type, protocol)`使用的参数，都有对应的Marco：
@@ -149,6 +152,15 @@ socket(domain, type, protocol)
 ```
 这些marco大都对应某个integer value，直接填这个integer一样奏效。这种方式是code设计的一种方法。
 
+Marco也可以用于定义数组，例如
+```c
+#define NUMBERS 1, \
+                2, \
+                3
+int x[] = { NUMBERS };
+// 等价于 int x[] = { 1, 2, 3 };
+```
+广义上，#define只会读取Marco定义的一行，并且在行尾结束。而使用`\`符号等于延长了这一行。上面的些法，在实践中大都用于定义error message。可以看出，预编译同样是完全等价替换，`NUMBERS`被替换成了`1, 2, 3`这样。
 
 
 
