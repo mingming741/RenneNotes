@@ -175,7 +175,20 @@ int x[] = { NUMBERS };
 ```
 Function-like Macros，因为Marco的本质是替换，所以我们可以定义长得像函数的Marco来替换函数本身，直观上类似一种别名alias。例如`#define lang_init()  c_init()`，在调用的时候这两个等价。
 
-### Macro Arguments
+### Stringizing
+同样Marco也可以定义一段code，附带一些argument，例如：
+```c
+#define WARN_IF(EXP) \
+do { if (EXP) \
+        fprintf (stderr, "Warning: " #EXP "\n"); } \
+while (0)
+
+WARN_IF (x == 0);
+/* 等价于
+     do { if (x == 0)
+           fprintf (stderr, "Warning: " "x == 0" "\n"); } while (0);	   
+*/
+```
 
 
 
