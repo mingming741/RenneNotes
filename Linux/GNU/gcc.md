@@ -141,7 +141,14 @@ gcc相比kernal来说，是独立的program。因此gcc可以有自己的环境�
 c/c++预编译需要处理的对象，Marco和编译器独立，可以使用编译器使用的关键词，但是不能使用Marco自己的关键词，例如`#define`
 
 ### Object-like Macros
-最简单的marco，在预编译的时候会被code替换，例如：`define BUFFER_SIZE 1024`，那么对于`foo = (char *) malloc (BUFFER_SIZE);`，在预编译的过程中，`BUFFER_SIZE`就已经被替换成1024，从编译器的角度来看，这个`BUFFER_SIZE`并不存在。这种用法很常见，通常是用于指定函数的选项，例如在`sys/socket.h`中，
+最简单的marco，在预编译的时候会被code替换，例如：`define BUFFER_SIZE 1024`，那么对于`foo = (char *) malloc (BUFFER_SIZE);`，在预编译的过程中，`BUFFER_SIZE`就已经被替换成1024，从编译器的角度看，这个`BUFFER_SIZE`并不存在，编译器只能看到1024。这种用法很常见，通常是用于指定函数的选项，例如在`sys/socket.h`中，函数`socket(domain, type, protocol)`使用的参数，都有对应的Marco：
+```c
+socket(domain, type, protocol)
+// domain: AF_INET (IPv4 protocol) , AF_INET6 (IPv6 protocol)
+// type: SOCK_STREAM (TCP)，SOCK_DGRAM (UDP)
+```
+这些marco大都对应某个integer value，直接填这个integer一样奏效。这种方式是code设计的一种方法。
+
 
 
 
