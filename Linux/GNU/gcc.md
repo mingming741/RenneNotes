@@ -1,4 +1,4 @@
-## GCC
+# GCC
 GNU Compiler Collection，初衷为了给GNU编写一套开源的编译软件，包括C，还要C++，Java等其他软件的编译系统。关于C的编译问题，这里总结C从代码带可执行文件的过程，希望分到linux和window的不同区别。
 
 查看gcc的include path
@@ -12,7 +12,7 @@ echo | gcc -E -Wp,-v -
 * `/usr/local/include`: 我电脑里面没有东西，这个路径应该是user自己可以安装的c library的dependency。
 
 
-### 文件组成
+## 文件组成
 c语言在gcc的编译之后，会生产不同的后缀形式的代码，而每个后缀都有自己的含义
 * .c文件：源代码文件，在c++中，通常是.C, .cc和.cxx这种形式的文件
 * .h文件：程序包含的头文件
@@ -20,9 +20,9 @@ c语言在gcc的编译之后，会生产不同的后缀形式的代码，而每�
 * .s文件：汇编语言文件，.i文件经过处理产生，表示机器的指令集。
 * .o文件：二进制对象文件。
 
-### 编译过程
+## 编译过程
 
-#### 1. 写C代码
+### 1. 写C代码
 用下面的代码作为例子，hello.c
 ```c
 #include <stdio.h>
@@ -35,7 +35,7 @@ int main()
 }
 ```
 
-#### 2. 预处理
+### 2. 预处理
 生成.i的预处理文件，gcc中使用下面的代码，会以下面的顺序执行：
 ```
 gcc -E -o hello.i hello.c
@@ -68,7 +68,7 @@ extern int printf (const char *__restrict __format, ...);
 ```
 这就是头文件#include <stdio.h>中对printf的定义，extern表示这是一个外部的链接，在link时，会去标准库找对应的动态链接库，这个库是一个implement了printf.c文件编译出来的lib。这里也说明，动态链接库的header需要被调用者#include和重新编译，但是implementation并不需要，而是早就编译好并且放在系统的lib路径下，交给linker去找。
 
-#### 3.编译
+### 3.编译
 编译将预处理的hello.i作为输入（也可以是hello.c），生成hello.s，输出是汇编级指令。
 ```
 gcc -S -o hello.s hello.i
@@ -93,14 +93,14 @@ main:
 ```
 编译的过程可以理解为，编译器对c style的语言(.c & .i)进行了词法语法语义分析，优化后产生了汇编语言。
 
-#### 4.组装(汇编)
+### 4.组装(汇编)
 组装(汇编)过程将汇编语言(hello.s)作为输入，产生一个对象文件(hello.o)。使用命令：
 ```bash
 gcc -c -o hello.o hello.s
 ```
 hello.o是一个二进制文件，人类不可读。如果不指定输出对象名称会产生a.out的输出文件。现在通用的是ELF格式，据说是比out文件更加复杂的编码方式。
 
-#### 5.链接
+### 5.链接
 函数调用的最后一个阶段。使用命令(即gcc本身)
 ```
 $ gcc -o hello hello.o
@@ -110,9 +110,9 @@ $ gcc -o hello hello.o
 $ ./hello
 ```
 
-### 编译细节
+## 编译细节
 
-#### include path
+### include path
 当我们调用#include的时候，编译器会试图寻找#include文件的在系统的位置。即在#include的前面添加了某个绝对路径，有下面两种写法
 ```c
 #include "sys/socket.h"
@@ -136,3 +136,23 @@ gcc -print-search-dirs
 
 ### GCC configure
 gcc相比kernal来说，是独立的program。因此gcc可以有自己的环境变量为`C_INCLUDE_PATH`和`CPLUS_INCLUDE_PATH`，不一定要follow kernal的configure，如`LD_LIBRARY_PATH`
+
+## Marco
+c/c++预编译需要处理的对象，Marco和编译器独立，可以使用编译器使用的关键词，但是不能使用Marco自己的关键词，例如`#define`
+
+### Object-like Macros
+最简单的marco，在预编译的时候会被code替换，例如：`define BUFFER_SIZE 1024`，那么对于`foo = (char *) malloc (BUFFER_SIZE);`，在预编译的过程中，`BUFFER_SIZE`就已经被替换成1024，从编译器的角度来看，这个`BUFFER_SIZE`并不存在。这种用法很常见，通常是用于指定函数的选项，例如在`sys/socket.h`中，
+
+
+
+
+
+
+
+
+
+
+
+
+
+
