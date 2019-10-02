@@ -18,15 +18,41 @@ int setsockopt(int sockfd, int level, int optname, const void *optval, socklen_t
 因为socket本身只是一块内存的config，我们需要将其bind到一个network interface上去，使用bind函数：
 ```c
 int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
-// sys/socket.h: extern int bind (int __fd, __CONST_SOCKADDR_ARG __addr, socklen_t __len) __THROW;
-
+// sys/socket.h: extern int bind (int __fd, sockaddr __addr, socklen_t __len) __THROW;
+// sockfd: 要绑定的socket
+// *addr: 要绑定的address，使用struct sockaddr定义
+// addrlen: 对应的socket address的length
 ```
+这里讲一下`struct sockaddr`，定义在`bits/socket.h`中，被`sys/socket.h`调用，结构大概是：
+```c
+struct sockaddr {
+    unsigned short    sa_family;    // address family, AF_xxx
+    char              sa_data[14];  // 14 bytes of protocol address
+};
+```
+而`sockaddr_in`是类似继承了sockaddr的一个结构
+```c
+struct sockaddr_in {
+    short            sin_family;   // e.g. AF_INET, AF_INET6
+    unsigned short   sin_port;     // e.g. htons(3490)
+    struct in_addr   sin_addr;     // see struct in_addr, below
+    char             sin_zero[8];  // zero this if you want to
+};
+```
+我找到的example的code，可以这样使用bind函数：
+```c
+bind(server_fd, (struct sockaddr *)&address, sizeof(address))
+```
+即直接将sockaddr_in cast成了一个sockaddr，（没看懂，先记下来）
 
 ```c++
 #include <sys/socket.h>
 
 ```
 
+
+
+### 其他
 ```c++
 #include <netinet/in.h>
 // Internet Protocol family
