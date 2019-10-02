@@ -138,6 +138,8 @@ gcc -print-search-dirs
 gcc相比kernal来说，是独立的program。因此gcc可以有自己的环境变量为`C_INCLUDE_PATH`和`CPLUS_INCLUDE_PATH`，不一定要follow kernal的configure，如`LD_LIBRARY_PATH`
 
 ## Macro
+ref: https://gcc.gnu.org/onlinedocs/cpp/Macros.html
+
 c/c++预编译需要处理的对象
 * Marco和编译器独立，可以使用编译器使用的关键词，但是不能使用Marco自己的关键词，例如`#define`。
 * Marco在惯例中都是使用大写来定义，当然小写也可以，只是看code会很难受。
@@ -189,6 +191,8 @@ WARN_IF (x == 0);
 */
 ```
 
+我们可以用`#undef`来消除之前define的Macro，但是如果要redefine的话，这个Macro的type必须和之前的一致。
+
 ### Predefined Macros
 C和C++中都有一些Predefined的Macro，应该说他们是编译器在某些地方定义的，可以辅助我们的programming。Predefined的Macro无法被我们再次define。
 
@@ -213,8 +217,6 @@ Common Predefined Macro，GNU所支持的Macro，无论你使用什么OS，只�
 * `__TIMESTAMP__`： 表示当前file最后被修改的时间，例如`"Sun Sep 16 01:03:52 1973"`
 
 
-* 
-* 
 
 
 
