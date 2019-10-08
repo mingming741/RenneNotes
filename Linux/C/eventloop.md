@@ -16,3 +16,5 @@ struct pollfd{
 };
 ```
 即 wait for some event on a file descriptor。
+
+本质上，polling的意思是轮寻，`pool(x)`的意思，类似“在x为timeout时间内，检查条件，若成立，执行callback函数”
