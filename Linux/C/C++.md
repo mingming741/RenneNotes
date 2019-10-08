@@ -244,7 +244,48 @@ int main()
 * 引用(reference)，即一种重命名，在申明变量`Foo foo`的时候，`foo`可以看做object本身，也可用看做自己对自己的引用。如果要创建新的引用，使用`Foo& = foo`。如果引用指向了同一个instance，那么这两个引用变量其实完全等价。
 
 
+### template
+generic programming的基础，即是的code本身独立与各种不同的数据类型。例如`vector`本身就是template的一个实例。
 
+#### function template
+template基本定义为：
+```c++
+template <typename type> 
+ret-type func-name(parameter list) {
+   // body of function
+}
+```
+这里`template`表示关键词，`<>`中表示模板关键词引用，`ret-type`对应函数返回值，这里`<>`定义了`T`之后，既可以用于返回值，也可以用于函数的参数。例如：
+```c++
+template <typename T>
+inline T const& Max (T const& a, T const& b) { 
+   return a < b ? b:a; 
+}
+```
+
+#### class template
+基本定义为：
+```c++
+template <class type> 
+class class-name {
+   // body of class
+}
+```
+其实和functional的差不多，`template <class T>`和`template <typename T>`都只是让接下来的一个code segment中这个template可见。例如：
+```c++
+template <class T>
+class Stack { 
+   private: 
+      vector<T> elems;    // elements 
+   public: 
+      void push(T const&);  // push element 
+}; 
+
+template <class T>
+void Stack<T>::push (T const& elem) { 
+   elems.push_back(elem);    
+} 
+```
 
 
 
