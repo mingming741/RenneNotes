@@ -5,10 +5,12 @@ FP只被g++11以上的版本支持，因此如果要使用FP，使用下面编�
 ```
 g++ -std=c++11 FP.cpp
 ```
+参考https://www.codeproject.com/Articles/1267996/Functional-Programming-in-Cplusplus
+
 
 ### lambdas
 lambdas即定义函数变量的方式，最基本的结构是`[] () {}`。其中`[]`表示introducer，`()`表示函数的参数，`{}`表示函数的内容，下面列举几个lambda的结构：
-```
+```c++
 [] () {} // lambdas基本结构，不能写在程序主体中，否则报错
 auto a = [] () {}; // a表示一个函数的变量
 a(); // 在定义之后调用函数a
@@ -59,5 +61,15 @@ auto func = [pi] () {std::cout << "The value of pi is "<< pi << std::endl;};
 [=, &A] // captures A by reference, everything else by value
 ```
 
+### Polymorphic Function Wrapper 
+define在`std::function`中，是c++编译器给我们的一个封装了lambda操作的API，方便用户定义函数，基本定义为：
+```c++
+std::function<return_value(args)> function_name
+```
+上面的定义取代了前面使用的`auto`关键词，使得这个函数的定义更加明确，不会动态到处转化，例如下面的例子，就参数就一定是`double`类型而不会变成`int`
+```c++
+std::function<double(double, double)> sum = [](double A, double B) { return A + B; };
+std::cout << sum(4.6, 5.9) << std::endl;
+```
 
 
