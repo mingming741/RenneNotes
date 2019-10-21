@@ -15,7 +15,10 @@ ssh 192.168.80.39
 # 等价于
 ssh showing@192.168.80.39
 ```
-如果server和client上有可以对应的密钥，那么就不需要username，直接可以ssh过去。
+如果server和client上有可以对应的密钥，那么就不需要username，直接可以ssh过去。如果遇到问题，可以试下重启ssh服务：
+```
+sudo service ssh restart
+```
 
 
 # SFTP
