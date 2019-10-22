@@ -13,3 +13,11 @@ print(numpy.__file__)
 # /usr/local/lib/python3.5/dist-packages/numpy/__init__.py
 ```
 如果要讲一个文件夹里面的所有文件都成为library，则需要在这个文件夹下面创建`__init__.py`，`__init__.py`在编译之后也会将这个路径下的其他文件的pyc编译出来，然后import他们的全部。
+
+# path.join
+将几个path用斜杠`/`连接起来，参数应该是可以任意多个
+```python
+path = "/home"
+print(os.path.join(path, "User/Desktop", "file.txt"))
+# /home/User/Desktop/file.txt
+```
