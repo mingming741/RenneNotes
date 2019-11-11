@@ -7,6 +7,8 @@ gcc FILENAME.cpp -o FILENAME -lstdc++
 ### tips
 1. `&v`表示变量v的地址，如果v是kernal space中的变量，这个会seg fault
 2. `int* p; p++;`，p在内存中会移动一个int的大小，即4位
+3. `char * s = "hello"`是特殊声明方法，声明之后的s是一个const string而不是一个char的指针
+4. global和static的区别：`global`定义为在main函数之外定义`int i`，这样的定义，可以被其他.c文件使用`extern int i`来调用到这个`i`，调用条件是调用者include了被调用者，这种方式叫做external linkage。而`static int i`定义的变量，即使被include了，也不能被外部的.c文件调用，这叫做internal linkage。
 
 
 ### type
