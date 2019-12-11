@@ -20,6 +20,18 @@ ssh showing@192.168.80.39
 sudo service ssh restart
 ```
 
+### SSH config
+在ubuntu中，可以修改`~/.ssh/config`文件做到直接ssh对应的host而省去一些参数的设定，这里是`ssh renne.gcloud`的一个例子，这里的`IdentityFile`表示客户端的private key，与服务器端的`.pub`的public key对应，可以在服务器上使用`ssh-keygen`生成。（这里记住，短的是private key，长的是public key）
+```
+Host renne.gcloud
+    HostName 34.92.170.44
+    IdentityFile /home/showing/.ssh/google_compute_engine
+    UserKnownHostsFile=/home/showing/.ssh/google_compute_known_hosts
+    HostKeyAlias=compute.7091155878809552605
+    IdentitiesOnly=yes
+    CheckHostIP=no
+```
+
 
 # SFTP
 SSH File Transfor Protocal(SFTP)，是一种安全的文件传输协议，为SSH的一部分，并且和FTP有着相同的使用方法。但是由于在传输的过程中使用了加密，因此比普通的FTP传输效率要低一些。
