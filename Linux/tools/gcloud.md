@@ -27,3 +27,17 @@ Project创建了本地gcloud的工作环境，用于在和云端交互的时候�
 
 查看当前给予权限的google账号：
 `gcloud auth list`
+
+### VM
+查看instance
+`gcloud compute instances list`
+
+查看某个instance的细节
+`gcloud compute instances describe my-instance`
+
+连接到instance：
+```
+  gcloud compute ssh my-instance
+  gcloud compute ssh user@my-instance
+``` 
+
