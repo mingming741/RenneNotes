@@ -16,6 +16,10 @@ check network interface
 ```
 show interface status
 ```
+check neighbor switch and router
+```
+show cdp neighbors
+```
 
 
 You can enter config mode to config this switch:
