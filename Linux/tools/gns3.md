@@ -20,6 +20,10 @@ check neighbor switch and router
 ```
 show cdp neighbors
 ```
+check STP detail
+```
+show spanning-tree 
+```
 
 
 You can enter config mode to config this switch:
@@ -54,7 +58,17 @@ wr
 ```
 
 
+### Host
+linux pc, same as any linux, we can using any command in linux inside these host
 
+ARP在任何host和router中都存在，switch中不存在。Check arp table:
+```
+arp -a
+```
+Remove a arp entry for 10.0.0.3:
+```
+arp -d 10.0.0.3
+```
 
 
 
