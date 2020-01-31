@@ -6,8 +6,10 @@ Switch的config类似文件系统，即cd到某个路径下，所有的config都
 
 首先是管理员权限：
 ```console
-enable # Enter root mode
-disable # Exit to user mode
+ # Enter root mode
+enable
+ # Exit to user mode
+disable
 ```
 
 然后是查看当前状态
