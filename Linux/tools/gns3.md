@@ -1,25 +1,21 @@
 # GNS3
-graphic network simulater 3, this document record the command about config switch and router.
+graphic network simulater 3,记录各种switch and router的config操作以及意义。
 
 ### Switch config
-if you are outside config mode, all command are view the state of this switch, here is:
+Switch的config类似文件系统，即cd到某个路径下，所有的config都作用于该路径。这里是config进入某个switch就config这个switch，如果是某个switch的某个port，就是config这个port。
 
-Enter root mode
+首先是管理员权限：
+```shell
+enable # Enter root mode
+disable # Exit to user mode
 ```
-enable
+
+然后是查看当前状态
 ```
-Exit to user mode
+show interface status # 查看自己的network interface
+show cdp neighbors # 查看与自己相连的neighbor
 ```
-disable
-```
-check network interface 
-```
-show interface status
-```
-check neighbor switch and router
-```
-show cdp neighbors
-```
+
 check STP detail
 ```
 show spanning-tree 
@@ -56,6 +52,13 @@ After all config, we need to save the config to the switch for run, use:
 ```
 wr
 ```
+
+## Switch config Knowledgement 
+我们可以查看switch某个port的详细config，输入
+```
+show interface switchport e0/2
+```
+可以查看
 
 
 ### Host
