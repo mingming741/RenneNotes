@@ -5,7 +5,7 @@ graphic network simulater 3,记录各种switch and router的config操作以及�
 Switch的config类似文件系统，即cd到某个路径下，所有的config都作用于该路径。这里是config进入某个switch就config这个switch，如果是某个switch的某个port，就是config这个port。
 
 首先是管理员权限：
-```console
+```shell
  # Enter root mode
 enable
  # Exit to user mode
