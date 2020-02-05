@@ -15,6 +15,8 @@ disable  # 进入user模式
 show interface status  # 查看自己的network interface
 show cdp neighbors  # 查看与自己相连的neighbor
 show spanning-tree # 查看STP的细节
+show vlan # 查看vlan的设置
+show ip route # ip的设置，包括vlan的ip
 ```
 
 Switch的config类似文件系统，即cd到某个路径下，所有的config都作用于该路径。这里是config进入某个switch就config这个switch，如果是某个switch的某个port，就是config这个port。
