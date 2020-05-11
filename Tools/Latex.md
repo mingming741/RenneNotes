@@ -71,7 +71,7 @@ in a large scale, everywhere we look at.
     \centering
     \includegraphics[width=0.25\textwidth]{mesh}
     \caption{a nice plot}
-    `\label{fig:mesh``
+    \label{fig:mesh}
 \end{figure}
 
 As you can see in the figure \ref{fig:mesh1}, the 
