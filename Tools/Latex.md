@@ -35,7 +35,7 @@ First document. This is a simple example, with no extra parameters or packages i
 % This line here is a comment. It will not be printed in the document.
 \end{document}
 ```
-latex的title的information是写在preamble里面的，我们可以在body中调用`\maketitle`将title的信息打印出来。之类的title包括`title, author, date`。用`%` 标注出来的为latex的comment，不会显示在主体中。
+latex的title的information是写在preamble里面的，我们可以在body中调用`\maketitle`将title的信息打印出来。之类的title包括`title, author, date`。用`%` 标注出来的为latex的comment，不会显示在主体中。这里`author`和`thanks`是合在一起的。
 
 ```latex
 Some of the \textbf{greatest}
@@ -60,11 +60,24 @@ in a large scale, everywhere we look at.
 ```
 图片，需要在preamble中include packet，使用`\usepackage{graphicx}`。即添加兼容图片的扩展包。这里`\includegraphics`为外部packet `graphicx`的函数，`doki`对应文件夹`image/doki.png`
 
+```latex
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth]{mesh}
+    \caption{a nice plot}
+    `\label{fig:mesh``
+\end{figure}
 
+As you can see in the figure \ref{fig:mesh1}, the 
+function grows near 0. Also, in the page \pageref{fig:mesh1} 
+is the same example.
+```
+这里试图产生一个paper中的figure，使用`\begin{figure}[h], \end{figure}`表示image caption。`[h]`表示figure的position，`\caption{a nice plot}`表示对于这个figure的说明。`\label{fig:mesh1}`表示这个figure的变量名，之后可以通过其他方式reference到这个figure，例如下面的`\ref{fig:mesh1}`和`\pageref{fig:mesh1} `，分别输出figure 1和page 1。我猜latex的figure是自动编号12345的。
 
-
-
-
-
-
+```latex
+\begin{itemize}
+  \item The individual entries are indicated with a black dot, a so-called bullet.
+  \item The text in the entries may be of any length.
+\end{itemize}
+```
 
