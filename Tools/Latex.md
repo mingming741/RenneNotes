@@ -1,7 +1,7 @@
 # Latex
 Latex (LAY-tek or LAH-tek) 目前通用的文档排版工具，对于各种公式可视化非常方便。其操作原理类似于HTML的自动排版。
 
-Overleaf为在线的latex的编辑工具，这个文档来自于https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes#What_is_LaTeX.3F 。我是用google账号在overleaf上面注册的。
+Overleaf为在线的latex的编辑工具，这个文档来自于https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes#What_is_LaTeX.3F 。我是用google账号在overleaf上面注册的。周博磊老师推荐的latex tutorial在https://www.latex-tutorial.com/tutorials/
 
 
 # Latex tutorial
@@ -16,7 +16,7 @@ First document. This is a simple example, with no extra parameters or packages i
 
 \end{document}
 ```
-`documentclass`说明了这个文件的overall view，"article"是最通用的文件类型，其他的还有"book","report","beamer"等等。在`\begin{document}`和`\end{document}`之间的为document的主体，类似html的boty。
+`documentclass`说明了这个文件的overall view，"article"是最通用的文件类型，其他的还有"book","report","beamer"等等。在`\begin{document}`和`\end{document}`之间的为document的主体，类似html的boty。注意这里的`\begin`和`\end`为通用的section开始结束符，而里面的`{document}`指定了开始和结束的是哪个section，和html的嵌套格式类似。
 
 ### 宏 preamble
 ```latex
