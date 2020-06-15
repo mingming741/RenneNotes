@@ -2,11 +2,12 @@
 scipy.stats提供各种概率分布的随机变量，应该可以帮助建立模型。
 
 ### basic code
-`np.linspace`用于产生坐标轴空间，`np.linspace(2.0, 3.0, num=5)`即在2和3之间产生一个一共为5个数的坐标空间，有点类似np.arange()，但是多用于科学计算的基底。
+`np.linspace`用于产生坐标轴空间，`np.linspace(2.0, 3.0, num=5)`即在2和3之间产生一个一共为5个数的坐标空间。
 ```python
 y = np.linspace(start=2.0, stop=3.0, num=5)
 print(y) # [2.   2.25 2.5  2.75 3.  ]
 ```
+区别于`np.arange()`，`np.linspace`多用于连续随机变量的x轴，而`np.arange()`多用于离散随机变量的x轴
 
 ### rv_continuous & rv_discrete
 scipy.stats中大部分随机变量都继承了`rv_continuous`和`rv_discrete`这两个基类，所以这里介绍一些基类的使用方法。
