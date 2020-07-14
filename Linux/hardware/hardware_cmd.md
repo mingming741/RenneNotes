@@ -52,4 +52,5 @@
 * linux version: `cat /proc/version`
 * partitions: `cat /proc/partitions`
 
-
+### model
+`dmidecode -s system-product-name`可以查看这部机器的model
