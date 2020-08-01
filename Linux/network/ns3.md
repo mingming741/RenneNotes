@@ -5,7 +5,11 @@ network similator 3, 用于做网络的simulation
 ### Avaliable resource
 official web site: https://www.nsnam.org/
 
+wiki: https://www.nsnam.org/wiki/Main_Page
 
+ducoments: https://www.nsnam.org/documentation/
+
+gitlab: https://gitlab.com/nsnam
 
 ### build (waf)
 使用`waf`小程序，首先configure需要build的environment。这里推荐在development的时候使用debug模式，因为logging和assertions只在debug模式存在。在script完成后进行大规模实验，或者调整参数的时候，使用optimize的模式。`--out`指明了build的result的路径
