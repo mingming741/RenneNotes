@@ -52,7 +52,7 @@ routing table用于记录，如果要发送packet去对应的destination的ip，
 
 
 ### 设置两个网络interface
-
+可以设置两个网络interface处理destination IP不同的task
 ```
 sudo ifconfig enp1s0f0 10.50.0.1/24
 sudo ifconfig enp1s0f1 10.50.1.1/24
