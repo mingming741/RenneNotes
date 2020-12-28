@@ -50,3 +50,28 @@ routing table用于记录，如果要发送packet去对应的destination的ip，
 ```
 这样就完成了。但是这里注意到的是，namespace中的veth1只能ping到veth0，还是ping不到我自己电脑的ip和实验室里面的任意一部机，可能是还有一些gateway之类的东西需要去调节。并且，这上面的操作，是对os本身网络环境的全局修改，mahimahi可以做到在shell中独立创建环境，然后进行操作。
 
+
+### 设置两个网络interface
+
+sudo ifconfig enp1s0f0 10.50.0.1/24
+sudo ifconfig enp1s0f1 10.50.1.1/24
+# nat source IP 10.50.0.1 -> 10.60.0.1 when going to 10.60.1.1
+sudo iptables -t nat -A POSTROUTING -s 10.50.0.1 -d 10.60.1.1 -j SNAT --to-source 10.60.0.1
+
+# nat inbound 10.60.0.1 -> 10.50.0.1
+sudo iptables -t nat -A PREROUTING -d 10.60.0.1 -j DNAT --to-destination 10.50.0.1
+
+# nat source IP 10.50.1.1 -> 10.60.1.1 when going to 10.60.0.1
+sudo iptables -t nat -A POSTROUTING -s 10.50.1.1 -d 10.60.0.1 -j SNAT --to-source 10.60.1.1
+
+# nat inbound 10.60.1.1 -> 10.50.1.1
+sudo iptables -t nat -A PREROUTING -d 10.60.1.1 -j DNAT --to-destination 10.50.1.1
+sudo ip route add 10.60.1.1 dev enp1s0f0
+sudo arp -i enp1s0f0 -s 10.60.1.1 a0:36:9f:dc:a7:fa
+
+sudo ip route add 10.60.0.1 dev enp1s0f1
+sudo arp -i enp1s0f1 -s 10.60.0.1 a0:36:9f:dc:a7:f8
+salsify-sender --device /dev/video0 10.60.0.1 8888 1337
+
+
+
