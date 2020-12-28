@@ -53,6 +53,7 @@ routing table用于记录，如果要发送packet去对应的destination的ip，
 
 ### 设置两个网络interface
 
+```
 sudo ifconfig enp1s0f0 10.50.0.1/24
 sudo ifconfig enp1s0f1 10.50.1.1/24
 # nat source IP 10.50.0.1 -> 10.60.0.1 when going to 10.60.1.1
@@ -72,6 +73,6 @@ sudo arp -i enp1s0f0 -s 10.60.1.1 a0:36:9f:dc:a7:fa
 sudo ip route add 10.60.0.1 dev enp1s0f1
 sudo arp -i enp1s0f1 -s 10.60.0.1 a0:36:9f:dc:a7:f8
 salsify-sender --device /dev/video0 10.60.0.1 8888 1337
-
+```
 
 
